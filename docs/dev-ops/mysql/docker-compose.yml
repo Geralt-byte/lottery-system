@@ -8,16 +8,24 @@ services:
     restart: always
     environment:
       TZ: Asia/Shanghai
-      #      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes' # 可配置无密码，注意配置 SPRING_DATASOURCE_PASSWORD=
+      # MYSQL_ALLOW_EMPTY_PASSWORD: 'yes' # 可配置无密码，注意配置 SPRING_DATASOURCE_PASSWORD=
       MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_USER: xfg
+      MYSQL_USER: mlei
       MYSQL_PASSWORD: 123456
+    networks:
+      - my-network
     depends_on:
       - mysql-job-dbdata
     ports:
-      - "3306:3306"
+      - "13306:3306"
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 15s
     volumes_from:
       - mysql-job-dbdata
 
@@ -27,3 +35,24 @@ services:
     container_name: mysql-job-dbdata
     volumes:
       - /var/lib/mysql
+
+  # phpmyadmin https://hub.docker.com/_/phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    container_name: phpmyadmin
+    hostname: phpmyadmin
+    ports:
+      - 8899:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=123456
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
