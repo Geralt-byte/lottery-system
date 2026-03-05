@@ -1,0 +1,12 @@
+26-03-05.14:42:51.716 [main            ] INFO  Application            - Starting Application using Java 17.0.10 on DESKTOP-RIFPEOR with PID 19104 (E:\JavaWeb\big-market\big-market-app\target\classes started by 星念 in E:\JavaWeb\big-market)
+26-03-05.14:42:51.718 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-03-05.14:42:52.130 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[com.xjtu]' package. Please check your configuration.
+26-03-05.14:42:52.469 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-03-05.14:42:52.482 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-03-05.14:42:52.482 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-03-05.14:42:52.482 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-03-05.14:42:52.574 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-03-05.14:42:52.574 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 822 ms
+26-03-05.14:42:52.950 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-03-05.14:42:52.966 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-03-05.14:42:52.975 [main            ] INFO  Application            - Started Application in 1.732 seconds (JVM running for 2.313)
