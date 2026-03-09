@@ -14,6 +14,8 @@ public class Strategy {
     private Long strategyId;
     /*抽奖策略描述*/
     private String strategyDesc;
+    /*抽奖规则模型 rule_weight,rule_blacklist*/
+    private String ruleModels;
     /*创建时间*/
     private Date createTime;
     /*更新时间*/
