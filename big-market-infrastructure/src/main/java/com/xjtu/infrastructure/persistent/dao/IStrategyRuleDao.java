@@ -9,4 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface IStrategyRuleDao {
     /**根据策略id和规则模型查找策略规则*/
     StrategyRule queryStrategyRule(Long strategyId, String ruleModel);
+
+    /**根据策略id,规则模型,奖品id查询规则值*/
+    String queryStrategyRuleValue(StrategyRule strategyRule);
 }

@@ -36,7 +36,8 @@ VALUES (1, 101, 'user_credit_random', '1,100', '用户积分【优先透彻规�
        (6, 106, 'openai_model', 'dall-e-2', 'OpenAI 增加模型'),
        (7, 107, 'openai_model', 'dall-e-3', 'OpenAI 增加模型'),
        (8, 108, 'openai_use_count', '100', 'OpenAI 增加使用次数'),
-       (9, 109, 'openai_model', 'gpt-4,dall-e-2,dall-e-3', 'OpenAI 增加模型');
+       (9, 109, 'openai_model', 'gpt-4,dall-e-2,dall-e-3', 'OpenAI 增加模型'),
+       (10,100,'user_credit_blacklist','1','黑名单积分');
 
 UNLOCK TABLES;
 
@@ -141,7 +142,7 @@ VALUES (1, 100001, 101, 2, 'rule_random', '1,1000', '随机积分策略'),
        (13, 100001, NULL, 1, 'rule_weight',
         '4000:102,103,104,105 5000:102,103,104,105,106,107 6000:102,103,104,105,106,107,108,109',
         '消耗6000分，必中奖范围'),
-       (14, 100001, NULL, 1, 'rule_blacklist', '1', '黑名单抽奖，积分兜底');
+       (14, 100001, NULL, 1, 'rule_blacklist', '100:user001,user002,user003', '黑名单抽奖，积分兜底');
 
 UNLOCK TABLES;
 

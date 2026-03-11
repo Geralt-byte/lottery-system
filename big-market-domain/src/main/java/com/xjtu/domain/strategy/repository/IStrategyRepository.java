@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**策略服务仓储接口*/
 
-public interface /**抽奖行为，根据策略id进行抽奖*/IStrategyRepository {
+public interface IStrategyRepository {
 
     /**从redis中查找策略id对应的奖品*/
     List<StrategyAwardEntity> queryStrategyAwardList(Long strategyId);
@@ -29,4 +29,7 @@ public interface /**抽奖行为，根据策略id进行抽奖*/IStrategyReposito
 
     /**根据策略id和规则模型查询策略规则*/
     StrategyRuleEntity queryStrategyRuleEntity(Long strategyId, String ruleModel);
+
+    /**根据策略id,规则模型,奖品id查询规则值*/
+    String queryStrategyRuleValueEntity(Long strategyId, String ruleModel,Integer awardId);
 }
