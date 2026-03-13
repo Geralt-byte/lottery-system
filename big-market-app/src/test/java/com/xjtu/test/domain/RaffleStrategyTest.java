@@ -4,8 +4,8 @@ import com.alibaba.fastjson2.JSON;
 import com.xjtu.domain.strategy.model.entity.RaffleAwardEntity;
 import com.xjtu.domain.strategy.model.entity.RaffleFactorEntity;
 import com.xjtu.domain.strategy.service.IRaffleStrategy;
-import com.xjtu.domain.strategy.service.rule.impl.RuleLockLogicFilter;
-import com.xjtu.domain.strategy.service.rule.impl.RuleWeightLogicFilter;
+import com.xjtu.domain.strategy.service.rule.chain.impl.RuleWeightLogicChain;
+import com.xjtu.domain.strategy.service.rule.filter.impl.RuleLockLogicFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,15 +31,15 @@ public class RaffleStrategyTest {
     private IRaffleStrategy raffleStrategy;
 
     @Resource
-    private RuleWeightLogicFilter ruleWeightLogicFilter;
+    private RuleWeightLogicChain ruleWeightLogicChain;
 
     @Resource
     private RuleLockLogicFilter ruleLockLogicFilter;
 
     @Before
     public void set(){
-        ReflectionTestUtils.setField(ruleWeightLogicFilter,"userScore",5500L);
-        ReflectionTestUtils.setField(ruleLockLogicFilter,"userRaffleCount",10L);
+        ReflectionTestUtils.setField(ruleWeightLogicChain,"userScore",5500L);
+        ReflectionTestUtils.setField(ruleLockLogicFilter,"userRaffleCount",0L);
     }
 
     /*权重测试*/

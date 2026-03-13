@@ -124,6 +124,11 @@ public class StrategyRepository implements IStrategyRepository {
                 .build();
     }
 
+    @Override
+    public String queryStrategyRuleValueEntity(Long strategyId, String ruleModel) {
+        return queryStrategyRuleValueEntity(strategyId,ruleModel,null);
+    }
+
     /**根据策略id,规则模型,奖品id查询规则值*/
     @Override
     public String queryStrategyRuleValueEntity(Long strategyId, String ruleModel, Integer awardId) {

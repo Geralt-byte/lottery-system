@@ -32,6 +32,7 @@ public interface IStrategyRepository {
     StrategyRuleEntity queryStrategyRuleEntity(Long strategyId, String ruleModel);
 
     /**根据策略id,规则模型,奖品id查询规则值*/
+    String queryStrategyRuleValueEntity(Long strategyId, String ruleModel);
     String queryStrategyRuleValueEntity(Long strategyId, String ruleModel,Integer awardId);
 
     /**根据策略id，奖品id查询策略奖品规则模型值*/

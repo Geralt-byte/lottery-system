@@ -1,11 +1,12 @@
 package com.xjtu.domain.strategy.model.valobj;
 
-import com.xjtu.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import com.xjtu.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import com.xjtu.types.common.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class StrategyAwardRuleModelVO {
 
     public String[] raffleCenterRuleModelList(){
         List<String> ruleModelList=new ArrayList<>();
+        if(StringUtils.isBlank(ruleModels)) return null;
         String[] ruleModelValues = ruleModels.split(Constants.SPLIT);
         for (String ruleModelValue : ruleModelValues) {
             if(DefaultLogicFactory.LogicModel.isCenter(ruleModelValue)){
@@ -36,6 +38,7 @@ public class StrategyAwardRuleModelVO {
 
     public String[] raffleAfterRuleModelList(){
         List<String> ruleModelList=new ArrayList<>();
+        if(StringUtils.isBlank(ruleModels)) return null;
         String[] ruleModelValues = ruleModels.split(Constants.SPLIT);
         for (String ruleModelValue : ruleModelValues) {
             if(DefaultLogicFactory.LogicModel.isAfter(ruleModelValue)){

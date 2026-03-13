@@ -61,7 +61,7 @@ CREATE TABLE `strategy`
 LOCK TABLES `strategy` WRITE;
 
 INSERT INTO `strategy` (id, strategy_id, strategy_desc, rule_models)
-VALUES (1, 100001, '抽奖策略', 'rule_weight,rule_blacklist'),
+VALUES (1, 100001, '抽奖策略', 'rule_blacklist,rule_weight'),
 (2,100003,'抽奖策略-验证lock',NULL),
 (3,100002,'抽奖策略-非完整1概率',NULL);
 

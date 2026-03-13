@@ -1,4 +1,4 @@
-package com.xjtu.domain.strategy.service.rule;
+package com.xjtu.domain.strategy.service.rule.filter;
 
 import com.xjtu.domain.strategy.model.entity.RuleActionEntity;
 import com.xjtu.domain.strategy.model.entity.RuleMatterEntity;
