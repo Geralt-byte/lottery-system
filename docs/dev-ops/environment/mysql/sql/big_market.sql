@@ -61,7 +61,10 @@ CREATE TABLE `strategy`
 LOCK TABLES `strategy` WRITE;
 
 INSERT INTO `strategy` (id, strategy_id, strategy_desc, rule_models)
-VALUES (1, 100001, '抽奖策略', 'rule_weight,rule_blacklist');
+VALUES (1, 100001, '抽奖策略', 'rule_weight,rule_blacklist'),
+(2,100003,'抽奖策略-验证lock',NULL),
+(3,100002,'抽奖策略-非完整1概率',NULL);
+
 
 UNLOCK TABLES;
 
@@ -100,7 +103,13 @@ VALUES (1, 100001, 101, '随机积分', NULL, 80000, 80000, 0.3000, 'rule_random
        (6, 100001, 106, '增加dall-e-2画图模型', NULL, 200, 200, 0.0500, 'rule_luck_award', 6),
        (7, 100001, 107, '增加dall-e-3画图模型', '抽奖1次后解锁', 200, 200, 0.0400, 'rule_lock,rule_luck_award', 7),
        (8, 100001, 108, '增加100次使用', '抽奖2次后解锁', 199, 199, 0.0099, 'rule_lock,rule_luck_award', 8),
-       (9, 100001, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 0.0001, 'rule_lock,rule_luck_award', 9);
+       (9, 100001, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 0.0001, 'rule_lock,rule_luck_award', 9),
+        (10,100002,101,'随机积分',NULL,1,1,0.5000,'rule_random,rule_luck_award',1),
+        (11,100002,102,'5次使用',NULL,1,1,0.1000,'rule_random,rule_luck_award',2),
+        (12,100002,106,'增加dall-e-2画图模型',NULL,1,1,0.0100,'rule_random,rule_luck_award',3),
+        (13,100003,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,0.0400,'rule_lock,rule_luck_award',7),
+        (14,100003,108,'增加100次使用','抽奖2次后解锁',199,199,0.0099,'rule_lock,rule_luck_award',8),
+        (15,100003,109,'解锁全部模型','抽奖6次后解锁',1,1,0.0001,'rule_lock,rule_luck_award',9);
 
 UNLOCK TABLES;
 
@@ -142,7 +151,10 @@ VALUES (1, 100001, 101, 2, 'rule_random', '1,1000', '随机积分策略'),
        (13, 100001, NULL, 1, 'rule_weight',
         '4000:102,103,104,105 5000:102,103,104,105,106,107 6000:102,103,104,105,106,107,108,109',
         '消耗6000分，必中奖范围'),
-       (14, 100001, NULL, 1, 'rule_blacklist', '100:user001,user002,user003', '黑名单抽奖，积分兜底');
+       (14, 100001, NULL, 1, 'rule_blacklist', '100:user001,user002,user003', '黑名单抽奖，积分兜底'),
+       (15,100003,107,2,'rule_lock','1','抽奖1次后解锁'),
+       (16,100003,108,2,'rule_lock','2','抽奖2次后解锁'),
+       (17,100003,109,2,'rule_lock','6','抽奖6次后解锁');
 
 UNLOCK TABLES;
 

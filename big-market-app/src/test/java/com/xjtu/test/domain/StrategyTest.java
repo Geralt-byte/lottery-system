@@ -33,8 +33,12 @@ public class StrategyTest {
     /**生成策略奖品表*/
     @Test
     public void strategyAwardSearchRateTableTest(){
-        boolean flag= iStrategyArmory.assembleLotteryStrategy(100001L);
-        log.info("生成策略100001L的奖品配置表:{}",flag);
+        boolean flag1= iStrategyArmory.assembleLotteryStrategy(100001L);
+        boolean flag2= iStrategyArmory.assembleLotteryStrategy(100002L);
+        boolean flag3= iStrategyArmory.assembleLotteryStrategy(100003L);
+        log.info("生成策略100001L的奖品配置表:{}",flag1);
+        log.info("生成策略100002L的奖品配置表:{}",flag2);
+        log.info("生成策略100003L的奖品配置表:{}",flag3);
     }
 
     /**无权重抽奖测试*/
