@@ -51,9 +51,10 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
         //数据格式转化
         Map<Long, String> ruleValueMaps = getAnalyticalValue(ruleValue);
 
-        //
+        //策略配置了权重规则，但是没有查询到规则值，报警，但是仍然放行
         if(ruleValueMaps==null||ruleValueMaps.isEmpty()){
-            return null;
+            log.warn("抽奖责任链-权重警告【策略配置权重，但ruleValue未配置相应值】 userId:{} strategyId:{} ruleModel:{}",userId, strategyId,ruleModel());
+            return this.next().logic(userId,strategyId);
         }
 
         //取出key值，即4000，5000，6000，进行排序

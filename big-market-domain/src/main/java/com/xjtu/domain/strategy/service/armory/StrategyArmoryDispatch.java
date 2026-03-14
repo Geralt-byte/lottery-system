@@ -77,21 +77,20 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
                 .min(BigDecimal::compareTo)
                 .orElse(BigDecimal.ZERO);
 
-        //获取概率总和
-        BigDecimal totalAwardRate = strategyAwardEntities.stream()
-                .map(StrategyAwardEntity::getAwardRate)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        //获取概率范围，使用概率总和
-        BigDecimal rateRange = totalAwardRate.divide(minAwardRate, 0, RoundingMode.CEILING);
+        //将最小的概率扩展10的x次方直到大于1，此时10的x次方可以当作概率范围，可以乘其他更大的概率值都为整数
+        BigDecimal rateRange=BigDecimal.valueOf(1L);
+        double min = minAwardRate.doubleValue();
+        while (min<1){
+            min*=10;
+            rateRange=rateRange.multiply(BigDecimal.valueOf(10));
+        }
 
         //生成策略奖品概率查找表，在list集合中存放奖品占位
         List<Integer> strategyAwardSearchRateTables = new ArrayList<>(rateRange.intValue());
         for (StrategyAwardEntity strategyAwardEntity : strategyAwardEntities) {
             Integer awardId = strategyAwardEntity.getAwardId();
             BigDecimal awardRate = strategyAwardEntity.getAwardRate();
-            for (int i = 0; i < rateRange.multiply(awardRate)
-                    .setScale(0, RoundingMode.CEILING).intValue(); i++) {
+            for (int i = 0; i < rateRange.multiply(awardRate).intValue(); i++) {
                 strategyAwardSearchRateTables.add(awardId);
             }
         }

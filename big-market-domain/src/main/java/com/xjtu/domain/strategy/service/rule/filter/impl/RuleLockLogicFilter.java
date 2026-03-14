@@ -8,6 +8,7 @@ import com.xjtu.domain.strategy.service.annotation.LogicStrategy;
 import com.xjtu.domain.strategy.service.rule.filter.ILogicFilter;
 import com.xjtu.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -26,20 +27,34 @@ public class RuleLockLogicFilter implements ILogicFilter<RuleActionEntity.Raffle
     private IStrategyRepository iStrategyRepository;
 
     /*用户抽奖次数*/
-    private Long userRaffleCount=0L;
+    private Long userRaffleCount = 0L;
 
-    /**抽奖次数规则过滤*/
+    /**
+     * 抽奖次数规则过滤
+     */
     @Override
     public RuleActionEntity<RuleActionEntity.RaffleCenterEntity> filter(RuleMatterEntity ruleMatterEntity) {
         //日志
         log.info("规则过滤-抽奖次数 userId:{} strategyId:{} ruleModel:{} awardId:{}",
-                ruleMatterEntity.getUserId(), ruleMatterEntity.getStrategyId(), ruleMatterEntity.getRuleModel(),ruleMatterEntity.getAwardId());
+                ruleMatterEntity.getUserId(), ruleMatterEntity.getStrategyId(), ruleMatterEntity.getRuleModel(), ruleMatterEntity.getAwardId());
 
         //根据策略id，规则模型，奖品id查询抽奖次数限制要求
-        String ruleValue = iStrategyRepository.queryStrategyRuleValueEntity(ruleMatterEntity.getStrategyId(),ruleMatterEntity.getRuleModel(),ruleMatterEntity.getAwardId());
-        Long raffleCount=Long.parseLong(ruleValue);
+        String ruleValue = iStrategyRepository.queryStrategyRuleValueEntity(ruleMatterEntity.getStrategyId(), ruleMatterEntity.getRuleModel(), ruleMatterEntity.getAwardId());
+        if (StringUtils.isBlank(ruleValue)) {
+            RuleActionEntity.<RuleActionEntity.RaffleCenterEntity>builder()
+                    .code(RuleLogicCheckTypeVO.ALLOW.getCode())
+                    .info(RuleLogicCheckTypeVO.ALLOW.getInfo())
+                    .build();
+        }
 
-        if(userRaffleCount>=raffleCount){
+        long raffleCount = 0L;
+        try {
+            raffleCount = Long.parseLong(ruleValue);
+        } catch (Exception e) {
+            throw new RuntimeException("规则过滤-次数锁异常 ruleValue: " + ruleValue + " 配置不正确");
+        }
+
+        if (userRaffleCount >= raffleCount) {
             return RuleActionEntity.<RuleActionEntity.RaffleCenterEntity>builder()
                     .code(RuleLogicCheckTypeVO.ALLOW.getCode())
                     .info(RuleLogicCheckTypeVO.ALLOW.getInfo())
