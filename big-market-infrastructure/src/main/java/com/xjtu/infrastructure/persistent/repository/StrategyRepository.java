@@ -9,6 +9,9 @@ import com.xjtu.infrastructure.persistent.dao.*;
 import com.xjtu.infrastructure.persistent.po.*;
 import com.xjtu.infrastructure.persistent.redis.IRedisService;
 import com.xjtu.types.common.Constants;
+import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBlockingQueue;
+import org.redisson.api.RDelayedQueue;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -16,9 +19,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**策略服务仓储实现*/
 
+@Slf4j
 @Repository
 public class StrategyRepository implements IStrategyRepository {
 
@@ -75,6 +80,13 @@ public class StrategyRepository implements IStrategyRepository {
         //存储概率查找表到redis中
         Map<Integer,Integer> cacheRateTable=iRedisService.getMap(Constants.RedisKey.STRATEGY_RATE_TABLE_KEY+key);
         cacheRateTable.putAll(strategyAwardSearchRateTable);
+    }
+
+    /**将奖品的库存缓存到redis中*/
+    @Override
+    public void cacheStrategyAwardCount(String cacheKey, Integer awardCount) {
+        if(iRedisService.isExists(cacheKey)) return;
+        iRedisService.setAtomicLong(cacheKey,awardCount);
     }
 
     /**根据策略id和随机数从redis中抽取奖品,返回值为奖品Id*/
@@ -210,5 +222,50 @@ public class StrategyRepository implements IStrategyRepository {
 
         iRedisService.setValue(cacheKey,ruleTreeVO);
         return ruleTreeVO;
+    }
+
+    /**获取奖品库存消费队列*/
+    @Override
+    public StrategyAwardStockKeyVO takeQueueValue() {
+        String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
+        RBlockingQueue<StrategyAwardStockKeyVO> destinationQueue = iRedisService.getBlockingQueue(cacheKey);
+        return destinationQueue.poll();
+    }
+
+    /**更新奖品库存消耗*/
+    @Override
+    public void updateStrategyAwardStock(Long strategyId, Integer awardId) {
+        StrategyAward strategyAward=new StrategyAward();
+        strategyAward.setStrategyId(strategyId);
+        strategyAward.setAwardId(awardId);
+        iStrategyAwardDao.updateStrategyAwardStock(strategyAward);
+    }
+
+
+
+    /**扣减库存操作*/
+    @Override
+    public Boolean subtractionAwardStock(String cacheKey) {
+        long surplus=iRedisService.decr(cacheKey);
+        if(surplus<0){
+            //库存为0，恢复为0
+            iRedisService.setValue(cacheKey,0);
+            return false;
+        }
+        String lockKey = cacheKey + Constants.UNDERLINE + surplus;
+        Boolean lock = iRedisService.setNx(lockKey);
+        if(!lock){
+            log.info("策略奖品库存加锁失败 {}", lockKey);
+        }
+        return lock;
+    }
+
+    /**写入奖品库存消费队列*/
+    @Override
+    public void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO) {
+        String cacheKey=Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
+        RBlockingQueue<StrategyAwardStockKeyVO> blockingQueue = iRedisService.getBlockingQueue(cacheKey);
+        RDelayedQueue<StrategyAwardStockKeyVO> delayedQueue = iRedisService.getDelayedQueue(blockingQueue);
+        delayedQueue.offer(strategyAwardStockKeyVO,3, TimeUnit.SECONDS);
     }
 }

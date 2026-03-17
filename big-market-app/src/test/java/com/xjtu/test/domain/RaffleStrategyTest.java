@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author mlei@xjtu
@@ -41,7 +42,7 @@ public class RaffleStrategyTest {
     @Before
     public void set(){
         ReflectionTestUtils.setField(ruleWeightLogicChain,"userScore",5500L);
-        ReflectionTestUtils.setField(ruleLockLogicTreeNode,"userRaffleCount",0L);
+        ReflectionTestUtils.setField(ruleLockLogicTreeNode,"userRaffleCount",10L);
     }
 
     /*权重测试*/
@@ -104,18 +105,36 @@ public class RaffleStrategyTest {
         log.info("测试结果: {}", JSON.toJSONString(raffleAwardEntity));
     }
 
+    /*规则树测试*/
     @Test
-    public void test_performRaffle() {
+    public void performRaffleTest4() {
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
-                .userId("xiaofuge")
+                .userId("mlei")
                 .strategyId(100006L)
                 .build();
 
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
 
-        log.info("请求参数：{}", com.alibaba.fastjson.JSON.toJSONString(raffleFactorEntity));
-        log.info("测试结果：{}", com.alibaba.fastjson.JSON.toJSONString(raffleAwardEntity));
+        log.info("请求参数：{}", JSON.toJSONString(raffleFactorEntity));
+        log.info("测试结果：{}", JSON.toJSONString(raffleAwardEntity));
     }
 
+    /*库存扣减测试*/
+    @Test
+    public void test_performRaffle() throws InterruptedException {
+        for (int i = 0; i < 3; i++) {
+            RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
+                    .userId("mlei")
+                    .strategyId(100006L)
+                    .build();
 
+            RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
+
+            log.info("请求参数：{}", JSON.toJSONString(raffleFactorEntity));
+            log.info("测试结果：{}", JSON.toJSONString(raffleAwardEntity));
+        }
+
+        // 等待 UpdateAwardStockJob 消费队列
+        new CountDownLatch(1).await();
+    }
 }

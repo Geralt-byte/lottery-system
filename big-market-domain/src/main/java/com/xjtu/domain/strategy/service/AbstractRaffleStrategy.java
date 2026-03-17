@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
  * @create 2026/3/11 21:45
  */
 @Slf4j
-public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
+public abstract class AbstractRaffleStrategy implements IRaffleStrategy,IRaffleStock {
 
     /*引入策略服务仓储接口*/
     protected IStrategyRepository iStrategyRepository;

@@ -11,10 +11,19 @@
         from strategy_award
         where strategy_id = #{strategyId}
     </select>
+
     <select id="queryStrategyAwardRuleModels" resultType="java.lang.String">
         select rule_models
         from strategy_award
         where strategy_id = #{strategyId}
           and award_id = #{awardId}
     </select>
+
+    <update id="updateStrategyAwardStock">
+        update strategy_award
+        set award_count_surplus=award_count_surplus - 1
+        where strategy_id = #{strategyId}
+          and award_id = #{awardId}
+          and award_count_surplus > 0
+    </update>
 </mapper>

@@ -20,7 +20,7 @@ public class RuleLuckAwardLogicTreeNode implements ILogicTreeNode {
         //日志
         log.info("规则过滤-兜底奖品 userId:{} strategyId:{} ruleModel:{} awardId:{} ruleValue:{}",
                 userId, strategyId, "rule_luck_award", awardId,ruleValue);
-        String[] split = ruleValue.split(Constants.SPLIT);
+        String[] split = ruleValue.split(Constants.COLON);
         if(split.length==0){
             log.error("规则过滤-兜底奖品，兜底奖品未配置告警 userId:{} strategyId:{} awardId:{}", userId, strategyId, awardId);
             throw new RuntimeException("兜底奖品未配置 " + ruleValue);

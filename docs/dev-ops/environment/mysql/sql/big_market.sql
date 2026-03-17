@@ -215,7 +215,7 @@ LOCK TABLES `rule_tree_node` WRITE;
 
 INSERT INTO `rule_tree_node` (`id`, `tree_id`, `rule_key`, `rule_desc`, `rule_value`)
 VALUES (1, 'tree_lock', 'rule_lock', '限定用户已完成N次抽奖后解锁', '1'),
-       (2, 'tree_lock', 'rule_luck_award', '兜底奖品随机积分', '1,100'),
+       (2, 'tree_lock', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
        (3, 'tree_lock', 'rule_stock', '库存扣减规则', NULL);
 
 UNLOCK TABLES;

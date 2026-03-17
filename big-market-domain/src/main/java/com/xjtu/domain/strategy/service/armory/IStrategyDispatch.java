@@ -17,5 +17,15 @@ public interface IStrategyDispatch {
      * 抽奖加入权重规则
      * 返回值为奖品id
      */
-    Integer getRandomAwardId(Long strategyId,String ruleWeightValue);
+    Integer getRandomAwardId(Long strategyId, String ruleWeightValue);
+
+    /**
+     * key=strategyId+_+ruleWeightValue
+     */
+    Integer getRandomAwardId(String key);
+
+    /**
+     * 扣减库存操作
+     * */
+    Boolean subtractionAwardStock(Long strategyId,Integer awardId);
 }
