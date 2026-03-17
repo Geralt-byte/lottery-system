@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RuleTreeNodeVO {
     /** 规则树Id*/
-    private Integer treeId;
+    private String treeId;
     /** 规则树Key*/
     private String ruleKey;
     /** 规则树描述*/

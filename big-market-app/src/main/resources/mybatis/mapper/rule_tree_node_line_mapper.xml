@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjtu.infrastructure.persistent.dao.IRuleTreeNodeLineDao">
+
+    <!--    <resultMap id="CaseMap" type="com.xjtu.infrastructure.persistent.po.A">-->
+    <!--        <id column="id" property="id"/>-->
+    <!--        <result column="create_time" property="createTime"/>-->
+    <!--        <result column="update_time" property="updateTime"/>-->
+    <!--    </resultMap>-->
+
+
+    <select id="queryRuleTreeNodeLineListByTreeId" resultType="com.xjtu.infrastructure.persistent.po.RuleTreeNodeLine">
+        select tree_id, rule_node_from, rule_node_to, rule_limit_type, rule_limit_value
+        from rule_tree_node_line
+        where tree_id = #{treeId}
+    </select>
+
+</mapper>

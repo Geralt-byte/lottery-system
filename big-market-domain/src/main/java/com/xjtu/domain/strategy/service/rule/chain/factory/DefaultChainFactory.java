@@ -3,6 +3,7 @@ package com.xjtu.domain.strategy.service.rule.chain.factory;
 import com.xjtu.domain.strategy.model.entity.StrategyEntity;
 import com.xjtu.domain.strategy.repository.IStrategyRepository;
 import com.xjtu.domain.strategy.service.rule.chain.ILogicChain;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -34,7 +35,7 @@ public class DefaultChainFactory {
 
         //为空装填默认链返回
         if (ruleModels == null || ruleModels.length == 0) {
-            return logicChainGroup.get("default");
+            return logicChainGroup.get(LogicModel.RULE_DEFAULT.getCode());
         }
 
         //装填规则链
@@ -44,8 +45,32 @@ public class DefaultChainFactory {
             cur = cur.appendNext(logicChainGroup.get(ruleModels[i]));
         }
         //最后装填默认规则链
-        cur.appendNext(logicChainGroup.get("default"));
+        cur.appendNext(logicChainGroup.get(LogicModel.RULE_DEFAULT.getCode()));
 
         return iLogicChain;
+    }
+
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class StrategyAwardVO{
+        /** 抽奖奖品id*/
+        private Integer awardId;
+        /** 规则值*/
+        private String logicModel;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum LogicModel{
+
+        RULE_DEFAULT("rule_default","默认抽奖"),
+        RULE_WEIGHT("rule_weight","权重抽奖"),
+        RULE_BLACKLIST("rule_blacklist","黑名单抽奖"),
+        ;
+
+        private final String code;
+        private final String info;
     }
 }

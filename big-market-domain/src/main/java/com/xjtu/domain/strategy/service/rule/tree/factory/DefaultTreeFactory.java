@@ -5,10 +5,7 @@ import com.xjtu.domain.strategy.model.valobj.RuleTreeVO;
 import com.xjtu.domain.strategy.service.rule.tree.ILogicTreeNode;
 import com.xjtu.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeEngine;
 import com.xjtu.domain.strategy.service.rule.tree.factory.engine.impl.DecisionTreeEngine;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -37,14 +34,14 @@ public class DefaultTreeFactory {
     @NoArgsConstructor
     public static class TreeActionEntity{
         private RuleLogicCheckTypeVO ruleLogicCheckType;
-        private StrategyAwardData strategyAwardData;
+        private StrategyAwardVO strategyAwardVO;
     }
 
     @Data
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class StrategyAwardData{
+    public static class StrategyAwardVO {
         /** 抽奖奖品ID - 内部流转使用 */
         private Integer awardId;
         /** 抽奖奖品规则值 */

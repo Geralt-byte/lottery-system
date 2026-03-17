@@ -1,24 +1,16 @@
 package com.xjtu.domain.strategy.service.raffle;
 
-import com.xjtu.domain.strategy.model.entity.RaffleFactorEntity;
-import com.xjtu.domain.strategy.model.entity.RuleActionEntity;
-import com.xjtu.domain.strategy.model.entity.RuleMatterEntity;
-import com.xjtu.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
+import com.xjtu.domain.strategy.model.valobj.RuleTreeVO;
+import com.xjtu.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import com.xjtu.domain.strategy.repository.IStrategyRepository;
 import com.xjtu.domain.strategy.service.AbstractRaffleStrategy;
 import com.xjtu.domain.strategy.service.armory.IStrategyDispatch;
+import com.xjtu.domain.strategy.service.rule.chain.ILogicChain;
 import com.xjtu.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
-import com.xjtu.domain.strategy.service.rule.filter.ILogicFilter;
-import com.xjtu.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
+import com.xjtu.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
+import com.xjtu.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeEngine;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author mlei@xjtu
@@ -29,45 +21,32 @@ import java.util.stream.Collectors;
 @Service
 public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
 
-    @Resource
-    private DefaultLogicFactory defaultLogicFactory;
-
-    public DefaultRaffleStrategy(IStrategyRepository iStrategyRepository, IStrategyDispatch iStrategyDispatch, DefaultChainFactory defaultChainFactory) {
-        super(iStrategyRepository, iStrategyDispatch,defaultChainFactory);
+    public DefaultRaffleStrategy(IStrategyRepository iStrategyRepository, IStrategyDispatch iStrategyDispatch, DefaultChainFactory defaultChainFactory,DefaultTreeFactory defaultTreeFactory) {
+        super(iStrategyRepository, iStrategyDispatch,defaultChainFactory,defaultTreeFactory);
     }
 
 
     @Override
-    protected RuleActionEntity<RuleActionEntity.RaffleCenterEntity> doCheckRaffleCenterLogic(RaffleFactorEntity raffleFactorEntity, String[] ruleModels) {
-        if(ruleModels==null||ruleModels.length==0){
-            return RuleActionEntity.<RuleActionEntity.RaffleCenterEntity>builder()
-                    .code(RuleLogicCheckTypeVO.ALLOW.getCode())
-                    .info(RuleLogicCheckTypeVO.ALLOW.getInfo())
-                    .build();
+    public DefaultChainFactory.StrategyAwardVO raffleLoginChain(String userId, Long strategyId) {
+        ILogicChain iLogicChain = defaultChainFactory.openLogicChain(strategyId);
+        return iLogicChain.logic(userId,strategyId);
+    }
+
+    @Override
+    public DefaultTreeFactory.StrategyAwardVO raffleLogicTree(String userId, Long strategyId, Integer awardId) {
+        //抽奖中规则过滤，判断抽中特定奖品（需要抽奖次数解锁的奖品）此时用户的抽奖次数是否满足要求
+        StrategyAwardRuleModelVO strategyAwardRuleModelVO=iStrategyRepository.queryStrategyAwardRuleModelVO(strategyId,awardId);
+        //说明未在策略奖品表中查找到对应奖品有策略配置,直接返回奖品
+        if(strategyAwardRuleModelVO==null){
+            return DefaultTreeFactory.StrategyAwardVO.builder().awardId(awardId).build();
         }
 
-        //产生过滤器bean对象列表
-        Map<String, ILogicFilter<RuleActionEntity.RaffleCenterEntity>> logicFilterMap = defaultLogicFactory.openLogicFilter();
-
-        RuleActionEntity<RuleActionEntity.RaffleCenterEntity> ruleActionEntity=null;
-        for (String ruleModel : ruleModels) {
-            //调用对应于当前规则的过滤器
-            ILogicFilter<RuleActionEntity.RaffleCenterEntity> logicFilter = logicFilterMap.get(ruleModel);
-            RuleMatterEntity ruleMatterEntity=RuleMatterEntity.builder()
-                    .userId(raffleFactorEntity.getUserId())
-                    .strategyId(raffleFactorEntity.getStrategyId())
-                    .ruleModel(ruleModel)
-                    .awardId(raffleFactorEntity.getAwardId())
-                    .build();
-            //抽奖中过滤调用
-            ruleActionEntity = logicFilter.filter(ruleMatterEntity);
-            //非放行结果按顺序过滤
-            log.info("抽奖中规则过滤 userId:{} ruleModel: {} code: {} info: {}",
-                    raffleFactorEntity.getUserId(),ruleModel,ruleActionEntity.getCode(),ruleActionEntity.getInfo());
-            if(!ruleActionEntity.getCode().equals(RuleLogicCheckTypeVO.ALLOW.getCode())){
-                return ruleActionEntity;
-            }
+        RuleTreeVO ruleTreeVO = iStrategyRepository.queryRuleTreeVOByTreeId(strategyAwardRuleModelVO.getRuleModels());
+        if(ruleTreeVO==null){
+            throw new RuntimeException("存在抽奖策略配置的规则模型 Key，未在库表 rule_tree、rule_tree_node、rule_tree_line 配置对应的规则树信息 "
+                    + strategyAwardRuleModelVO.getRuleModels());
         }
-        return ruleActionEntity;
+        IDecisionTreeEngine treeEngine = defaultTreeFactory.openLogicTree(ruleTreeVO);
+        return treeEngine.process(userId, strategyId, awardId);
     }
 }

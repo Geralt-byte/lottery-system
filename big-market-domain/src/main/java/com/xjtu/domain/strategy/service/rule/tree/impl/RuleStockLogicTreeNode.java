@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component("rule_stock")
 public class RuleStockLogicTreeNode implements ILogicTreeNode {
     @Override
-    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId) {
+    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId, String ruleValue) {
 
         return DefaultTreeFactory.TreeActionEntity
                 .builder()

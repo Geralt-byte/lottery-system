@@ -5,7 +5,7 @@ import com.xjtu.domain.strategy.model.entity.RaffleAwardEntity;
 import com.xjtu.domain.strategy.model.entity.RaffleFactorEntity;
 import com.xjtu.domain.strategy.service.IRaffleStrategy;
 import com.xjtu.domain.strategy.service.rule.chain.impl.RuleWeightLogicChain;
-import com.xjtu.domain.strategy.service.rule.filter.impl.RuleLockLogicFilter;
+import com.xjtu.domain.strategy.service.rule.tree.impl.RuleLockLogicTreeNode;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author mlei@xjtu
@@ -34,12 +36,12 @@ public class RaffleStrategyTest {
     private RuleWeightLogicChain ruleWeightLogicChain;
 
     @Resource
-    private RuleLockLogicFilter ruleLockLogicFilter;
+    private RuleLockLogicTreeNode ruleLockLogicTreeNode;
 
     @Before
     public void set(){
         ReflectionTestUtils.setField(ruleWeightLogicChain,"userScore",5500L);
-        ReflectionTestUtils.setField(ruleLockLogicFilter,"userRaffleCount",0L);
+        ReflectionTestUtils.setField(ruleLockLogicTreeNode,"userRaffleCount",0L);
     }
 
     /*权重测试*/
@@ -101,4 +103,19 @@ public class RaffleStrategyTest {
         log.info("请求参数: {}", JSON.toJSONString(raffleFactorEntity));
         log.info("测试结果: {}", JSON.toJSONString(raffleAwardEntity));
     }
+
+    @Test
+    public void test_performRaffle() {
+        RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
+                .userId("xiaofuge")
+                .strategyId(100006L)
+                .build();
+
+        RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
+
+        log.info("请求参数：{}", com.alibaba.fastjson.JSON.toJSONString(raffleFactorEntity));
+        log.info("测试结果：{}", com.alibaba.fastjson.JSON.toJSONString(raffleAwardEntity));
+    }
+
+
 }

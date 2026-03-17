@@ -3,6 +3,7 @@ package com.xjtu.domain.strategy.repository;
 import com.xjtu.domain.strategy.model.entity.StrategyAwardEntity;
 import com.xjtu.domain.strategy.model.entity.StrategyEntity;
 import com.xjtu.domain.strategy.model.entity.StrategyRuleEntity;
+import com.xjtu.domain.strategy.model.valobj.RuleTreeVO;
 import com.xjtu.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 
 import java.util.List;
@@ -37,4 +38,7 @@ public interface IStrategyRepository {
 
     /**根据策略id，奖品id查询策略奖品规则模型值*/
     StrategyAwardRuleModelVO queryStrategyAwardRuleModelVO(Long strategyId, Integer awardId);
+
+    /**根据树id查询规则树*/
+    RuleTreeVO queryRuleTreeVOByTreeId(String treeId);
 }

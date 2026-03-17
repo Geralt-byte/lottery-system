@@ -1,5 +1,6 @@
 package com.xjtu.domain.strategy.service.rule.tree.impl;
 
+import com.xjtu.domain.strategy.model.entity.RuleActionEntity;
 import com.xjtu.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import com.xjtu.domain.strategy.service.rule.tree.ILogicTreeNode;
 import com.xjtu.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
@@ -15,12 +16,38 @@ import org.springframework.stereotype.Component;
 @Component("rule_lock")
 public class RuleLockLogicTreeNode implements ILogicTreeNode {
 
-    @Override
-    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId) {
+    /*用户抽奖次数*/
+    private Long userRaffleCount = 0L;
 
+    /**
+     * 抽奖次数规则过滤
+     */
+    @Override
+    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId, String ruleValue) {
+        //日志
+        log.info("规则过滤-抽奖次数 userId:{} strategyId:{} ruleModel:{} awardId:{} ruleValue:{}",
+                userId, strategyId, "rule_lock", awardId,ruleValue);
+
+        long raffleCount = 0L;
+        try {
+            raffleCount = Long.parseLong(ruleValue);
+        } catch (Exception e) {
+            throw new RuntimeException("规则过滤-次数锁异常 ruleValue: " + ruleValue + " 配置不正确");
+        }
+
+        //用户抽奖次数大于限定值，走库存
+        if (userRaffleCount >= raffleCount) {
+            return DefaultTreeFactory
+                    .TreeActionEntity
+                    .builder()
+                    .ruleLogicCheckType(RuleLogicCheckTypeVO.ALLOW)
+                    .build();
+        }
+
+        //走兜底
         return DefaultTreeFactory.TreeActionEntity
                 .builder()
-                .ruleLogicCheckType(RuleLogicCheckTypeVO.ALLOW)
+                .ruleLogicCheckType(RuleLogicCheckTypeVO.TAKE_OVER)
                 .build();
     }
 }
