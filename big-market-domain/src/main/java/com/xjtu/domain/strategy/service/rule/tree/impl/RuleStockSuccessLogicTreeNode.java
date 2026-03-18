@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @create 2026/3/17 17:53
  */
 @Slf4j
-@Component("rule_stock_success")
+//@Component("rule_stock_success")
 public class RuleStockSuccessLogicTreeNode implements ILogicTreeNode {
 
     @Override

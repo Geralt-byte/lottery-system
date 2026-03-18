@@ -17,6 +17,9 @@ public interface IStrategyRepository {
     /**从redis中查找策略id对应的奖品*/
     List<StrategyAwardEntity> queryStrategyAwardList(Long strategyId);
 
+    /**从redis中查找单个奖品*/
+    StrategyAwardEntity queryStrategyEntity(Long strategyId,Integer awardId);
+
     /**存储概率查找表到reids中*/
     void storeStrategyAwardSearchRateTable(String key, Integer rateRange, Map<Integer,Integer> strategyAwardSearchRateTable);
 

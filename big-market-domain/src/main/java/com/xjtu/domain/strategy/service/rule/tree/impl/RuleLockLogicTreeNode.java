@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class RuleLockLogicTreeNode implements ILogicTreeNode {
 
     /*用户抽奖次数*/
-    private Long userRaffleCount = 0L;
+    private Long userRaffleCount = 3L;
 
     /**
      * 抽奖次数规则过滤

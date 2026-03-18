@@ -36,6 +36,10 @@
             <groupId>com.xjtu</groupId>
             <artifactId>big-market-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.xjtu</groupId>
+            <artifactId>big-market-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

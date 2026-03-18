@@ -2,12 +2,9 @@ package com.xjtu.domain.strategy.service;
 
 import com.xjtu.domain.strategy.model.entity.RaffleAwardEntity;
 import com.xjtu.domain.strategy.model.entity.RaffleFactorEntity;
-import com.xjtu.domain.strategy.model.entity.RuleActionEntity;
-import com.xjtu.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
-import com.xjtu.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
+import com.xjtu.domain.strategy.model.entity.StrategyAwardEntity;
 import com.xjtu.domain.strategy.repository.IStrategyRepository;
 import com.xjtu.domain.strategy.service.armory.IStrategyDispatch;
-import com.xjtu.domain.strategy.service.rule.chain.ILogicChain;
 import com.xjtu.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import com.xjtu.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import com.xjtu.types.enums.ResponseCode;
@@ -21,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
  * @create 2026/3/11 21:45
  */
 @Slf4j
-public abstract class AbstractRaffleStrategy implements IRaffleStrategy,IRaffleStock {
+public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
 
     /*引入策略服务仓储接口*/
     protected IStrategyRepository iStrategyRepository;
@@ -54,9 +51,8 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy,IRaffleS
         log.info("抽奖策略计算-责任链出口 userId: {} strategyId: {} ruleModel: {} awardId: {}",userId,strategyId,chainStrategyAwardVO.getLogicModel(),chainStrategyAwardVO.getAwardId());
         //当责任链出口是黑名单或权重时，不继续走规则树，直接返回结果
         if(!DefaultChainFactory.LogicModel.RULE_DEFAULT.getCode().equals(chainStrategyAwardVO.getLogicModel())){
-            return RaffleAwardEntity.builder()
-                    .awardId(chainStrategyAwardVO.getAwardId())
-                    .build();
+            // TODO awardConfig 暂时为空。黑名单指定积分奖品，后续需要在库表中配置上对应的1积分值，并获取到。
+            return buildRaffleAwardEntity(strategyId,chainStrategyAwardVO.getAwardId(),null);
         }
 
         //调用规则树进行抽奖，获得规则树奖品值对象
@@ -64,9 +60,15 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy,IRaffleS
         log.info("抽奖策略计算-规则树出口 userId: {} strategyId: {} ruleValue: {} awardId: {}",userId,strategyId,treeStrategyAwardVO.getAwardRuleValue(),treeStrategyAwardVO.getAwardId());
 
         //返回抽奖结果
+        return buildRaffleAwardEntity(strategyId,treeStrategyAwardVO.getAwardId(),treeStrategyAwardVO.getAwardRuleValue());
+    }
+
+    private RaffleAwardEntity buildRaffleAwardEntity(Long strategyId,Integer awardId,String awardConfig){
+        StrategyAwardEntity strategyAwardEntity= iStrategyRepository.queryStrategyEntity(strategyId,awardId);
         return RaffleAwardEntity.builder()
-                .awardId(treeStrategyAwardVO.getAwardId())
-                .awardConfig(treeStrategyAwardVO.getAwardRuleValue())
+                .awardId(awardId)
+                .awardConfig(awardConfig)
+                .sort(strategyAwardEntity.getSort())
                 .build();
     }
 

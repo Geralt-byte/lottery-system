@@ -37,7 +37,7 @@ public class AppException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "com.xjtu.x.api.types.exception.XApiException{" +
+        return "com.xjtu.x.api.types.exception.ApiException{" +
                 "code='" + code + '\'' +
                 ", info='" + info + '\'' +
                 '}';

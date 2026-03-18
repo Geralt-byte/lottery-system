@@ -10,8 +10,11 @@ import java.util.List;
 @Mapper
 public interface IStrategyAwardDao {
 
-    /*根据策略id查找策略奖品*/
+    /*根据策略id查找策略奖品列表*/
     List<StrategyAward> queryStrategyAwardListByStrategyId(Long strategyId);
+
+    /*查找单个策略奖品*/
+    StrategyAward queryStrategyAward(StrategyAward strategyAwardReq);
 
     /**根据策略id，奖品id查询策略奖品规则模型值*/
     String queryStrategyAwardRuleModels(StrategyAward strategyAward);

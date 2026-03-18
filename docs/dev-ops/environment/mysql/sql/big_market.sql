@@ -62,7 +62,7 @@ LOCK TABLES `strategy` WRITE;
 
 INSERT INTO `strategy` (id, strategy_id, strategy_desc, rule_models)
 VALUES (1, 100001, '抽奖策略', 'rule_blacklist,rule_weight'),
-       (2, 100003, '抽奖策略-验证lock', NULL),
+       (2, 100003, '抽奖策略-验证lock', 'rule_blacklist'),
        (3, 100002, '抽奖策略-非完整1概率', NULL),
        (4, 100004, '抽奖策略-随机抽奖', NULL),
        (5, 100005, '抽奖策略-测试概率计算', NULL),
@@ -98,29 +98,35 @@ LOCK TABLES `strategy_award` WRITE;
 
 INSERT INTO `strategy_award` (`id`, `strategy_id`, `award_id`, `award_title`, `award_subtitle`, `award_count`,
                               `award_count_surplus`, `award_rate`, `rule_models`, `sort`)
-VALUES (1, 100001, 101, '随机积分', NULL, 80000, 80000, 0.3000, 'rule_random,rule_luck_award', 1),
-       (2, 100001, 102, '5次使用', NULL, 10000, 10000, 0.2000, 'rule_luck_award', 2),
-       (3, 100001, 103, '10次使用', NULL, 5000, 5000, 0.2000, 'rule_luck_award', 3),
-       (4, 100001, 104, '20次使用', NULL, 4000, 4000, 0.1000, 'rule_luck_award', 4),
-       (5, 100001, 105, '增加gpt-4对话模型', NULL, 600, 600, 0.1000, 'rule_luck_award', 5),
-       (6, 100001, 106, '增加dall-e-2画图模型', NULL, 200, 200, 0.0500, 'rule_luck_award', 6),
-       (7, 100001, 107, '增加dall-e-3画图模型', '抽奖1次后解锁', 200, 200, 0.0400, 'rule_lock,rule_luck_award', 7),
-       (8, 100001, 108, '增加100次使用', '抽奖2次后解锁', 199, 199, 0.0099, 'rule_lock,rule_luck_award', 8),
-       (9, 100001, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 0.0001, 'rule_lock,rule_luck_award', 9),
-       (10, 100002, 101, '随机积分', NULL, 1, 1, 0.5000, 'rule_random,rule_luck_award', 1),
-       (11, 100002, 102, '5次使用', NULL, 1, 1, 0.1000, 'rule_random,rule_luck_award', 2),
-       (12, 100002, 106, '增加dall-e-2画图模型', NULL, 1, 1, 0.0100, 'rule_random,rule_luck_award', 3),
-       (13, 100003, 107, '增加dall-e-3画图模型', '抽奖1次后解锁', 200, 200, 0.0400, 'rule_lock,rule_luck_award', 7),
-       (14, 100003, 108, '增加100次使用', '抽奖2次后解锁', 199, 199, 0.0099, 'rule_lock,rule_luck_award', 8),
-       (15, 100003, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 0.0001, 'rule_lock,rule_luck_award', 9),
-       (16, 100004, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 1.0000, 'rule_random', 9),
-       (17, 100005, 101, '随机积分', NULL, 80000, 80000, 0.0300, 'rule_random', 1),
-       (18, 100005, 102, '随机积分', NULL, 80000, 80000, 0.0300, 'rule_random', 1),
-       (19, 100005, 103, '随机积分', NULL, 80000, 80000, 0.0300, 'rule_random', 1),
-       (20, 100005, 104, '随机积分', NULL, 80000, 80000, 0.0300, 'rule_random', 1),
-       (21, 100005, 105, '随机积分', NULL, 80000, 80000, 0.0010, 'rule_random', 1),
-       (22, 100006, 101, '随机积分', NULL, 3, 3, 0.0300, 'tree_lock', 1),
-       (23, 100006, 102, '随机积分', NULL, 97, 97, 0.9700, 'tree_lock', 1);
+VALUES (1, 100001, 101, '随机积分', NULL, 80000, 80000, 0.3000, 'tree_luck_award', 1),
+       (2, 100001, 102, '5次使用', NULL, 10000, 10000, 0.2000, 'tree_luck_award', 2),
+       (3, 100001, 103, '10次使用', NULL, 5000, 5000, 0.2000, 'tree_luck_award', 3),
+       (4, 100001, 104, '20次使用', NULL, 4000, 4000, 0.1000, 'tree_luck_award', 4),
+       (5, 100001, 105, '增加gpt-4对话模型', NULL, 600, 600, 0.1000, 'tree_luck_award', 5),
+       (6, 100001, 106, '增加dall-e-2画图模型', NULL, 200, 200, 0.0500, 'tree_luck_award', 6),
+       (7, 100001, 107, '增加dall-e-3画图模型', '抽奖1次后解锁', 200, 200, 0.0400, 'tree_luck_award', 7),
+       (8, 100001, 108, '增加100次使用', '抽奖2次后解锁', 199, 199, 0.0099, 'tree_luck_award', 8),
+       (9, 100001, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 0.0001, 'tree_luck_award', 9),
+       (10, 100002, 101, '随机积分', NULL, 1, 1, 0.5000, 'tree_luck_award', 1),
+       (11, 100002, 102, '5次使用', NULL, 1, 1, 0.1000, 'tree_luck_award', 2),
+       (12, 100002, 106, '增加dall-e-2画图模型', NULL, 1, 1, 0.0100, 'tree_luck_award', 3),
+       (13, 100003, 107, '增加dall-e-3画图模型', '抽奖1次后解锁', 200, 200, 0.0400, 'tree_luck_award', 7),
+       (14, 100003, 108, '增加100次使用', '抽奖2次后解锁', 199, 199, 0.0099, 'tree_luck_award', 8),
+       (15, 100003, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 0.0001, 'tree_luck_award', 9),
+       (16, 100004, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 1.0000, 'tree_luck_award', 9),
+       (17, 100005, 101, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1),
+       (18, 100005, 102, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1),
+       (19, 100005, 103, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1),
+       (20, 100005, 104, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1),
+       (21, 100005, 105, '随机积分', NULL, 80000, 80000, 0.0010, 'tree_luck_award', 1),
+       (22, 100006, 101, '随机积分', NULL, 100, 100, 0.0200, 'tree_luck_award', 1),
+       (23, 100006, 102, '7等奖', NULL, 100, 100, 0.0300, 'tree_luck_award', 2),
+       (24, 100006, 103, '6等奖', NULL, 100, 100, 0.0300, 'tree_luck_award', 3),
+       (25, 100006, 104, '5等奖', NULL, 100, 100, 0.0300, 'tree_luck_award', 4),
+       (26, 100006, 105, '4等奖', NULL, 100, 100, 0.0300, 'tree_luck_award', 5),
+       (27, 100006, 106, '3等奖', '抽奖1次后解锁', 100, 100, 0.0300, 'tree_lock_1', 6),
+       (28, 100006, 107, '2等奖', '抽奖1次后解锁', 100, 100, 0.0300, 'tree_lock_1', 7),
+       (29, 100006, 108, '1等奖', '抽奖2次后解锁', 100, 100, 0.0300, 'tree_lock_2', 8);
 
 UNLOCK TABLES;
 
@@ -190,7 +196,9 @@ CREATE TABLE `rule_tree`
 LOCK TABLES `rule_tree` WRITE;
 
 INSERT INTO `rule_tree` (`id`, `tree_id`, `tree_name`, `tree_desc`, `tree_node_rule_key`)
-VALUES (1, 'tree_lock', '规则树', '规则树', 'rule_lock');
+VALUES (1, 'tree_lock_1', '规则树', '规则树', 'rule_lock'),
+       (2, 'tree_luck_award', '规则树-兜底奖励', '规则树-兜底奖励', 'rule_stock'),
+       (3, 'tree_lock_2', '规则树', '规则树', 'rule_lock');
 
 UNLOCK TABLES;
 
@@ -214,9 +222,14 @@ CREATE TABLE `rule_tree_node`
 LOCK TABLES `rule_tree_node` WRITE;
 
 INSERT INTO `rule_tree_node` (`id`, `tree_id`, `rule_key`, `rule_desc`, `rule_value`)
-VALUES (1, 'tree_lock', 'rule_lock', '限定用户已完成N次抽奖后解锁', '1'),
-       (2, 'tree_lock', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
-       (3, 'tree_lock', 'rule_stock', '库存扣减规则', NULL);
+VALUES (1, 'tree_lock_1', 'rule_lock', '限定用户已完成N次抽奖后解锁', '1'),
+       (2, 'tree_lock_1', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
+       (3, 'tree_lock_1', 'rule_stock', '库存扣减规则', NULL),
+       (4, 'tree_luck_award', 'rule_stock', '库存扣减规则', NULL),
+       (5, 'tree_luck_award', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
+       (6, 'tree_lock_2', 'rule_lock', '限定用户已完成N次抽奖后解锁', '2'),
+       (7, 'tree_lock_2', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
+       (8, 'tree_lock_2', 'rule_stock', '库存扣减规则', NULL);
 
 UNLOCK TABLES;
 
@@ -242,9 +255,13 @@ LOCK TABLES `rule_tree_node_line` WRITE;
 
 INSERT INTO `rule_tree_node_line` (`id`, `tree_id`, `rule_node_from`, `rule_node_to`, `rule_limit_type`,
                                    `rule_limit_value`)
-VALUES (1, 'tree_lock', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
-       (2, 'tree_lock', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER'),
-       (3, 'tree_lock', 'rule_stock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER');
+VALUES (1, 'tree_lock_1', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
+       (2, 'tree_lock_1', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER'),
+       (3, 'tree_lock_1', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW'),
+       (4, 'tree_luck_award', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW'),
+       (5, 'tree_lock_2', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
+       (6, 'tree_lock_2', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER'),
+       (7, 'tree_lock_2', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW');
 
 UNLOCK TABLES;
 

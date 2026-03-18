@@ -1,10 +1,13 @@
 package com.xjtu.domain.strategy.service.raffle;
 
+import com.xjtu.domain.strategy.model.entity.StrategyAwardEntity;
 import com.xjtu.domain.strategy.model.valobj.RuleTreeVO;
 import com.xjtu.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import com.xjtu.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import com.xjtu.domain.strategy.repository.IStrategyRepository;
 import com.xjtu.domain.strategy.service.AbstractRaffleStrategy;
+import com.xjtu.domain.strategy.service.IRaffleAward;
+import com.xjtu.domain.strategy.service.IRaffleStock;
 import com.xjtu.domain.strategy.service.armory.IStrategyDispatch;
 import com.xjtu.domain.strategy.service.rule.chain.ILogicChain;
 import com.xjtu.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
@@ -13,6 +16,8 @@ import com.xjtu.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeEn
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author mlei@xjtu
  * @description 默认抽奖策略实现
@@ -20,7 +25,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
+public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRaffleStock, IRaffleAward {
 
     public DefaultRaffleStrategy(IStrategyRepository iStrategyRepository, IStrategyDispatch iStrategyDispatch, DefaultChainFactory defaultChainFactory,DefaultTreeFactory defaultTreeFactory) {
         super(iStrategyRepository, iStrategyDispatch,defaultChainFactory,defaultTreeFactory);
@@ -59,5 +64,10 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
     @Override
     public void updateStrategyAwardStock(Long strategyId, Integer awardId) {
         iStrategyRepository.updateStrategyAwardStock(strategyId,awardId);
+    }
+
+    @Override
+    public List<StrategyAwardEntity> queryRaffleStrategyAwardList(Long strategyId) {
+        return iStrategyRepository.queryStrategyAwardList(strategyId);
     }
 }

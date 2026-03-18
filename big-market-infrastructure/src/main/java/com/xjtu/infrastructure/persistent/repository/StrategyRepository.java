@@ -9,6 +9,8 @@ import com.xjtu.infrastructure.persistent.dao.*;
 import com.xjtu.infrastructure.persistent.po.*;
 import com.xjtu.infrastructure.persistent.redis.IRedisService;
 import com.xjtu.types.common.Constants;
+import com.xjtu.types.enums.ResponseCode;
+import com.xjtu.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
@@ -45,11 +47,11 @@ public class StrategyRepository implements IStrategyRepository {
     @Resource
     private IRedisService iRedisService;
 
-    /**从redis中查找策略id对应的奖品*/
+    /**从redis中查找策略id对应的奖品列表*/
     @Override
     public List<StrategyAwardEntity> queryStrategyAwardList(Long strategyId) {
         //先查redis缓存
-        String cacheKey= Constants.RedisKey.STRATEGY_AWARD_KEY+strategyId;
+        String cacheKey= Constants.RedisKey.STRATEGY_AWARD_LIST_KEY +strategyId;
         List<StrategyAwardEntity> strategyAwardEntities = iRedisService.getValue(cacheKey);
         if(strategyAwardEntities!=null&&!strategyAwardEntities.isEmpty()) return strategyAwardEntities;
 
@@ -60,15 +62,48 @@ public class StrategyRepository implements IStrategyRepository {
             StrategyAwardEntity strategyAwardEntity=StrategyAwardEntity.builder()
                     .strategyId(strategyAward.getStrategyId())
                     .awardId(strategyAward.getAwardId())
+                    .awardTitle(strategyAward.getAwardTitle())
+                    .awardSubtitle(strategyAward.getAwardSubtitle())
                     .awardCount(strategyAward.getAwardCount())
-                    .AwardCountSurplus(strategyAward.getAwardCountSurplus())
+                    .awardCountSurplus(strategyAward.getAwardCountSurplus())
                     .awardRate(strategyAward.getAwardRate())
+                    .sort(strategyAward.getSort())
                     .build();
             strategyAwardEntities.add(strategyAwardEntity);
         }
         //存储策略奖品到redis中
         iRedisService.setValue(cacheKey,strategyAwardEntities);
         return strategyAwardEntities;
+    }
+
+    /**从redis中查找策略id对应的单个奖品*/
+    @Override
+    public StrategyAwardEntity queryStrategyEntity(Long strategyId, Integer awardId) {
+        //先查redis缓存
+        String cacheKey= Constants.RedisKey.STRATEGY_AWARD_KEY +strategyId;
+        StrategyAwardEntity strategyAwardEntity = iRedisService.getValue(cacheKey);
+        if(strategyAwardEntity!=null) return strategyAwardEntity;
+
+        //redis缓存为空，查询数据库
+        StrategyAward strategyAwardReq=new StrategyAward();
+        strategyAwardReq.setStrategyId(strategyId);
+        strategyAwardReq.setAwardId(awardId);
+        StrategyAward strategyAward = iStrategyAwardDao.queryStrategyAward(strategyAwardReq);
+
+        strategyAwardEntity=StrategyAwardEntity
+                .builder()
+                .strategyId(strategyAward.getStrategyId())
+                .awardId(strategyAward.getAwardId())
+                .awardTitle(strategyAward.getAwardTitle())
+                .awardSubtitle(strategyAward.getAwardSubtitle())
+                .awardCount(strategyAward.getAwardCount())
+                .awardCountSurplus(strategyAward.getAwardCountSurplus())
+                .awardRate(strategyAward.getAwardRate())
+                .sort(strategyAward.getSort())
+                .build();
+        //存储策略奖品到redis中
+        iRedisService.setValue(cacheKey,strategyAwardEntity);
+        return strategyAwardEntity;
     }
 
     /**存储概率查找表到reids中*/
@@ -104,8 +139,13 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public Integer getRateRange(String key) {
+        String cacheKey=Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+key;
+        if(!iRedisService.isExists(cacheKey)){
+            throw new AppException(ResponseCode.UN_ASSEMBLED_STRATEGY_ARMORY.getCode(), cacheKey +
+                    Constants.COLON + ResponseCode.UN_ASSEMBLED_STRATEGY_ARMORY.getInfo());
+        }
         //概率范围获取
-        return iRedisService.getValue(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+key);
+        return iRedisService.getValue(cacheKey);
     }
 
     /**根据策略id查询策略实体*/
@@ -249,7 +289,7 @@ public class StrategyRepository implements IStrategyRepository {
         long surplus=iRedisService.decr(cacheKey);
         if(surplus<0){
             //库存为0，恢复为0
-            iRedisService.setValue(cacheKey,0);
+            iRedisService.setAtomicLong(cacheKey,0);
             return false;
         }
         String lockKey = cacheKey + Constants.UNDERLINE + surplus;
