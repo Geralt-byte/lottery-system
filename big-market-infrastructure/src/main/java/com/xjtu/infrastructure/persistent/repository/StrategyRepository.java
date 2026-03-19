@@ -80,7 +80,7 @@ public class StrategyRepository implements IStrategyRepository {
     @Override
     public StrategyAwardEntity queryStrategyEntity(Long strategyId, Integer awardId) {
         //先查redis缓存
-        String cacheKey= Constants.RedisKey.STRATEGY_AWARD_KEY +strategyId;
+        String cacheKey= Constants.RedisKey.STRATEGY_AWARD_KEY +strategyId+Constants.UNDERLINE+awardId;
         StrategyAwardEntity strategyAwardEntity = iRedisService.getValue(cacheKey);
         if(strategyAwardEntity!=null) return strategyAwardEntity;
 
