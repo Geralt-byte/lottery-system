@@ -2,10 +2,10 @@
 SET NAMES utf8mb4;
 
 #创建big_market数据库
-CREATE database if not exists `big_market` default character set utf8mb4 collate utf8mb4_0900_ai_ci;
+CREATE database if not exists `big_market_v1` default character set utf8mb4 collate utf8mb4_0900_ai_ci;
 
 #切换big_market数据库
-use big_market;
+use big_market_v1;
 
 #创建奖品表-------------------------------------------------
 
