@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjtu.infrastructure.persistent.dao.IRaffleActivityAccountFlowDao">
+
+    <insert id="insert">
+        insert into raffle_activity_account_flow(user_id, activity_id, total_count, day_count, month_count, flow_id,
+                                                 flow_channel, biz_id)
+        VALUES (#{userId}, #{activityId}, #{totalCount}, #{dayCount}, #{monthCount}, #{flowId}, #{flowChannel},
+                #{bizId})
+    </insert>
+    <select id="queryRaffleActivityAccountFlowByUserId"
+            resultType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccountFlow">
+        select user_id,
+               activity_id,
+               total_count,
+               day_count,
+               month_count,
+               flow_id,
+               flow_channel,
+               biz_id
+        from raffle_activity_account_flow
+        where user_id = #{userId}
+    </select>
+</mapper>

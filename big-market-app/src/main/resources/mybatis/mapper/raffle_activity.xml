@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjtu.infrastructure.persistent.dao.IRaffleActivityDao">
+
+    <select id="queryRaffleActivityByActivityId" resultType="com.xjtu.infrastructure.persistent.po.RaffleActivity">
+        select activity_id,
+               activity_name,
+               activity_desc,
+               begin_date_time,
+               end_date_time,
+               stock_count,
+               stock_count_surplus,
+               activity_count_id,
+               strategy_id,
+               state
+        from raffle_activity
+        where activity_id = #{activityId}
+    </select>
+</mapper>

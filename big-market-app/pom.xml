@@ -78,6 +78,14 @@
             <artifactId>converter-gson</artifactId>
             <version>2.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-random-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.bugstack.middleware</groupId>
+            <artifactId>db-router-spring-boot-starter</artifactId>
+        </dependency>
         <!-- redis依赖-->
         <dependency>
             <groupId>org.redisson</groupId>

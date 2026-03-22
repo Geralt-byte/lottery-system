@@ -1,5 +1,10 @@
-#设置字符集编码
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 SET NAMES utf8mb4;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE='NO_AUTO_VALUE_ON_ZERO', SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 #创建big_market数据库
 CREATE database if not exists `big_market` default character set utf8mb4 collate utf8mb4_0900_ai_ci;
@@ -26,7 +31,8 @@ CREATE TABLE `award`
   DEFAULT CHARSET = utf8mb4;
 
 LOCK TABLES `award` WRITE;
-
+/*!40000 ALTER TABLE `award`
+    DISABLE KEYS */;
 INSERT INTO `award` (id, award_id, award_key, award_config, award_desc)
 VALUES (1, 101, 'user_credit_random', '1,100', '用户积分【优先透彻规则范围，如果没有则走配置】'),
        (2, 102, 'openai_use_count', '5', 'OpenAI 增加使用次数'),
@@ -38,7 +44,8 @@ VALUES (1, 101, 'user_credit_random', '1,100', '用户积分【优先透彻规�
        (8, 108, 'openai_use_count', '100', 'OpenAI 增加使用次数'),
        (9, 109, 'openai_model', 'gpt-4,dall-e-2,dall-e-3', 'OpenAI 增加模型'),
        (10, 100, 'user_credit_blacklist', '1', '黑名单积分');
-
+/*!40000 ALTER TABLE `award`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
 #创建策略表-------------------------------------------------
@@ -59,7 +66,8 @@ CREATE TABLE `strategy`
   DEFAULT CHARSET = utf8mb4;
 
 LOCK TABLES `strategy` WRITE;
-
+/*!40000 ALTER TABLE `strategy`
+    DISABLE KEYS */;
 INSERT INTO `strategy` (id, strategy_id, strategy_desc, rule_models)
 VALUES (1, 100001, '抽奖策略', 'rule_blacklist,rule_weight'),
        (2, 100003, '抽奖策略-验证lock', 'rule_blacklist'),
@@ -67,8 +75,8 @@ VALUES (1, 100001, '抽奖策略', 'rule_blacklist,rule_weight'),
        (4, 100004, '抽奖策略-随机抽奖', NULL),
        (5, 100005, '抽奖策略-测试概率计算', NULL),
        (6, 100006, '抽奖策略-规则树', NULL);
-
-
+/*!40000 ALTER TABLE `strategy`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
 #创建奖品策略表-------------------------------------------------
@@ -95,7 +103,8 @@ CREATE TABLE `strategy_award`
   DEFAULT CHARSET = utf8mb4;
 
 LOCK TABLES `strategy_award` WRITE;
-
+/*!40000 ALTER TABLE `strategy_award`
+    DISABLE KEYS */;
 INSERT INTO `strategy_award` (`id`, `strategy_id`, `award_id`, `award_title`, `award_subtitle`, `award_count`,
                               `award_count_surplus`, `award_rate`, `rule_models`, `sort`)
 VALUES (1, 100001, 101, '随机积分', NULL, 80000, 80000, 0.3000, 'tree_luck_award', 1),
@@ -127,7 +136,8 @@ VALUES (1, 100001, 101, '随机积分', NULL, 80000, 80000, 0.3000, 'tree_luck_a
        (27, 100006, 106, '3等奖', '抽奖1次后解锁', 100, 100, 0.0300, 'tree_lock_1', 6),
        (28, 100006, 107, '2等奖', '抽奖1次后解锁', 100, 100, 0.0300, 'tree_lock_1', 7),
        (29, 100006, 108, '1等奖', '抽奖2次后解锁', 100, 100, 0.0300, 'tree_lock_2', 8);
-
+/*!40000 ALTER TABLE `strategy_award`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
 #创建策略规则表-------------------------------------------------
@@ -151,7 +161,8 @@ CREATE TABLE `strategy_rule`
   DEFAULT CHARSET = utf8mb4;
 
 LOCK TABLES `strategy_rule` WRITE;
-
+/*!40000 ALTER TABLE `strategy_rule`
+    DISABLE KEYS */;
 INSERT INTO `strategy_rule` (`id`, `strategy_id`, `award_id`, `rule_type`, `rule_model`, `rule_value`, `rule_desc`)
 VALUES (1, 100001, 101, 2, 'rule_random', '1,1000', '随机积分策略'),
        (2, 100001, 107, 2, 'rule_lock', '1', '抽奖1次后解锁'),
@@ -172,7 +183,8 @@ VALUES (1, 100001, 101, 2, 'rule_random', '1,1000', '随机积分策略'),
        (15, 100003, 107, 2, 'rule_lock', '1', '抽奖1次后解锁'),
        (16, 100003, 108, 2, 'rule_lock', '2', '抽奖2次后解锁'),
        (17, 100003, 109, 2, 'rule_lock', '6', '抽奖6次后解锁');
-
+/*!40000 ALTER TABLE `strategy_rule`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
 #创建规则树表-------------------------------------------------
@@ -194,12 +206,14 @@ CREATE TABLE `rule_tree`
   DEFAULT CHARSET = utf8mb4;
 
 LOCK TABLES `rule_tree` WRITE;
-
+/*!40000 ALTER TABLE `rule_tree`
+    DISABLE KEYS */;
 INSERT INTO `rule_tree` (`id`, `tree_id`, `tree_name`, `tree_desc`, `tree_node_rule_key`)
 VALUES (1, 'tree_lock_1', '规则树', '规则树', 'rule_lock'),
        (2, 'tree_luck_award', '规则树-兜底奖励', '规则树-兜底奖励', 'rule_stock'),
        (3, 'tree_lock_2', '规则树', '规则树', 'rule_lock');
-
+/*!40000 ALTER TABLE `rule_tree`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
 # 创建规则树节点表-------------------------------------------------
@@ -220,7 +234,8 @@ CREATE TABLE `rule_tree_node`
   DEFAULT CHARSET = utf8mb4;
 
 LOCK TABLES `rule_tree_node` WRITE;
-
+/*!40000 ALTER TABLE `rule_tree_node`
+    DISABLE KEYS */;
 INSERT INTO `rule_tree_node` (`id`, `tree_id`, `rule_key`, `rule_desc`, `rule_value`)
 VALUES (1, 'tree_lock_1', 'rule_lock', '限定用户已完成N次抽奖后解锁', '1'),
        (2, 'tree_lock_1', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
@@ -230,7 +245,8 @@ VALUES (1, 'tree_lock_1', 'rule_lock', '限定用户已完成N次抽奖后解锁
        (6, 'tree_lock_2', 'rule_lock', '限定用户已完成N次抽奖后解锁', '2'),
        (7, 'tree_lock_2', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
        (8, 'tree_lock_2', 'rule_stock', '库存扣减规则', NULL);
-
+/*!40000 ALTER TABLE `rule_tree_node`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
 # 创建规则树节点边表-------------------------------------------------
@@ -252,7 +268,8 @@ CREATE TABLE `rule_tree_node_line`
   DEFAULT CHARSET = utf8mb4;
 
 LOCK TABLES `rule_tree_node_line` WRITE;
-
+/*!40000 ALTER TABLE `rule_tree_node_line`
+    DISABLE KEYS */;
 INSERT INTO `rule_tree_node_line` (`id`, `tree_id`, `rule_node_from`, `rule_node_to`, `rule_limit_type`,
                                    `rule_limit_value`)
 VALUES (1, 'tree_lock_1', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
@@ -262,7 +279,8 @@ VALUES (1, 'tree_lock_1', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
        (5, 'tree_lock_2', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
        (6, 'tree_lock_2', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER'),
        (7, 'tree_lock_2', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW');
-
+/*!40000 ALTER TABLE `rule_tree_node_line`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
 # 创建raffle_activity-------------------------------------------------
@@ -291,6 +309,17 @@ CREATE TABLE `raffle_activity`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='抽奖活动表';
 
+LOCK TABLES `raffle_activity` WRITE;
+/*!40000 ALTER TABLE `raffle_activity`
+    DISABLE KEYS */;
+INSERT INTO `raffle_activity` (`id`, `activity_id`, `activity_name`, `activity_desc`, `begin_date_time`,
+                               `end_date_time`, `stock_count`, `stock_count_surplus`, `activity_count_id`,
+                               `strategy_id`, `state`)
+VALUES (1, 100301, '测试活动', '测试活动', '2026-03-09 10:15:10', '2034-03-09 10:15:10', 1000, 1000, 1, 100006, '0');
+/*!40000 ALTER TABLE `raffle_activity`
+    ENABLE KEYS */;
+UNLOCK TABLES;
+
 # 创建raffle_activity_count-------------------------------------------------
 
 DROP TABLE IF EXISTS `raffle_activity_count`;
@@ -307,6 +336,21 @@ CREATE TABLE `raffle_activity_count`
     PRIMARY KEY (`id`),
     UNIQUE KEY `uq_activity_count_id` (`activity_count_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 COMMENT='抽奖活动次数配置表';
+  DEFAULT CHARSET = utf8mb4 COMMENT ='抽奖活动次数配置表';
 
+LOCK TABLES `raffle_activity_count` WRITE;
+/*!40000 ALTER TABLE `raffle_activity_count` DISABLE KEYS */;
 
+INSERT INTO `raffle_activity_count` (`id`, `activity_count_id`, `total_count`, `day_count`, `month_count`)
+VALUES
+    (1,1,100,2,60);
+
+/*!40000 ALTER TABLE `raffle_activity_count` ENABLE KEYS */;
+UNLOCK TABLES;
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
