@@ -1,10 +1,10 @@
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION = @@COLLATION_CONNECTION */;
 SET NAMES utf8mb4;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE='NO_AUTO_VALUE_ON_ZERO', SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0 */;
+/*!40101 SET @OLD_SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO', SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES = @@SQL_NOTES, SQL_NOTES = 0 */;
 
 #创建big_market数据库
 CREATE database if not exists `big_market` default character set utf8mb4 collate utf8mb4_0900_ai_ci;
@@ -289,19 +289,16 @@ DROP TABLE IF EXISTS `raffle_activity`;
 
 CREATE TABLE `raffle_activity`
 (
-    `id`                  bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-    `activity_id`         bigint(12)          NOT NULL COMMENT '活动ID',
-    `activity_name`       varchar(64)         NOT NULL COMMENT '活动名称',
-    `activity_desc`       varchar(128)        NOT NULL COMMENT '活动描述',
-    `begin_date_time`     datetime            NOT NULL COMMENT '开始时间',
-    `end_date_time`       datetime            NOT NULL COMMENT '结束时间',
-    `stock_count`         int(11)             NOT NULL COMMENT '库存总量',
-    `stock_count_surplus` int(11)             NOT NULL COMMENT '剩余库存',
-    `activity_count_id`   bigint(12)          NOT NULL COMMENT '活动参与次数配置',
-    `strategy_id`         bigint(8)           NOT NULL COMMENT '抽奖策略ID',
-    `state`               varchar(8)          NOT NULL COMMENT '活动状态',
-    `create_time`         datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`         datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `id`              bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+    `activity_id`     bigint(12)          NOT NULL COMMENT '活动ID',
+    `activity_name`   varchar(64)         NOT NULL COMMENT '活动名称',
+    `activity_desc`   varchar(128)        NOT NULL COMMENT '活动描述',
+    `begin_date_time` datetime            NOT NULL COMMENT '开始时间',
+    `end_date_time`   datetime            NOT NULL COMMENT '结束时间',
+    `strategy_id`     bigint(8)           NOT NULL COMMENT '抽奖策略ID',
+    `state`           varchar(8)          NOT NULL DEFAULT 'create' COMMENT '活动状态',
+    `create_time`     datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`     datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `uq_activity_id` (`activity_id`),
     KEY `idx_begin_date_time` (`begin_date_time`),
@@ -313,9 +310,8 @@ LOCK TABLES `raffle_activity` WRITE;
 /*!40000 ALTER TABLE `raffle_activity`
     DISABLE KEYS */;
 INSERT INTO `raffle_activity` (`id`, `activity_id`, `activity_name`, `activity_desc`, `begin_date_time`,
-                               `end_date_time`, `stock_count`, `stock_count_surplus`, `activity_count_id`,
-                               `strategy_id`, `state`)
-VALUES (1, 100301, '测试活动', '测试活动', '2026-03-09 10:15:10', '2034-03-09 10:15:10', 1000, 1000, 1, 100006, '0');
+                               `end_date_time`, `strategy_id`, `state`)
+VALUES (1, 100301, '测试活动', '测试活动', '2026-03-09 10:15:10', '2034-03-09 10:15:10', 100006, 'create');
 /*!40000 ALTER TABLE `raffle_activity`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -339,18 +335,51 @@ CREATE TABLE `raffle_activity_count`
   DEFAULT CHARSET = utf8mb4 COMMENT ='抽奖活动次数配置表';
 
 LOCK TABLES `raffle_activity_count` WRITE;
-/*!40000 ALTER TABLE `raffle_activity_count` DISABLE KEYS */;
+/*!40000 ALTER TABLE `raffle_activity_count`
+    DISABLE KEYS */;
 
 INSERT INTO `raffle_activity_count` (`id`, `activity_count_id`, `total_count`, `day_count`, `month_count`)
-VALUES
-    (1,1,100,2,60);
+VALUES (1, 11101, 1, 1, 1);
 
-/*!40000 ALTER TABLE `raffle_activity_count` ENABLE KEYS */;
+/*!40000 ALTER TABLE `raffle_activity_count`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+# 创建raffle_activity_sku-------------------------------------------------
+
+DROP TABLE IF EXISTS `raffle_activity_sku`;
+
+CREATE TABLE `raffle_activity_sku`
+(
+    `id`                  bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+    `sku`                 bigint(12)          NOT NULL COMMENT '商品sku - 把每一个组合当做一个商品',
+    `activity_id`         bigint(12)          NOT NULL COMMENT '活动ID',
+    `activity_count_id`   bigint(12)          NOT NULL COMMENT '活动个人参与次数ID',
+    `stock_count`         int(11)             NOT NULL COMMENT '商品库存',
+    `stock_count_surplus` int(11)             NOT NULL COMMENT '剩余库存',
+    `create_time`         datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`         datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uq_sku` (`sku`),
+    KEY `idx_activity_id_activity_count_id` (`activity_id`, `activity_count_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+LOCK TABLES `raffle_activity_sku` WRITE;
+/*!40000 ALTER TABLE `raffle_activity_sku`
+    DISABLE KEYS */;
+
+INSERT INTO `raffle_activity_sku` (`id`, `sku`, `activity_id`, `activity_count_id`, `stock_count`,
+                                   `stock_count_surplus`)
+VALUES (1, 9011, 100301, 11101, 0, 0);
+
+/*!40000 ALTER TABLE `raffle_activity_sku`
+    ENABLE KEYS */;
+UNLOCK TABLES;
+
+/*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE = @OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;

@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xjtu.infrastructure.persistent.dao.IRaffleActivityCountDao">
 
+    <select id="queryRaffleActivityCountByActivityId" resultType="com.xjtu.infrastructure.persistent.po.RaffleActivityCount">
+        select activity_count_id, total_count, day_count, month_count
+        from raffle_activity_count
+        where activity_count_id = #{activityCountId}
+    </select>
 </mapper>

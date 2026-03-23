@@ -1,6 +1,9 @@
-package com.xjtu.infrastructure.persistent.po;
+package com.xjtu.domain.activity.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -10,9 +13,10 @@ import java.util.Date;
  * @create 2026/3/22 02:51
  */
 @Data
-public class RaffleActivityOrder {
-    /**自增ID*/
-    private Long id;
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ActivityOrderEntity {
     /**用户ID*/
     private String userId;
     /**商品sku - 把每一个组合当做一个商品*/
@@ -35,8 +39,4 @@ public class RaffleActivityOrder {
     private Integer month_count;
     /**订单状态（not_used、used、expire）*/
     private String state;
-    /**创建时间*/
-    private Date createTime;
-    /**更新时间*/
-    private Date updateTime;
 }

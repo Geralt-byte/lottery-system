@@ -1,6 +1,9 @@
-package com.xjtu.infrastructure.persistent.po;
+package com.xjtu.domain.activity.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -10,9 +13,10 @@ import java.util.Date;
  * @create 2026/3/22 02:50
  */
 @Data
-public class RaffleActivity {
-    /**自增ID*/
-    private Long id;
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ActivityEntity {
     /**活动ID*/
     private Long activityId;
     /**活动名称*/
@@ -27,8 +31,4 @@ public class RaffleActivity {
     private Long strategyId;
     /**活动状态*/
     private String state;
-    /**创建时间*/
-    private Date createTime;
-    /**更新时间*/
-    private Date updateTime;
 }

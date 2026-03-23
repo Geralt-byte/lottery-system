@@ -3,19 +3,25 @@
 <mapper namespace="com.xjtu.infrastructure.persistent.dao.IRaffleActivityOrderDao">
 
     <insert id="insert">
-        insert into raffle_activity_order(user_id, activity_id, activity_name, strategy_id, order_id, order_time,
+        insert into raffle_activity_order(user_id, sku, activity_id, activity_name, strategy_id, order_id,
+                                              order_time, total_count, day_count, month_count,
                                               state)
-        VALUES (#{userId}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{state})
+        VALUES (#{userId}, #{sku}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime},
+                #{totalCount}, #{dayCount}, #{monthCount}, #{state})
     </insert>
 
     <select id="queryRaffleActivityOrderByUserId"
             resultType="com.xjtu.infrastructure.persistent.po.RaffleActivityOrder">
         select user_id,
+               sku,
                activity_id,
                activity_name,
                strategy_id,
                order_id,
                order_time,
+               total_count,
+               day_count,
+               month_count,
                state
         from raffle_activity_order
         where user_id = #{userId}

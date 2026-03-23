@@ -1,4 +1,4 @@
-package com.xjtu.test.domain;
+package com.xjtu.test.domain.strategy;
 
 import com.xjtu.domain.strategy.service.armory.IStrategyArmory;
 import com.xjtu.domain.strategy.service.armory.IStrategyDispatch;

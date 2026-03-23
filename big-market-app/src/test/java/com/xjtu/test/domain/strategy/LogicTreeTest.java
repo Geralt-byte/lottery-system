@@ -1,4 +1,4 @@
-package com.xjtu.test.domain;
+package com.xjtu.test.domain.strategy;
 
 import com.alibaba.fastjson.JSON;
 import com.xjtu.domain.strategy.model.valobj.*;
