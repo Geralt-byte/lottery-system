@@ -28,13 +28,15 @@ public class RaffleActivityOrder {
     /**下单时间*/
     private Date orderTime;
     /**总次数*/
-    private Integer total_count;
+    private Integer totalCount;
     /**日次数*/
-    private Integer day_count;
+    private Integer dayCount;
     /**月次数*/
-    private Integer month_count;
+    private Integer monthCount;
     /**订单状态（not_used、used、expire）*/
     private String state;
+    /**业务仿重ID - 外部透传的，确保幂等*/
+    private String outBusinessNo;
     /**创建时间*/
     private Date createTime;
     /**更新时间*/

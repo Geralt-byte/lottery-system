@@ -1,5 +1,6 @@
 package com.xjtu.domain.activity.repository;
 
+import com.xjtu.domain.activity.model.aggregate.CreateOrderAggregate;
 import com.xjtu.domain.activity.model.entity.ActivityCountEntity;
 import com.xjtu.domain.activity.model.entity.ActivityEntity;
 import com.xjtu.domain.activity.model.entity.ActivitySkuEntity;
@@ -17,4 +18,6 @@ public interface IActivityRepository {
     ActivityEntity queryRaffleActivityByActivityId(Long activityId);
     //查询抽奖活动次数
     ActivityCountEntity queryRaffleActivityCountByActivityCountId(Long activityCountId);
+    //保存订单
+    void doSaveOrder(CreateOrderAggregate createOrderAggregate);
 }

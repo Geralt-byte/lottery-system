@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjtu.infrastructure.persistent.dao.IRaffleActivityAccountDao">
+
+    <insert id="insert" parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccount">
+        insert into raffle_activity_account(user_id, activity_id, total_count, total_count_surplus, day_count,
+                                            day_count_surplus, month_count, month_count_surplus)
+        VALUES (#{userId}, #{activityId}, #{totalCount}, #{totalCountSurplus}, #{dayCount}, #{dayCountSurplus},
+                #{monthCount}, #{monthCountSurplus})
+    </insert>
+
+    <update id="updateAccountQuota" parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccount">
+        update raffle_activity_account
+        set total_count=total_count + #{totalCount},
+            total_count_surplus=total_count_surplus + #{totalCountSurplus},
+            day_count=day_count + #{dayCount},
+            day_count_surplus=day_count_surplus + #{dayCountSurplus},
+            month_count=month_count + #{monthCount},
+            month_count_surplus=month_count_surplus + #{monthCountSurplus}
+        where user_id = #{userId}
+          and activity_id = #{activityId}
+    </update>
+</mapper>

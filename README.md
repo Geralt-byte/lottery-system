@@ -1,8 +1,9 @@
 /*****************************************************************/
 
 
-20260322-mlei-db-router分支完成了数据库路由配置<br>
-1.数据库表进行分库分表，对流水和订单库进行2库4表的拆分<br>
-2.引入db-router和easy-random-core的依赖，可以完成数据库路由和随机生成mock值的功能<br>
-3.仓储层创建dao和xml文件<br>
+20260324-mlei-activity-order-flow分支完成了订单流水入库的基础流程设计<br>
+1.数据库表增加了外部透传单号，用来实现幂等性，对应po对象和实体对象同步修改<br>
+2.big-market-types/src/main/java/com/xjtu/types/enums/ResponseCode增加订单号重复异常字段<br>
+3.仓储增加对应所需查询和更新接口<br>
+4.big-market-domain/src/main/java/com/xjtu/domain/activity增加活动对应服务层功能实现，主要采用责任链完成前置规则校验<br>
 /*****************************************************************/

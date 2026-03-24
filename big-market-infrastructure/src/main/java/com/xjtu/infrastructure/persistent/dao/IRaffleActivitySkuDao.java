@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @create 2026/3/24 04:28
  */
 @Mapper
-
 public interface IRaffleActivitySkuDao {
     RaffleActivitySku queryActivitySku(Long sku);
 }

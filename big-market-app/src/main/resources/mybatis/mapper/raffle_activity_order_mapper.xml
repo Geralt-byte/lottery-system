@@ -5,9 +5,9 @@
     <insert id="insert">
         insert into raffle_activity_order(user_id, sku, activity_id, activity_name, strategy_id, order_id,
                                               order_time, total_count, day_count, month_count,
-                                              state)
+                                              state,out_business_no)
         VALUES (#{userId}, #{sku}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime},
-                #{totalCount}, #{dayCount}, #{monthCount}, #{state})
+                #{totalCount}, #{dayCount}, #{monthCount}, #{state},#{outBusinessNo})
     </insert>
 
     <select id="queryRaffleActivityOrderByUserId"
@@ -22,7 +22,8 @@
                total_count,
                day_count,
                month_count,
-               state
+               state,
+               out_business_no
         from raffle_activity_order
         where user_id = #{userId}
     </select>

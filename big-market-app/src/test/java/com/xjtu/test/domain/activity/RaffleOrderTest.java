@@ -1,8 +1,6 @@
 package com.xjtu.test.domain.activity;
 
-import com.alibaba.fastjson.JSON;
-import com.xjtu.domain.activity.model.entity.ActivityOrderEntity;
-import com.xjtu.domain.activity.model.entity.ActivityShopCartEntity;
+import com.xjtu.domain.activity.model.entity.SkuRechargeEntity;
 import com.xjtu.domain.activity.service.IRaffleOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -22,10 +20,12 @@ public class RaffleOrderTest {
 
     @Test
     public void test_createRaffleActivityOrder() {
-        ActivityShopCartEntity activityShopCartEntity = new ActivityShopCartEntity();
-        activityShopCartEntity.setUserId("mlei");
-        activityShopCartEntity.setSku(9011L);
-        ActivityOrderEntity raffleActivityOrder = raffleOrder.createRaffleActivityOrder(activityShopCartEntity);
-        log.info("测试结果：{}", JSON.toJSONString(raffleActivityOrder));
+        SkuRechargeEntity skuRechargeEntity=SkuRechargeEntity.builder()
+                .userId("mlei")
+                .sku(9011L)
+                .outBusinessNo("700091009111")
+                .build();
+        String orderId = raffleOrder.createSkuRechargeOrder(skuRechargeEntity);
+        log.info("测试结果：{}", orderId);
     }
 }
