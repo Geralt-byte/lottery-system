@@ -4,6 +4,9 @@ import com.xjtu.domain.activity.model.aggregate.CreateOrderAggregate;
 import com.xjtu.domain.activity.model.entity.ActivityCountEntity;
 import com.xjtu.domain.activity.model.entity.ActivityEntity;
 import com.xjtu.domain.activity.model.entity.ActivitySkuEntity;
+import com.xjtu.domain.activity.model.valobj.ActivitySkuStockKeyVO;
+
+import java.util.Date;
 
 /**
  * @author mlei@xjtu
@@ -20,4 +23,18 @@ public interface IActivityRepository {
     ActivityCountEntity queryRaffleActivityCountByActivityCountId(Long activityCountId);
     //保存订单
     void doSaveOrder(CreateOrderAggregate createOrderAggregate);
+    //缓存sku库存到redis
+    void cacheActivitySkuStockCount(String cacheKey, Integer stockCount);
+    //redis中的库存扣减
+    boolean subtractionActivitySkuStock(Long sku, String cacheKey, Date endDateTime);
+    //消费库存发送sku
+    void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO);
+    //获取缓存队列
+    ActivitySkuStockKeyVO takeQueueValue();
+    //清空缓存队列
+    void clearQueueValue();
+    //更新库存
+    void updateActivitySkuStock(Long sku);
+    //清空库存
+    void clearActivitySkuStock(Long sku);
 }

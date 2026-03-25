@@ -2,6 +2,8 @@ package com.xjtu.infrastructure.persistent.redis;
 
 import org.redisson.api.*;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Redis 服务
  */
@@ -260,4 +262,6 @@ public interface IRedisService {
     <T> RBloomFilter<T> getBloomFilter(String key);
 
     Boolean setNx(String key);
+
+    boolean setNx(String lockKey, long expired, TimeUnit timeUnit);
 }
