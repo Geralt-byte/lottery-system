@@ -70,7 +70,7 @@ LOCK TABLES `strategy` WRITE;
     DISABLE KEYS */;
 INSERT INTO `strategy` (id, strategy_id, strategy_desc, rule_models)
 VALUES (1, 100001, '抽奖策略', 'rule_blacklist,rule_weight'),
-       (2, 100003, '抽奖策略-验证lock', 'rule_blacklist'),
+       (2, 100003, '抽奖策略-验证lock', NULL),
        (3, 100002, '抽奖策略-非完整1概率', NULL),
        (4, 100004, '抽奖策略-随机抽奖', NULL),
        (5, 100005, '抽奖策略-测试概率计算', NULL),
