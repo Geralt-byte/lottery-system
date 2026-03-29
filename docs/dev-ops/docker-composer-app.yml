@@ -28,6 +28,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
   big-market-front-app:
     container_name: big-market-front-app
     image: big-market-front-app:1.0
@@ -37,7 +38,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - API_HOST_URL=http://117.72.47.144:8091
+      - API_HOST_URL=http://101.42.109.191:8091
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     healthcheck:
       test: [ "CMD", "wget", "--spider", "-q", "http://0.0.0.0:3000/" ]
