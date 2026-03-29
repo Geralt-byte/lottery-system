@@ -20,7 +20,7 @@ services:
       - REDIS_SDK_CONFIG_HOST=redis
       - REDIS_SDK_CONFIG_PORT=6379
     volumes:
-      - ./log:/data/log
+      - ./big-market/log:/data/log
     networks:
       - my-network
     logging:
