@@ -192,12 +192,17 @@ DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task`
 (
     `id`          bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+    `user_id`     varchar(32)         NOT NULL COMMENT '用户id',
     `topic`       varchar(32)         NOT NULL COMMENT '消息主题',
+    `message_id`  varchar(11)                  DEFAULT NULL COMMENT '消息编号',
     `message`     varchar(512)        NOT NULL COMMENT '消息主体',
     `state`       varchar(16)         NOT NULL DEFAULT 'create' COMMENT '任务状态；create-创建、completed-完成、fail-失败',
     `create_time` datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    unique key `uq_message_id` (`message_id`),
+    key `idx_state` (`state`),
+    key `idx_create_time` (`create_time`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='任务表，发送MQ';
 

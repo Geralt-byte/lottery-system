@@ -1,6 +1,7 @@
 package com.xjtu.infrastructure.persistent.dao;
 
 import cn.bugstack.middleware.db.router.annotation.DBRouterStrategy;
+import com.xjtu.infrastructure.persistent.po.UserAwardRecord;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,4 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
 @DBRouterStrategy(splitTable = true)
 public interface IUserAwardRecordDao {
 
+    void insert(UserAwardRecord userAwardRecord);
 }

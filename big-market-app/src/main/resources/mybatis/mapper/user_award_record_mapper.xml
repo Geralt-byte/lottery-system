@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xjtu.infrastructure.persistent.dao.IUserAwardRecordDao">
 
+    <insert id="insert" parameterType="com.xjtu.infrastructure.persistent.po.UserAwardRecord">
+        insert into user_award_record(user_id, activity_id, strategy_id, order_id, award_id,
+                                                        award_title, award_time, award_state)
+        values (#{userId}, #{activityId}, #{strategyId}, #{orderId}, #{awardId}, #{awardTitle}, #{awardTime},
+                #{awardState})
+    </insert>
 </mapper>
