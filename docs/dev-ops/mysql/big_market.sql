@@ -311,7 +311,7 @@ LOCK TABLES `raffle_activity` WRITE;
     DISABLE KEYS */;
 INSERT INTO `raffle_activity` (`id`, `activity_id`, `activity_name`, `activity_desc`, `begin_date_time`,
                                `end_date_time`, `strategy_id`, `state`)
-VALUES (1, 100301, '测试活动', '测试活动', '2026-03-09 10:15:10', '2034-03-09 10:15:10', 100006, 'create');
+VALUES (1, 100301, '测试活动', '测试活动', '2026-03-09 10:15:10', '2034-03-09 10:15:10', 100006, 'open');
 /*!40000 ALTER TABLE `raffle_activity`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -371,7 +371,7 @@ LOCK TABLES `raffle_activity_sku` WRITE;
 
 INSERT INTO `raffle_activity_sku` (`id`, `sku`, `activity_id`, `activity_count_id`, `stock_count`,
                                    `stock_count_surplus`)
-VALUES (1, 9011, 100301, 11101, 0, 0);
+VALUES (1, 9011, 100301, 11101, 20, 20);
 
 /*!40000 ALTER TABLE `raffle_activity_sku`
     ENABLE KEYS */;

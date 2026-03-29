@@ -1,4 +1,4 @@
-package com.xjtu.domain.activity.service.rule.chain;
+package com.xjtu.domain.activity.service.quota.rule;
 
 /**
  * @author mlei@xjtu

@@ -1,5 +1,6 @@
-package com.xjtu.infrastructure.persistent.po;
+package com.xjtu.domain.activity.model.entity;
 
+import com.xjtu.domain.activity.model.valobj.UserRaffleOrderStateVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,16 +10,14 @@ import java.util.Date;
 
 /**
  * @author mlei@xjtu
- * @description 用户抽奖订单表
- * @create 2026/3/28 00:26
+ * @description 用户抽奖订单实体对象
+ * @create 2026/3/29 19:15
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRaffleOrder {
-    /*自增ID*/
-    private Long id;
+public class UserRaffleOrderEntity {
     /*用户ID*/
     private String userId;
     /*活动ID*/
@@ -32,9 +31,5 @@ public class UserRaffleOrder {
     /*下单时间*/
     private Date orderTime;
     /*订单状态；create-创建、used-已使用、cancel-已作废*/
-    private String orderState;
-    /*创建时间*/
-    private Date createTime;
-    /*更新时间*/
-    private Date updateTime;
+    private UserRaffleOrderStateVO orderState;
 }

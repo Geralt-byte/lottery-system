@@ -5,16 +5,16 @@ import lombok.Getter;
 
 /**
  * @author mlei@xjtu
- * @description 活动状态值对象
- * @create 2026/3/24 04:46
+ * @description UserRaffleOrderStateVO
+ * @create 2026/3/29 19:27
  */
 @Getter
 @AllArgsConstructor
-public enum ActivityStateVO {
+public enum UserRaffleOrderStateVO {
 
     create("create","创建"),
-    open("open","开启"),
-    close("close","关闭"),
+    used("used","已使用"),
+    cancel("cancel","已作废"),
     ;
 
     private final String code;

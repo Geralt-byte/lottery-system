@@ -1,8 +1,4 @@
-package com.xjtu.domain.activity.service.rule.chain;
-
-import com.xjtu.domain.activity.model.entity.ActivityCountEntity;
-import com.xjtu.domain.activity.model.entity.ActivityEntity;
-import com.xjtu.domain.activity.model.entity.ActivitySkuEntity;
+package com.xjtu.domain.activity.service.quota.rule;
 
 /**
  * @author mlei@xjtu

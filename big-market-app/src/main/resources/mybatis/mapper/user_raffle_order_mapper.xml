@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xjtu.infrastructure.persistent.dao.IUserRaffleOrderDao">
 
+    <insert id="insert" parameterType="com.xjtu.infrastructure.persistent.po.UserRaffleOrder">
+        insert into user_raffle_order(user_id, activity_id, activity_name, strategy_id, order_id,
+                                      order_time, order_state)
+        VALUES (#{userId}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{orderState})
+    </insert>
+
+    <select id="queryNoUsedRaffleOrder" parameterType="com.xjtu.infrastructure.persistent.po.UserRaffleOrder"
+            resultType="com.xjtu.infrastructure.persistent.po.UserRaffleOrder">
+        select user_id,
+               activity_id,
+               activity_name,
+               strategy_id,
+               order_id,
+               order_time,
+               order_state
+        from user_raffle_order
+        where user_id = #{userId}
+          and activity_id = #{activityId}
+          and order_state = 'create'
+    </select>
+
 </mapper>

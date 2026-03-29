@@ -7,16 +7,16 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author mlei@xjtu
- * @description 活动购物车实体对象
+ * @description 参与抽奖活动实体对象
  * @create 2026/3/24 04:38
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActivityShopCartEntity {
+public class PartakeRaffleActivityEntity {
     /** 用户ID */
     private String userId;
-    /** 商品SKU - activity + activity count */
-    private Long sku;
+    /** 活动ID */
+    private Long activityId;
 }

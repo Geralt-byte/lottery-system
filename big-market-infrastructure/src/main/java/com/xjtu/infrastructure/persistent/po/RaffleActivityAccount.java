@@ -1,6 +1,9 @@
 package com.xjtu.infrastructure.persistent.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -10,6 +13,9 @@ import java.util.Date;
  * @create 2026/3/22 02:50
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RaffleActivityAccount {
     /**自增ID*/
     private Long id;

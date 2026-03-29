@@ -1,5 +1,6 @@
 package com.xjtu.domain.activity.model.entity;
 
+import com.xjtu.domain.activity.model.valobj.OrderStateVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class ActivityOrderEntity {
     /**月次数*/
     private Integer monthCount;
     /**订单状态（not_used、used、expire）*/
-    private String state;
+    private OrderStateVO state;
     /**业务仿重ID - 外部透传的，确保幂等*/
     private String outBusinessNo;
 }

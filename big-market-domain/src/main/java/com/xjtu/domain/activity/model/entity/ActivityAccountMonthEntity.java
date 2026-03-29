@@ -1,24 +1,20 @@
-package com.xjtu.infrastructure.persistent.po;
+package com.xjtu.domain.activity.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 /**
  * @author mlei@xjtu
- * @description 抽奖活动账户表-月次数
- * @create 2026/3/28 00:17
+ * @description 活动账户（月）实体对象
+ * @create 2026/3/29 19:18
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RaffleActivityAccountMonth {
-    /*自增ID*/
-    private Long id;
+public class ActivityAccountMonthEntity {
     /*用户ID*/
     private String userId;
     /*活动ID*/
@@ -29,8 +25,4 @@ public class RaffleActivityAccountMonth {
     private Integer monthCount;
     /*月次数-剩余*/
     private Integer monthCountSurplus;
-    /*创建时间*/
-    private Date createTime;
-    /*更新时间*/
-    private Date updateTime;
 }

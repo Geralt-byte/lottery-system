@@ -1,4 +1,4 @@
-package com.xjtu.domain.activity.service.rule.chain;
+package com.xjtu.domain.activity.service.quota.rule;
 
 import com.xjtu.domain.activity.model.entity.ActivityCountEntity;
 import com.xjtu.domain.activity.model.entity.ActivityEntity;
