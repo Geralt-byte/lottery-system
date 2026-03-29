@@ -30,8 +30,8 @@ services:
         max-file: "3"
 
   big-market-front-app:
-    container_name: big-market-front-app
-    image: big-market-front-app:1.0
+    container_name: big-market-front
+    image: big-market-front:1.0
     restart: always
     networks:
       - my-network
