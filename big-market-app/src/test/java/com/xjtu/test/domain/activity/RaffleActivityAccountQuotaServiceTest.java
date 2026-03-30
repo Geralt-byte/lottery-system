@@ -26,10 +26,10 @@ public class RaffleActivityAccountQuotaServiceTest {
     @Resource
     private IActivityArmory iActivityArmory;
 
-    @Before
-    public void setUp(){
-        log.info("装配活动：{}", iActivityArmory.assembleActivitySku(9011L));
-    }
+//    @Before
+//    public void setUp(){
+//        log.info("装配活动：{}", iActivityArmory.assembleActivitySku(9011L));
+//    }
 
     @Test
     public void test_createRaffleActivityOrder() {

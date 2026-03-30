@@ -8,6 +8,14 @@
         VALUES (#{userId}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{orderState})
     </insert>
 
+    <update id="updateUserRaffleOrderStateUsed" parameterType="com.xjtu.infrastructure.persistent.po.UserRaffleOrder">
+        update user_raffle_order
+        set order_state='used'
+        where user_id = #{userId}
+          and order_id = #{orderId}
+          and order_state = 'create'
+    </update>
+
     <select id="queryNoUsedRaffleOrder" parameterType="com.xjtu.infrastructure.persistent.po.UserRaffleOrder"
             resultType="com.xjtu.infrastructure.persistent.po.UserRaffleOrder">
         select user_id,

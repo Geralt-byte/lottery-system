@@ -26,4 +26,15 @@
         from raffle_activity_sku
         where sku = #{sku}
     </select>
+
+    <select id="queryActivitySkuListByActivityId" resultType="com.xjtu.infrastructure.persistent.po.RaffleActivitySku">
+        select sku,
+               activity_id,
+               activity_count_id,
+               stock_count,
+               stock_count_surplus
+        from raffle_activity_sku
+        where activity_id = #{activityId}
+    </select>
+
 </mapper>

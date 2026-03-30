@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -33,4 +34,10 @@ public class RaffleActivityAccountDay {
     private Date createTime;
     /*更新时间*/
     private Date updateTime;
+
+    private static final SimpleDateFormat dateFormatDay = new SimpleDateFormat("yyyy-MM-dd");
+
+    public static String currentDay() {
+        return dateFormatDay.format(new Date());
+    }
 }

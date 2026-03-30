@@ -3,6 +3,8 @@ package com.xjtu.infrastructure.persistent.dao;
 import com.xjtu.infrastructure.persistent.po.RaffleActivitySku;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @author mlei@xjtu
  * @description IRaffleActivitySkuDao
@@ -15,4 +17,6 @@ public interface IRaffleActivitySkuDao {
     void updateActivitySkuStock(Long sku);
 
     void clearActivitySkuStock(Long sku);
+
+    List<RaffleActivitySku> queryActivitySkuListByActivityId(Long activityId);
 }

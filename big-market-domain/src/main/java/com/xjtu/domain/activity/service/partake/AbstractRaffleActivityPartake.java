@@ -50,7 +50,7 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
 
         // 2. 查询未被使用的活动参与订单记录
         UserRaffleOrderEntity userRaffleOrderEntity = iActivityRepository.queryNoUsedRaffleOrder(partakeRaffleActivityEntity);
-        if(userRaffleOrderEntity!=null){
+        if (userRaffleOrderEntity != null) {
             log.info("创建参与活动订单 userId:{} activityId:{} userRaffleOrderEntity:{}", userId, activityId, JSON.toJSONString(userRaffleOrderEntity));
             return userRaffleOrderEntity;
         }
@@ -64,6 +64,15 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
         iActivityRepository.saveCreatePartakeOrderAggregate(createPartakeOrderAggregate);
         // 7. 返回订单信息
         return userRaffleOrder;
+    }
+
+    @Override
+    public UserRaffleOrderEntity createOrder(String userId, Long activityId) {
+        return createOrder(PartakeRaffleActivityEntity
+                .builder()
+                .userId(userId)
+                .activityId(activityId)
+                .build());
     }
 
     protected abstract UserRaffleOrderEntity buildUserRaffleOrder(String userId, Long activityId, Date currentDate);

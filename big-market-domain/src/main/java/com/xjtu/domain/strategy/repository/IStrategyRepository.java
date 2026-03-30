@@ -60,4 +60,8 @@ public interface IStrategyRepository {
 
     /**写入奖品库存消费队列*/
     void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
+    /**根据活动id查询策略id*/
+    Long queryStrategyIdByActivityId(Long activityId);
+    /**查询用户当天的抽奖次数*/
+    Integer queryTodayUserRaffleCount(String userId, Long strategyId);
 }

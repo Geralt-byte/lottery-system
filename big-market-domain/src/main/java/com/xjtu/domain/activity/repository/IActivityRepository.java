@@ -6,6 +6,7 @@ import com.xjtu.domain.activity.model.entity.*;
 import com.xjtu.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author mlei@xjtu
@@ -46,4 +47,6 @@ public interface IActivityRepository {
     ActivityAccountDayEntity queryActivityAccountDayByUserId(String userId, Long activityId, String day);
     //保存用户抽奖单
     void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate);
+    //根据活动id查询活动sku列表
+    List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
 }

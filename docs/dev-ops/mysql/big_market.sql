@@ -301,6 +301,7 @@ CREATE TABLE `raffle_activity`
     `update_time`     datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `uq_activity_id` (`activity_id`),
+    UNIQUE KEY `uq_strategy_id` (`strategy_id`),
     KEY `idx_begin_date_time` (`begin_date_time`),
     KEY `idx_end_date_time` (`end_date_time`)
 ) ENGINE = InnoDB

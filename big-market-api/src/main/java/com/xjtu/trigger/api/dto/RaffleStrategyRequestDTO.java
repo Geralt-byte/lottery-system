@@ -8,7 +8,7 @@ import lombok.Data;
  * @create 2026/3/19 01:53
  */
 @Data
-public class RaffleRequestDTO {
+public class RaffleStrategyRequestDTO {
 
     /*策略id*/
     private Long strategyId;
