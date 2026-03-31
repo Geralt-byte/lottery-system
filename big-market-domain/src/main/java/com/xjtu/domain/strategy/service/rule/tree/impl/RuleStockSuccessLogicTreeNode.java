@@ -6,6 +6,8 @@ import com.xjtu.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 /**
  * @author mlei@xjtu
  * @description 库存规则的叶子节点   决策树实现类
@@ -16,10 +18,10 @@ import org.springframework.stereotype.Component;
 public class RuleStockSuccessLogicTreeNode implements ILogicTreeNode {
 
     @Override
-    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId, String ruleValue) {
+    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId, String ruleValue, Date endDateTime) {
         //日志
         log.info("规则过滤-库存扣减成功的叶子节点 userId:{} strategyId:{} ruleModel:{} awardId:{} ruleValue:{}",
-                userId, strategyId, "rule_stock", awardId,ruleValue);
+                userId, strategyId, "rule_stock", awardId, ruleValue);
 
         return DefaultTreeFactory.TreeActionEntity
                 .builder()

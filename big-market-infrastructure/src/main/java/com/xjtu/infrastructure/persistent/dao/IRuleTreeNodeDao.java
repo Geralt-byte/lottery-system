@@ -14,4 +14,6 @@ import java.util.List;
 public interface IRuleTreeNodeDao {
     /**根据树id查询规则树节点*/
     List<RuleTreeNode> queryRuleTreeNodeListByTreeId(String treeId);
+
+    List<RuleTreeNode> queryRuleLocks(String[] treeIds);
 }

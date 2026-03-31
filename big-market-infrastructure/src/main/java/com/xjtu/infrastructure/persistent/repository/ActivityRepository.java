@@ -210,7 +210,7 @@ public class ActivityRepository implements IActivityRepository {
         // 3. 设置加锁时间为活动到期 + 延迟1天
         String lockKey = cacheKey + Constants.UNDERLINE + surplus;
         long expireMillis = endDateTime.getTime() - System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1);
-        boolean lock = iRedisService.setNx(lockKey, expireMillis, TimeUnit.MILLISECONDS);
+        Boolean lock = iRedisService.setNx(lockKey, expireMillis, TimeUnit.MILLISECONDS);
         if (!lock) {
             log.info("活动sku库存加锁失败 {}", lockKey);
         }
@@ -391,7 +391,7 @@ public class ActivityRepository implements IActivityRepository {
                                 .activityId(activityAccountMonthEntity.getActivityId())
                                 .month(activityAccountMonthEntity.getMonth())
                                 .monthCount(activityAccountMonthEntity.getMonthCount())
-                                .monthCountSurplus(activityAccountMonthEntity.getMonthCountSurplus())
+                                .monthCountSurplus(activityAccountMonthEntity.getMonthCountSurplus()-1)
                                 .build());
 
                         // 新创建月账户，则更新总账表中月镜像额度
@@ -432,7 +432,7 @@ public class ActivityRepository implements IActivityRepository {
                                 .activityId(activityAccountDayEntity.getActivityId())
                                 .day(activityAccountDayEntity.getDay())
                                 .dayCount(activityAccountDayEntity.getDayCount())
-                                .dayCountSurplus(activityAccountDayEntity.getDayCountSurplus())
+                                .dayCountSurplus(activityAccountDayEntity.getDayCountSurplus()-1)
                                 .build());
 
                         // 新创建日账户，则更新总账表中日镜像额度
@@ -470,8 +470,8 @@ public class ActivityRepository implements IActivityRepository {
 
     @Override
     public List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId) {
-        List<RaffleActivitySku> activitySkus=iRaffleActivitySkuDao.queryActivitySkuListByActivityId(activityId);
-        List<ActivitySkuEntity> activitySkuEntityList=new ArrayList<>(activitySkus.size());
+        List<RaffleActivitySku> activitySkus = iRaffleActivitySkuDao.queryActivitySkuListByActivityId(activityId);
+        List<ActivitySkuEntity> activitySkuEntityList = new ArrayList<>(activitySkus.size());
         for (RaffleActivitySku sku : activitySkus) {
             ActivitySkuEntity activitySkuEntity = ActivitySkuEntity.builder()
                     .sku(sku.getSku())
@@ -483,5 +483,17 @@ public class ActivityRepository implements IActivityRepository {
             activitySkuEntityList.add(activitySkuEntity);
         }
         return activitySkuEntityList;
+    }
+
+    @Override
+    public Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId) {
+        RaffleActivityAccountDay raffleActivityAccountDay = RaffleActivityAccountDay.builder()
+                .userId(userId)
+                .activityId(activityId)
+                .day(RaffleActivityAccountDay.currentDay())
+                .build();
+        Integer dayPartakeCount = iRaffleActivityAccountDayDao.queryRaffleActivityAccountDayPartakeCount(raffleActivityAccountDay);
+
+        return dayPartakeCount == null ? 0 : dayPartakeCount;
     }
 }

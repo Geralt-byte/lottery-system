@@ -1,9 +1,12 @@
 package com.xjtu.test.domain.activity;
 
+import com.alibaba.fastjson.JSON;
 import com.xjtu.domain.activity.model.entity.SkuRechargeEntity;
 import com.xjtu.domain.activity.service.IRaffleActivityAccountQuotaService;
 import com.xjtu.domain.activity.service.armory.IActivityArmory;
+import com.xjtu.trigger.api.IRaffleActivityService;
 import com.xjtu.types.exception.AppException;
+import com.xjtu.types.model.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
@@ -26,10 +29,14 @@ public class RaffleActivityAccountQuotaServiceTest {
     @Resource
     private IActivityArmory iActivityArmory;
 
-//    @Before
-//    public void setUp(){
-//        log.info("装配活动：{}", iActivityArmory.assembleActivitySku(9011L));
-//    }
+    @Resource
+    private IRaffleActivityService iRaffleActivityService;
+
+    @Test
+    public void test_armory(){
+        Response<Boolean> response = iRaffleActivityService.armory(100301L);
+        log.info("测试结果：{}", JSON.toJSONString(response));
+    }
 
     @Test
     public void test_createRaffleActivityOrder() {

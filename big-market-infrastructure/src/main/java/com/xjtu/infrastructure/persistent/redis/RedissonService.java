@@ -171,7 +171,8 @@ public class RedissonService implements IRedisService {
     }
 
     @Override
-    public boolean setNx(String lockKey, long expired, TimeUnit timeUnit) {
-        return redissonClient.getBucket(lockKey).trySet("lock", expired, timeUnit);
+    public Boolean setNx(String key, long expired, TimeUnit timeUnit) {
+        return redissonClient.getBucket(key).trySet("lock", expired, timeUnit);
     }
+
 }

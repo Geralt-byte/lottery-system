@@ -49,4 +49,6 @@ public interface IActivityRepository {
     void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate);
     //根据活动id查询活动sku列表
     List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
+    //查询当前用户今天已抽奖次数
+    Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId);
 }

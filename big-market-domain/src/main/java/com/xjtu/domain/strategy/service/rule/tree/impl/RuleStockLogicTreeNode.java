@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @author mlei@xjtu
@@ -26,17 +27,17 @@ public class RuleStockLogicTreeNode implements ILogicTreeNode {
     private IStrategyRepository iStrategyRepository;
 
     @Override
-    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId, String ruleValue) {
+    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId, String ruleValue, Date endDateTime) {
         //日志
         log.info("规则过滤-库存扣减 userId:{} strategyId:{} ruleModel:{} awardId:{} ruleValue:{}",
-                userId, strategyId, "rule_stock", awardId,ruleValue);
+                userId, strategyId, "rule_stock", awardId, ruleValue);
 
         //扣减库存
-        Boolean status = iStrategyDispatch.subtractionAwardStock(strategyId, awardId);
+        Boolean status = iStrategyDispatch.subtractionAwardStock(strategyId, awardId, endDateTime);
 
-        if(status){
+        if (status) {
             log.info("规则过滤-库存扣减-成功 userId:{} strategyId:{} ruleModel:{} awardId:{} ruleValue:{}",
-                    userId, strategyId, "rule_stock", awardId,ruleValue);
+                    userId, strategyId, "rule_stock", awardId, ruleValue);
 
             // 写入延迟队列，延迟消费更新数据库记录。【在trigger的job；UpdateAwardStockJob 下消费队列，更新数据库记录】
             iStrategyRepository.awardStockConsumeSendQueue(StrategyAwardStockKeyVO

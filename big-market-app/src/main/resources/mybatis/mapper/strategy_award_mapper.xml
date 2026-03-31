@@ -10,7 +10,8 @@
                award_count,
                award_count_surplus,
                award_rate,
-               sort
+               sort,
+               rule_models
         from strategy_award
         where strategy_id = #{strategyId}
     </select>

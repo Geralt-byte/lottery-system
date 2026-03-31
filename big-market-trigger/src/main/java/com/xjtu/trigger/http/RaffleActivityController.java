@@ -98,7 +98,7 @@ public class RaffleActivityController implements IRaffleActivityService {
      * --url http://localhost:8091/api/v1/raffle/activity/draw \
      * --header 'content-type: application/json' \
      * --data '{
-     * "userId":"xiaofuge",
+     * "userId":"mlei",
      * "activityId": 100301
      * }'
      */
@@ -124,6 +124,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .builder()
                     .userId(orderEntity.getUserId())
                     .strategyId(orderEntity.getStrategyId())
+                    .endDateTime(orderEntity.getEndDateTime())
                     .build());
 
             // 4. 存放结果 - 写入中奖记录

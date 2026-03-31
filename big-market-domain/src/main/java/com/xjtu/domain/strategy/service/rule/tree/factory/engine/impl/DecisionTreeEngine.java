@@ -9,6 +9,7 @@ import com.xjtu.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import com.xjtu.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeEngine;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +31,9 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
     }
 
     @Override
-    public DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId) {
+    public DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId, Date endDateTime) {
 
-        DefaultTreeFactory.StrategyAwardVO strategyAwardVO =null;
+        DefaultTreeFactory.StrategyAwardVO strategyAwardVO = null;
 
         //获取基础信息
         String node = ruleTreeVO.getTreeRootRuleNode();
@@ -41,30 +42,30 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         //获取起始节点
         RuleTreeNodeVO ruleTreeNodeVO = treeNodeMap.get(node);
 
-        while (node!=null){
+        while (node != null) {
             //获取决策节点
             ILogicTreeNode iLogicTreeNode = iLogicTreeNodeGroup.get(ruleTreeNodeVO.getRuleKey());
             String ruleValue = ruleTreeNodeVO.getRuleValue();
 
             //决策节点计算
-            DefaultTreeFactory.TreeActionEntity logicEntity = iLogicTreeNode.logic(userId, strategyId, awardId,ruleValue);
+            DefaultTreeFactory.TreeActionEntity logicEntity = iLogicTreeNode.logic(userId, strategyId, awardId, ruleValue,endDateTime);
             RuleLogicCheckTypeVO ruleLogicCheckType = logicEntity.getRuleLogicCheckType();
             strategyAwardVO = logicEntity.getStrategyAwardVO();
-            log.info("决策树引擎【{}】 treeId: {} node: {} code: {}",ruleTreeVO.getTreeName(),ruleTreeVO.getTreeId(),node,ruleLogicCheckType.getCode());
+            log.info("决策树引擎【{}】 treeId: {} node: {} code: {}", ruleTreeVO.getTreeName(), ruleTreeVO.getTreeId(), node, ruleLogicCheckType.getCode());
 
             //获取下个节点
             node = nextNode(ruleLogicCheckType.getCode(), ruleTreeNodeVO.getTreeNodeLineVOList());
-            ruleTreeNodeVO=treeNodeMap.get(node);
+            ruleTreeNodeVO = treeNodeMap.get(node);
         }
         return strategyAwardVO;
     }
 
-    private String nextNode(String matterValue, List<RuleTreeNodeLineVO> treeNodeLineVOList){
-        if(treeNodeLineVOList==null||treeNodeLineVOList.isEmpty()){
+    private String nextNode(String matterValue, List<RuleTreeNodeLineVO> treeNodeLineVOList) {
+        if (treeNodeLineVOList == null || treeNodeLineVOList.isEmpty()) {
             return null;
         }
         for (RuleTreeNodeLineVO nodeLine : treeNodeLineVOList) {
-            if(decisionLogic(matterValue,nodeLine)){
+            if (decisionLogic(matterValue, nodeLine)) {
                 return nodeLine.getRuleNodeTo();
             }
         }
@@ -74,8 +75,8 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         return null;
     }
 
-    private boolean decisionLogic(String matterValue,RuleTreeNodeLineVO nodeLine){
-        switch (nodeLine.getRuleLimitType()){
+    private boolean decisionLogic(String matterValue, RuleTreeNodeLineVO nodeLine) {
+        switch (nodeLine.getRuleLimitType()) {
             case EQUAL:
                 return matterValue.equals(nodeLine.getRuleLimitValue().getCode());
             case GT:

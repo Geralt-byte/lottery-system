@@ -15,7 +15,7 @@ public interface IRaffleStock {
      * @return 奖品库存Key信息
      * @throws InterruptedException 异常
      */
-    StrategyAwardStockKeyVO takeQueueValue();
+    StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException;
 
     /**
      * 更新奖品库存消耗记录
@@ -23,5 +23,5 @@ public interface IRaffleStock {
      * @param strategyId 策略ID
      * @param awardId    奖品ID
      */
-    void updateStrategyAwardStock(Long strategyId,Integer awardId);
+    void updateStrategyAwardStock(Long strategyId, Integer awardId);
 }

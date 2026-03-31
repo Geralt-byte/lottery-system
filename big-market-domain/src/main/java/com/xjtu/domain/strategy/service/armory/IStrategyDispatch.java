@@ -1,5 +1,7 @@
 package com.xjtu.domain.strategy.service.armory;
 
+import java.util.Date;
+
 /**
  * @author mlei@xjtu
  * @description 策略抽奖调度接口
@@ -27,5 +29,5 @@ public interface IStrategyDispatch {
     /**
      * 扣减库存操作
      * */
-    Boolean subtractionAwardStock(Long strategyId,Integer awardId);
+    Boolean subtractionAwardStock(Long strategyId,Integer awardId, Date endDateTime);
 }

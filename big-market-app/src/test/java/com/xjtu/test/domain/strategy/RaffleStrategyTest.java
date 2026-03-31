@@ -39,11 +39,11 @@ public class RaffleStrategyTest {
     @Resource
     private RuleLockLogicTreeNode ruleLockLogicTreeNode;
 
-    @Before
-    public void set(){
-        ReflectionTestUtils.setField(ruleWeightLogicChain,"userScore",5500L);
-        ReflectionTestUtils.setField(ruleLockLogicTreeNode,"userRaffleCount",10L);
-    }
+//    @Before
+//    public void set(){
+//        ReflectionTestUtils.setField(ruleWeightLogicChain,"userScore",5500L);
+//        ReflectionTestUtils.setField(ruleLockLogicTreeNode,"userRaffleCount",10L);
+//    }
 
     /*权重测试*/
     @Test
