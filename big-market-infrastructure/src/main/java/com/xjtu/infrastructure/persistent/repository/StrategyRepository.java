@@ -303,7 +303,7 @@ public class StrategyRepository implements IStrategyRepository {
     public StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException {
         String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
         RBlockingQueue<StrategyAwardStockKeyVO> destinationQueue = iRedisService.getBlockingQueue(cacheKey);
-        return destinationQueue.poll();
+        return destinationQueue.take();
     }
 
     /**

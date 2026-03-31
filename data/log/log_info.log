@@ -2284,3 +2284,390 @@ com.xjtu.types.exception.AppException: null
 26-03-31.10:31:22.079 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
 26-03-31.10:31:22.120 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
 26-03-31.10:31:22.120 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-03-31.12:53:12.352 [main            ] INFO  Application            - Starting Application using Java 17.0.10 on DESKTOP-RIFPEOR with PID 34056 (E:\JavaWeb\big-market\big-market-app\target\classes started by 星念 in E:\JavaWeb\big-market)
+26-03-31.12:53:12.353 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-03-31.12:53:13.192 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-03-31.12:53:13.194 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-03-31.12:53:13.253 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 50 ms. Found 0 Redis repository interfaces.
+26-03-31.12:53:14.040 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-03-31.12:53:14.048 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-03-31.12:53:14.048 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-03-31.12:53:14.048 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-03-31.12:53:14.190 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-03-31.12:53:14.190 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1793 ms
+26-03-31.12:53:14.765 [main            ] INFO  Version                - Redisson 3.26.0
+26-03-31.12:53:15.149 [redisson-netty-1-4] INFO  ConnectionsHolder      - 1 connections initialized for 101.42.109.191/101.42.109.191:16379
+26-03-31.12:53:15.363 [redisson-netty-1-13] INFO  ConnectionsHolder      - 5 connections initialized for 101.42.109.191/101.42.109.191:16379
+26-03-31.12:53:16.250 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-03-31.12:53:16.327 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-03-31.12:53:16.341 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-03-31.12:53:16.341 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [101.42.109.191:5672]
+26-03-31.12:53:16.480 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#400e741:0/SimpleConnection@35c9f527 [delegate=amqp://admin@101.42.109.191:5672/, localPort= 58976]
+26-03-31.12:53:16.821 [main            ] INFO  Application            - Started Application in 4.866 seconds (JVM running for 5.421)
+26-03-31.12:53:16.949 [RMI TCP Connection(1)-192.168.245.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-03-31.12:53:16.949 [RMI TCP Connection(1)-192.168.245.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-03-31.12:53:16.950 [RMI TCP Connection(1)-192.168.245.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-03-31.12:53:16.974 [RMI TCP Connection(2)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.12:53:17.420 [RMI TCP Connection(2)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.12:53:17.458 [RMI TCP Connection(2)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.12:53:17.761 [RMI TCP Connection(2)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.12:53:32.463 [http-nio-8091-exec-2] INFO  RaffleActivityController - 活动装配，数据预热，开始 activityId:100301
+26-03-31.12:53:32.464 [http-nio-8091-exec-2] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.12:53:32.748 [http-nio-8091-exec-2] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.12:53:34.271 [http-nio-8091-exec-2] INFO  RaffleActivityController - 活动装配，数据预热，完成 activityId:100301
+26-03-31.12:54:28.114 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-03-31.12:54:28.140 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-03-31.12:54:28.190 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-03-31.12:54:28.251 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-03-31.12:54:28.293 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-03-31.12:54:28.293 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-03-31.12:57:23.525 [main            ] INFO  Application            - Starting Application using Java 17.0.10 on DESKTOP-RIFPEOR with PID 20260 (E:\JavaWeb\big-market\big-market-app\target\classes started by 星念 in E:\JavaWeb\big-market)
+26-03-31.12:57:23.528 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-03-31.12:57:24.319 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-03-31.12:57:24.327 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-03-31.12:57:24.386 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 0 Redis repository interfaces.
+26-03-31.12:57:25.188 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-03-31.12:57:25.196 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-03-31.12:57:25.196 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-03-31.12:57:25.197 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-03-31.12:57:25.325 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-03-31.12:57:25.325 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1763 ms
+26-03-31.12:57:25.920 [main            ] INFO  Version                - Redisson 3.26.0
+26-03-31.12:57:26.360 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 101.42.109.191/101.42.109.191:16379
+26-03-31.12:57:26.516 [redisson-netty-1-13] INFO  ConnectionsHolder      - 5 connections initialized for 101.42.109.191/101.42.109.191:16379
+26-03-31.12:57:27.585 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-03-31.12:57:27.675 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-03-31.12:57:27.690 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-03-31.12:57:27.692 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [101.42.109.191:5672]
+26-03-31.12:57:27.826 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6719f206:0/SimpleConnection@4f836d9 [delegate=amqp://admin@101.42.109.191:5672/, localPort= 53780]
+26-03-31.12:57:28.167 [main            ] INFO  Application            - Started Application in 5.048 seconds (JVM running for 5.712)
+26-03-31.12:57:28.695 [RMI TCP Connection(2)-192.168.245.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-03-31.12:57:28.696 [RMI TCP Connection(2)-192.168.245.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-03-31.12:57:28.698 [RMI TCP Connection(2)-192.168.245.1] INFO  DispatcherServlet      - Completed initialization in 2 ms
+26-03-31.12:57:28.892 [RMI TCP Connection(6)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.12:57:29.344 [RMI TCP Connection(6)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.12:57:29.385 [RMI TCP Connection(6)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.12:57:29.660 [RMI TCP Connection(6)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.12:57:41.689 [http-nio-8091-exec-2] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.12:57:42.268 [http-nio-8091-exec-2] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:795135907609
+26-03-31.12:57:42.379 [http-nio-8091-exec-2] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.12:57:42.382 [http-nio-8091-exec-2] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.12:57:42.382 [http-nio-8091-exec-2] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.12:57:42.766 [http-nio-8091-exec-2] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.12:57:42.939 [http-nio-8091-exec-2] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:106 ruleValue:1
+26-03-31.12:57:43.010 [http-nio-8091-exec-2] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:106 raffleCount:1 userRaffleCount:1
+26-03-31.12:57:43.010 [http-nio-8091-exec-2] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_lock code: 0000
+26-03-31.12:57:43.011 [http-nio-8091-exec-2] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.12:57:43.063 [http-nio-8091-exec-2] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.12:57:43.128 [http-nio-8091-exec-2] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_stock code: 0001
+26-03-31.12:57:43.128 [http-nio-8091-exec-2] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 106
+26-03-31.12:57:43.538 [http-nio-8091-exec-2] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"25120394559","timestamp":1774933063208}
+26-03-31.12:57:43.569 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"25120394559","timestamp":1774933063208}
+26-03-31.12:59:36.340 [http-nio-8091-exec-4] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.12:59:36.904 [http-nio-8091-exec-4] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:423109700249
+26-03-31.12:59:36.994 [http-nio-8091-exec-4] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.12:59:36.994 [http-nio-8091-exec-4] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.12:59:37.066 [http-nio-8091-exec-4] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:106 ruleValue:1
+26-03-31.12:59:37.157 [http-nio-8091-exec-4] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:106 raffleCount:1 userRaffleCount:2
+26-03-31.12:59:37.157 [http-nio-8091-exec-4] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_lock code: 0000
+26-03-31.12:59:37.157 [http-nio-8091-exec-4] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.12:59:37.201 [http-nio-8091-exec-4] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.12:59:37.224 [http-nio-8091-exec-4] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_stock code: 0001
+26-03-31.12:59:37.224 [http-nio-8091-exec-4] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 106
+26-03-31.12:59:37.908 [http-nio-8091-exec-4] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"92522961056","timestamp":1774933177248}
+26-03-31.12:59:37.928 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"92522961056","timestamp":1774933177248}
+26-03-31.12:59:40.031 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:106
+26-03-31.13:00:10.801 [http-nio-8091-exec-6] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:00:11.308 [http-nio-8091-exec-6] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:429054483200
+26-03-31.13:00:11.398 [http-nio-8091-exec-6] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.13:00:11.398 [http-nio-8091-exec-6] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.13:00:11.467 [http-nio-8091-exec-6] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:106 ruleValue:1
+26-03-31.13:00:11.512 [http-nio-8091-exec-6] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:106 raffleCount:1 userRaffleCount:3
+26-03-31.13:00:11.512 [http-nio-8091-exec-6] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_lock code: 0000
+26-03-31.13:00:11.512 [http-nio-8091-exec-6] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.13:00:11.560 [http-nio-8091-exec-6] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.13:00:11.584 [http-nio-8091-exec-6] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_stock code: 0001
+26-03-31.13:00:11.584 [http-nio-8091-exec-6] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 106
+26-03-31.13:00:11.839 [http-nio-8091-exec-6] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"71046752926","timestamp":1774933211605}
+26-03-31.13:00:11.860 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"71046752926","timestamp":1774933211605}
+26-03-31.13:00:31.531 [http-nio-8091-exec-7] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:00:32.044 [http-nio-8091-exec-7] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:395469336212
+26-03-31.13:00:32.134 [http-nio-8091-exec-7] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 108
+26-03-31.13:00:32.134 [http-nio-8091-exec-7] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 108
+26-03-31.13:00:32.292 [http-nio-8091-exec-7] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:108 ruleValue:2
+26-03-31.13:00:32.339 [http-nio-8091-exec-7] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:108 raffleCount:2 userRaffleCount:4
+26-03-31.13:00:32.339 [http-nio-8091-exec-7] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_2 node: rule_lock code: 0000
+26-03-31.13:00:32.339 [http-nio-8091-exec-7] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:108 ruleValue:null
+26-03-31.13:00:32.384 [http-nio-8091-exec-7] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:108 ruleValue:null
+26-03-31.13:00:32.406 [http-nio-8091-exec-7] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_2 node: rule_stock code: 0001
+26-03-31.13:00:32.406 [http-nio-8091-exec-7] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 108
+26-03-31.13:00:32.704 [http-nio-8091-exec-7] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":108,"awardTitle":"1等奖","userId":"mlei1"},"id":"22034234652","timestamp":1774933232473}
+26-03-31.13:00:32.725 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":108,"awardTitle":"1等奖","userId":"mlei1"},"id":"22034234652","timestamp":1774933232473}
+26-03-31.13:00:35.033 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:108
+26-03-31.13:01:02.278 [http-nio-8091-exec-8] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:01:02.797 [http-nio-8091-exec-8] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:524812989377
+26-03-31.13:01:02.885 [http-nio-8091-exec-8] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 103
+26-03-31.13:01:02.885 [http-nio-8091-exec-8] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 103
+26-03-31.13:01:03.051 [http-nio-8091-exec-8] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:103 ruleValue:null
+26-03-31.13:01:03.094 [http-nio-8091-exec-8] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:103 ruleValue:null
+26-03-31.13:01:03.116 [http-nio-8091-exec-8] INFO  DecisionTreeEngine     - 决策树引擎【规则树-兜底奖励】 treeId: tree_luck_award node: rule_stock code: 0001
+26-03-31.13:01:03.117 [http-nio-8091-exec-8] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 103
+26-03-31.13:01:03.421 [http-nio-8091-exec-8] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":103,"awardTitle":"6等奖","userId":"mlei1"},"id":"99762716156","timestamp":1774933263198}
+26-03-31.13:01:03.444 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":103,"awardTitle":"6等奖","userId":"mlei1"},"id":"99762716156","timestamp":1774933263198}
+26-03-31.13:01:46.352 [http-nio-8091-exec-9] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:01:46.890 [http-nio-8091-exec-9] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:141927412645
+26-03-31.13:01:46.979 [http-nio-8091-exec-9] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 107
+26-03-31.13:01:46.980 [http-nio-8091-exec-9] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 107
+26-03-31.13:01:47.048 [http-nio-8091-exec-9] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:107 ruleValue:1
+26-03-31.13:01:47.094 [http-nio-8091-exec-9] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:107 raffleCount:1 userRaffleCount:6
+26-03-31.13:01:47.094 [http-nio-8091-exec-9] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_lock code: 0000
+26-03-31.13:01:47.094 [http-nio-8091-exec-9] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:107 ruleValue:null
+26-03-31.13:01:47.137 [http-nio-8091-exec-9] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:107 ruleValue:null
+26-03-31.13:01:47.159 [http-nio-8091-exec-9] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_stock code: 0001
+26-03-31.13:01:47.159 [http-nio-8091-exec-9] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 107
+26-03-31.13:01:47.435 [http-nio-8091-exec-9] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":107,"awardTitle":"2等奖","userId":"mlei1"},"id":"52315658035","timestamp":1774933307225}
+26-03-31.13:01:47.456 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":107,"awardTitle":"2等奖","userId":"mlei1"},"id":"52315658035","timestamp":1774933307225}
+26-03-31.13:01:50.057 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:107
+26-03-31.13:02:05.343 [http-nio-8091-exec-10] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:02:05.843 [http-nio-8091-exec-10] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:074632264519
+26-03-31.13:02:05.931 [http-nio-8091-exec-10] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.13:02:05.931 [http-nio-8091-exec-10] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.13:02:05.997 [http-nio-8091-exec-10] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:106 ruleValue:1
+26-03-31.13:02:06.041 [http-nio-8091-exec-10] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:106 raffleCount:1 userRaffleCount:7
+26-03-31.13:02:06.043 [http-nio-8091-exec-10] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_lock code: 0000
+26-03-31.13:02:06.043 [http-nio-8091-exec-10] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.13:02:06.086 [http-nio-8091-exec-10] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.13:02:06.108 [http-nio-8091-exec-10] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_stock code: 0001
+26-03-31.13:02:06.108 [http-nio-8091-exec-10] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 106
+26-03-31.13:02:06.328 [http-nio-8091-exec-10] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"45495660601","timestamp":1774933326130}
+26-03-31.13:02:06.349 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"45495660601","timestamp":1774933326130}
+26-03-31.13:02:22.313 [http-nio-8091-exec-11] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:02:22.805 [http-nio-8091-exec-11] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:288584671700
+26-03-31.13:02:22.894 [http-nio-8091-exec-11] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 102
+26-03-31.13:02:22.894 [http-nio-8091-exec-11] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 102
+26-03-31.13:02:22.962 [http-nio-8091-exec-11] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:102 ruleValue:null
+26-03-31.13:02:23.005 [http-nio-8091-exec-11] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:102 ruleValue:null
+26-03-31.13:02:23.026 [http-nio-8091-exec-11] INFO  DecisionTreeEngine     - 决策树引擎【规则树-兜底奖励】 treeId: tree_luck_award node: rule_stock code: 0001
+26-03-31.13:02:23.028 [http-nio-8091-exec-11] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 102
+26-03-31.13:02:23.303 [http-nio-8091-exec-11] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":102,"awardTitle":"7等奖","userId":"mlei1"},"id":"22053969638","timestamp":1774933343094}
+26-03-31.13:02:23.323 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":102,"awardTitle":"7等奖","userId":"mlei1"},"id":"22053969638","timestamp":1774933343094}
+26-03-31.13:02:59.953 [http-nio-8091-exec-12] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:03:00.469 [http-nio-8091-exec-12] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:294535405832
+26-03-31.13:03:00.562 [http-nio-8091-exec-12] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 107
+26-03-31.13:03:00.562 [http-nio-8091-exec-12] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 107
+26-03-31.13:03:00.632 [http-nio-8091-exec-12] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:107 ruleValue:1
+26-03-31.13:03:00.687 [http-nio-8091-exec-12] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:107 raffleCount:1 userRaffleCount:9
+26-03-31.13:03:00.687 [http-nio-8091-exec-12] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_lock code: 0000
+26-03-31.13:03:00.687 [http-nio-8091-exec-12] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:107 ruleValue:null
+26-03-31.13:03:00.731 [http-nio-8091-exec-12] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:107 ruleValue:null
+26-03-31.13:03:00.755 [http-nio-8091-exec-12] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_stock code: 0001
+26-03-31.13:03:00.755 [http-nio-8091-exec-12] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 107
+26-03-31.13:03:00.975 [http-nio-8091-exec-12] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":107,"awardTitle":"2等奖","userId":"mlei1"},"id":"52880020659","timestamp":1774933380777}
+26-03-31.13:03:00.998 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":107,"awardTitle":"2等奖","userId":"mlei1"},"id":"52880020659","timestamp":1774933380777}
+26-03-31.13:03:11.219 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-03-31.13:03:11.240 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-03-31.13:03:11.241 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-03-31.13:03:12.063 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-03-31.13:03:12.099 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-03-31.13:03:12.101 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-03-31.13:04:19.925 [main            ] INFO  Application            - Starting Application using Java 17.0.10 on DESKTOP-RIFPEOR with PID 25304 (E:\JavaWeb\big-market\big-market-app\target\classes started by 星念 in E:\JavaWeb\big-market)
+26-03-31.13:04:19.928 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-03-31.13:04:20.867 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+26-03-31.13:04:20.871 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+26-03-31.13:04:20.929 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 0 Redis repository interfaces.
+26-03-31.13:04:21.912 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-03-31.13:04:21.921 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-03-31.13:04:21.921 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-03-31.13:04:21.921 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-03-31.13:04:22.066 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-03-31.13:04:22.066 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2089 ms
+26-03-31.13:04:22.726 [main            ] INFO  Version                - Redisson 3.26.0
+26-03-31.13:04:23.148 [redisson-netty-1-6] INFO  ConnectionsHolder      - 1 connections initialized for 101.42.109.191/101.42.109.191:16379
+26-03-31.13:04:23.356 [redisson-netty-1-13] INFO  ConnectionsHolder      - 5 connections initialized for 101.42.109.191/101.42.109.191:16379
+26-03-31.13:04:24.425 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-03-31.13:04:24.512 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-03-31.13:04:24.529 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-03-31.13:04:24.531 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [101.42.109.191:5672]
+26-03-31.13:04:24.675 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#73baf7f0:0/SimpleConnection@3a388769 [delegate=amqp://admin@101.42.109.191:5672/, localPort= 54531]
+26-03-31.13:04:25.036 [main            ] INFO  Application            - Started Application in 5.566 seconds (JVM running for 6.684)
+26-03-31.13:04:25.377 [RMI TCP Connection(3)-192.168.245.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-03-31.13:04:25.379 [RMI TCP Connection(3)-192.168.245.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-03-31.13:04:25.379 [RMI TCP Connection(3)-192.168.245.1] INFO  DispatcherServlet      - Completed initialization in 0 ms
+26-03-31.13:04:25.413 [RMI TCP Connection(4)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.13:04:25.906 [RMI TCP Connection(4)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.13:04:25.951 [RMI TCP Connection(4)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.13:04:26.273 [RMI TCP Connection(4)-192.168.245.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.13:04:34.614 [http-nio-8091-exec-2] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:04:35.205 [http-nio-8091-exec-2] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:952368821197
+26-03-31.13:04:35.313 [http-nio-8091-exec-2] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 104
+26-03-31.13:04:35.315 [http-nio-8091-exec-2] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 104
+26-03-31.13:04:35.315 [http-nio-8091-exec-2] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+26-03-31.13:04:35.598 [http-nio-8091-exec-2] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+26-03-31.13:04:35.662 [http-nio-8091-exec-2] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:104 ruleValue:null
+26-03-31.13:04:35.709 [http-nio-8091-exec-2] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:104 ruleValue:null
+26-03-31.13:04:35.850 [http-nio-8091-exec-2] INFO  DecisionTreeEngine     - 决策树引擎【规则树-兜底奖励】 treeId: tree_luck_award node: rule_stock code: 0001
+26-03-31.13:04:35.852 [http-nio-8091-exec-2] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 104
+26-03-31.13:04:36.296 [http-nio-8091-exec-2] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":104,"awardTitle":"5等奖","userId":"mlei1"},"id":"88827884533","timestamp":1774933475940}
+26-03-31.13:04:36.328 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":104,"awardTitle":"5等奖","userId":"mlei1"},"id":"88827884533","timestamp":1774933475940}
+26-03-31.13:04:37.927 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:104
+26-03-31.13:05:04.136 [http-nio-8091-exec-3] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:05:04.716 [http-nio-8091-exec-3] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:187175716025
+26-03-31.13:05:04.814 [http-nio-8091-exec-3] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 105
+26-03-31.13:05:04.814 [http-nio-8091-exec-3] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 105
+26-03-31.13:05:04.887 [http-nio-8091-exec-3] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:105 ruleValue:null
+26-03-31.13:05:04.940 [http-nio-8091-exec-3] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:105 ruleValue:null
+26-03-31.13:05:04.970 [http-nio-8091-exec-3] INFO  DecisionTreeEngine     - 决策树引擎【规则树-兜底奖励】 treeId: tree_luck_award node: rule_stock code: 0001
+26-03-31.13:05:04.970 [http-nio-8091-exec-3] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 105
+26-03-31.13:05:05.259 [http-nio-8091-exec-3] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":105,"awardTitle":"4等奖","userId":"mlei1"},"id":"40369500770","timestamp":1774933505045}
+26-03-31.13:05:05.284 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":105,"awardTitle":"4等奖","userId":"mlei1"},"id":"40369500770","timestamp":1774933505045}
+26-03-31.13:05:07.125 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:105
+26-03-31.13:05:18.898 [http-nio-8091-exec-4] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:05:19.454 [http-nio-8091-exec-4] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:744419185507
+26-03-31.13:05:19.556 [http-nio-8091-exec-4] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 101
+26-03-31.13:05:19.556 [http-nio-8091-exec-4] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 101
+26-03-31.13:05:19.628 [http-nio-8091-exec-4] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:101 ruleValue:null
+26-03-31.13:05:19.677 [http-nio-8091-exec-4] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:101 ruleValue:null
+26-03-31.13:05:19.710 [http-nio-8091-exec-4] INFO  DecisionTreeEngine     - 决策树引擎【规则树-兜底奖励】 treeId: tree_luck_award node: rule_stock code: 0001
+26-03-31.13:05:19.710 [http-nio-8091-exec-4] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 101
+26-03-31.13:05:19.996 [http-nio-8091-exec-4] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":101,"awardTitle":"随机积分","userId":"mlei1"},"id":"23750060783","timestamp":1774933519782}
+26-03-31.13:05:20.020 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":101,"awardTitle":"随机积分","userId":"mlei1"},"id":"23750060783","timestamp":1774933519782}
+26-03-31.13:05:21.924 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:101
+26-03-31.13:05:41.355 [http-nio-8091-exec-5] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:05:41.890 [http-nio-8091-exec-5] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:980425090885
+26-03-31.13:05:41.982 [http-nio-8091-exec-5] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 105
+26-03-31.13:05:41.982 [http-nio-8091-exec-5] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 105
+26-03-31.13:05:42.053 [http-nio-8091-exec-5] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:105 ruleValue:null
+26-03-31.13:05:42.098 [http-nio-8091-exec-5] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:105 ruleValue:null
+26-03-31.13:05:42.120 [http-nio-8091-exec-5] INFO  DecisionTreeEngine     - 决策树引擎【规则树-兜底奖励】 treeId: tree_luck_award node: rule_stock code: 0001
+26-03-31.13:05:42.120 [http-nio-8091-exec-5] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 105
+26-03-31.13:05:42.406 [http-nio-8091-exec-5] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":105,"awardTitle":"4等奖","userId":"mlei1"},"id":"03709353687","timestamp":1774933542144}
+26-03-31.13:05:42.426 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":105,"awardTitle":"4等奖","userId":"mlei1"},"id":"03709353687","timestamp":1774933542144}
+26-03-31.13:05:44.325 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:105
+26-03-31.13:05:53.238 [http-nio-8091-exec-6] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:05:53.769 [http-nio-8091-exec-6] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:925347963749
+26-03-31.13:05:53.860 [http-nio-8091-exec-6] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.13:05:53.861 [http-nio-8091-exec-6] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.13:05:53.930 [http-nio-8091-exec-6] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:106 ruleValue:1
+26-03-31.13:05:53.980 [http-nio-8091-exec-6] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:106 raffleCount:1 userRaffleCount:14
+26-03-31.13:05:53.980 [http-nio-8091-exec-6] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_lock code: 0000
+26-03-31.13:05:53.980 [http-nio-8091-exec-6] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.13:05:54.024 [http-nio-8091-exec-6] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.13:05:54.051 [http-nio-8091-exec-6] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_stock code: 0001
+26-03-31.13:05:54.051 [http-nio-8091-exec-6] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 106
+26-03-31.13:05:54.292 [http-nio-8091-exec-6] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"62520202891","timestamp":1774933554073}
+26-03-31.13:05:54.314 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"62520202891","timestamp":1774933554073}
+26-03-31.13:05:56.226 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:106
+26-03-31.13:06:48.252 [http-nio-8091-exec-7] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:06:48.793 [http-nio-8091-exec-7] INFO  RaffleActivityController - 活动抽奖,创建订单 userId:mlei1 activityId:100301 orderId:712777517279
+26-03-31.13:06:48.888 [http-nio-8091-exec-7] INFO  DefaultLogicChain      - 抽奖责任链-默认处理 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.13:06:48.888 [http-nio-8091-exec-7] INFO  AbstractRaffleStrategy - 抽奖策略计算-责任链出口 userId: mlei1 strategyId: 100006 ruleModel: rule_default awardId: 106
+26-03-31.13:06:48.964 [http-nio-8091-exec-7] INFO  RuleLockLogicTreeNode  - 规则过滤-抽奖次数 userId:mlei1 strategyId:100006 ruleModel:rule_lock awardId:106 ruleValue:1
+26-03-31.13:06:49.012 [http-nio-8091-exec-7] INFO  RuleLockLogicTreeNode  - 规则过滤-次数锁【放行】 userId:mlei1 strategyId:100006 awardId:106 raffleCount:1 userRaffleCount:15
+26-03-31.13:06:49.012 [http-nio-8091-exec-7] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_lock code: 0000
+26-03-31.13:06:49.012 [http-nio-8091-exec-7] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.13:06:49.058 [http-nio-8091-exec-7] INFO  RuleStockLogicTreeNode - 规则过滤-库存扣减-成功 userId:mlei1 strategyId:100006 ruleModel:rule_stock awardId:106 ruleValue:null
+26-03-31.13:06:49.080 [http-nio-8091-exec-7] INFO  DecisionTreeEngine     - 决策树引擎【规则树】 treeId: tree_lock_1 node: rule_stock code: 0001
+26-03-31.13:06:49.080 [http-nio-8091-exec-7] INFO  AbstractRaffleStrategy - 抽奖策略计算-规则树出口 userId: mlei1 strategyId: 100006 ruleValue: null awardId: 106
+26-03-31.13:06:49.423 [http-nio-8091-exec-7] INFO  EventPublisher         - 发送MQ消息 topic:send_award message:{"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"57534972964","timestamp":1774933609102}
+26-03-31.13:06:49.444 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] INFO  SendAwardCustomer      - 监听用户奖品发送消息 topic: send_award message: {"data":{"awardId":106,"awardTitle":"3等奖","userId":"mlei1"},"id":"57534972964","timestamp":1774933609102}
+26-03-31.13:06:51.323 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存 strategyId:100006 awardId:106
+26-03-31.13:08:03.178 [http-nio-8091-exec-10] INFO  RaffleActivityController - 活动抽奖 userId:mlei1 activityId:100301
+26-03-31.13:08:03.274 [http-nio-8091-exec-10] ERROR RaffleActivityController - 活动抽奖失败 userId:mlei1 activityId:100301
+com.xjtu.types.exception.AppException: null
+	at com.xjtu.domain.activity.service.partake.RaffleActivityPartakeService.doFilterAccount(RaffleActivityPartakeService.java:53)
+	at com.xjtu.domain.activity.service.partake.AbstractRaffleActivityPartake.createOrder(AbstractRaffleActivityPartake.java:58)
+	at com.xjtu.domain.activity.service.partake.AbstractRaffleActivityPartake.createOrder(AbstractRaffleActivityPartake.java:71)
+	at com.xjtu.trigger.http.RaffleActivityController.draw(RaffleActivityController.java:119)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+26-03-31.13:08:23.797 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-03-31.13:08:23.820 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+26-03-31.13:08:24.110 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-03-31.13:08:24.567 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+26-03-31.13:08:24.612 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-03-31.13:08:24.612 [SpringApplicationShutdownHook] INFO  SimpleMessageListenerContainer - Shutdown ignored - container is already stopped
+26-03-31.13:08:24.612 [scheduling-1    ] ERROR UpdateAwardStockJob    - 定时任务，更新奖品消耗库存失败
+java.lang.InterruptedException: null
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:386)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2073)
+	at org.redisson.command.CommandAsyncService.getInterrupted(CommandAsyncService.java:174)
+	at org.redisson.RedissonBlockingQueue.take(RedissonBlockingQueue.java:89)
+	at com.xjtu.infrastructure.persistent.repository.StrategyRepository.takeQueueValue(StrategyRepository.java:306)
+	at com.xjtu.infrastructure.persistent.repository.StrategyRepository$$FastClassBySpringCGLIB$$79b6887.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at com.xjtu.infrastructure.persistent.repository.StrategyRepository$$EnhancerBySpringCGLIB$$1a36faf.takeQueueValue(<generated>)
+	at com.xjtu.domain.strategy.service.raffle.DefaultRaffleStrategy.takeQueueValue(DefaultRaffleStrategy.java:69)
+	at com.xjtu.trigger.job.UpdateAwardStockJob.exec(UpdateAwardStockJob.java:26)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)

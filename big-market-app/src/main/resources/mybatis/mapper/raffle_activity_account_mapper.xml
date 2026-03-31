@@ -24,14 +24,10 @@
     <update id="updateActivityAccountSubtractionQuota"
             parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccount">
         update raffle_activity_account
-        set total_count_surplus=total_count_surplus - 1,
-            month_count_surplus=month_count_surplus - 1,
-            day_count_surplus=day_count_surplus - 1
+        set total_count_surplus=total_count_surplus - 1
         where user_id = #{userId}
           and activity_id = #{activityId}
           and total_count_surplus > 0
-          and month_count_surplus > 0
-          and day_count_surplus > 0
     </update>
 
     <update id="updateActivityAccountMonthSurplusImageQuota" parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccount">

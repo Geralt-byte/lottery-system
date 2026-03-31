@@ -60,14 +60,11 @@ public class StrategyRepositoryTest {
 
     @Test
     public void test_queue() throws InterruptedException {
-        String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
-        RBlockingQueue<StrategyAwardStockKeyVO> blockingQueue = redisService.getBlockingQueue(cacheKey);
-        RDelayedQueue<StrategyAwardStockKeyVO> delayedQueue = redisService.getDelayedQueue(blockingQueue);
-        delayedQueue.offer(StrategyAwardStockKeyVO.builder()
+        StrategyAwardStockKeyVO strategyAwardStockKeyVO = StrategyAwardStockKeyVO.builder()
                 .strategyId(100001L)
                 .awardId(102)
-                .build(), 3, TimeUnit.SECONDS);
-
+                .build();
+        strategyRepository.awardStockConsumeSendQueue(strategyAwardStockKeyVO);
         new CountDownLatch(1).await();
     }
 

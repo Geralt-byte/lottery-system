@@ -423,7 +423,6 @@ public class ActivityRepository implements IActivityRepository {
                                 .builder()
                                 .userId(userId)
                                 .activityId(activityId)
-                                .monthCountSurplus(activityAccountEntity.getDayCountSurplus())
                                 .build());
                     } else {
                         iRaffleActivityAccountDayDao.insertActivityAccountDay(RaffleActivityAccountDay

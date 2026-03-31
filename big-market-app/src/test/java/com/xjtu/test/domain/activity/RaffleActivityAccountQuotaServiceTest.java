@@ -57,10 +57,10 @@ public class RaffleActivityAccountQuotaServiceTest {
      */
     @Test
     public void test_createSkuRechargeOrder() throws InterruptedException {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             try {
                 SkuRechargeEntity skuRechargeEntity = new SkuRechargeEntity();
-                skuRechargeEntity.setUserId("mlei");
+                skuRechargeEntity.setUserId("mlei1");
                 skuRechargeEntity.setSku(9011L);
                 // outBusinessNo 作为幂等仿重使用，同一个业务单号2次使用会抛出索引冲突 Duplicate entry '700091009111' for key 'uq_out_business_no' 确保唯一性。
                 skuRechargeEntity.setOutBusinessNo(RandomStringUtils.randomNumeric(12));
