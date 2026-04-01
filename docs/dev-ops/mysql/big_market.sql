@@ -347,7 +347,7 @@ LOCK TABLES `raffle_activity_count` WRITE;
     DISABLE KEYS */;
 
 INSERT INTO `raffle_activity_count` (`id`, `activity_count_id`, `total_count`, `day_count`, `month_count`)
-VALUES (1, 11101, 10000, 1000, 1000);
+VALUES (1, 11101, 1, 1, 1);
 
 /*!40000 ALTER TABLE `raffle_activity_count`
     ENABLE KEYS */;

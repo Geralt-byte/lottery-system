@@ -7,10 +7,22 @@
         values (#{userId}, #{activityId}, #{month}, #{monthCount}, #{monthCountSurplus})
     </insert>
 
+    <update id="addAccountQuota" parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccountMonth">
+        update raffle_activity_account_month
+        set month_count_surplus=month_count_surplus + #{monthCountSurplus},
+            month_count=month_count + #{monthCount}
+        where user_id = #{userId}
+          and activity_id = #{activityId}
+          and month = #{month}
+    </update>
+
     <update id="updateActivityAccountMonthSubtractionQuota" parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccountMonth">
         update raffle_activity_account_month
-        set month_count_surplus=month_count_surplus-1
-        where user_id=#{userId} and activity_id=#{activityId} and month=#{month} and month_count_surplus>0
+        set month_count_surplus=month_count_surplus - 1
+        where user_id = #{userId}
+          and activity_id = #{activityId}
+          and month = #{month}
+          and month_count_surplus > 0
     </update>
 
     <select id="queryActivityAccountMonthByUserId" parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccountMonth" resultType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccountMonth">

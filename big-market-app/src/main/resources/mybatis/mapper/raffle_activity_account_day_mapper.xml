@@ -8,6 +8,15 @@
         VALUES (#{userId}, #{activityId}, #{day}, #{dayCount}, #{dayCountSurplus})
     </insert>
 
+    <update id="addAccountQuota" parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccountDay">
+        update raffle_activity_account_day
+        set day_count_surplus=day_count_surplus + #{dayCountSurplus},
+            day_count=day_count + #{dayCount}
+        where user_id = #{userId}
+          and activity_id = #{activityId}
+          and day = #{day}
+    </update>
+
     <update id="updateActivityAccountDaySubtractionQuota"
             parameterType="com.xjtu.infrastructure.persistent.po.RaffleActivityAccountDay">
         update raffle_activity_account_day
