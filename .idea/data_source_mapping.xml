@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/daily_behavior_rebate_mapper.xml" value="986225c5-3967-4c96-bbc8-53e5710af3aa" />
+    <file url="file://$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/user_behavior_rebate_order_mapper.xml" value="986225c5-3967-4c96-bbc8-53e5710af3aa" />
+  </component>
+</project>

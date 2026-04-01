@@ -129,13 +129,13 @@ VALUES (1, 100001, 101, '随机积分', NULL, 80000, 80000, 0.3000, 'tree_luck_a
        (20, 100005, 104, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1),
        (21, 100005, 105, '随机积分', NULL, 80000, 80000, 0.0010, 'tree_luck_award', 1),
        (22, 100006, 101, '随机积分', NULL, 100, 100, 0.0200, 'tree_luck_award', 1),
-       (23, 100006, 102, '7等奖', NULL, 100, 100, 0.0300, 'tree_luck_award', 2),
-       (24, 100006, 103, '6等奖', NULL, 100, 100, 0.0300, 'tree_luck_award', 3),
-       (25, 100006, 104, '5等奖', NULL, 100, 100, 0.0300, 'tree_luck_award', 4),
-       (26, 100006, 105, '4等奖', NULL, 100, 100, 0.0300, 'tree_luck_award', 5),
-       (27, 100006, 106, '3等奖', '抽奖1次后解锁', 100, 100, 0.0300, 'tree_lock_1', 6),
-       (28, 100006, 107, '2等奖', '抽奖1次后解锁', 100, 100, 0.0300, 'tree_lock_1', 7),
-       (29, 100006, 108, '1等奖', '抽奖2次后解锁', 100, 100, 0.0300, 'tree_lock_2', 8);
+       (23, 100006, 102, 'OpenAI会员卡', NULL, 100, 100, 0.0300, 'tree_luck_award', 2),
+       (24, 100006, 103, '支付优惠券', NULL, 100, 100, 0.0300, 'tree_luck_award', 3),
+       (25, 100006, 104, '小米台灯', NULL, 100, 100, 0.0300, 'tree_luck_award', 4),
+       (26, 100006, 105, '小米su7周体验', '抽奖3次后解锁', 100, 100, 0.0300, 'tree_lock_3', 5),
+       (27, 100006, 106, '轻奢办公椅', '抽奖2次后解锁', 100, 100, 0.0300, 'tree_lock_2', 6),
+       (28, 100006, 107, '小霸王游戏机', '抽奖1次后解锁', 100, 100, 0.0300, 'tree_lock_1', 7),
+       (29, 100006, 108, '暴走玩偶', NULL, 100, 100, 0.0300, 'tree_luck_award', 8);
 /*!40000 ALTER TABLE `strategy_award`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -211,7 +211,8 @@ LOCK TABLES `rule_tree` WRITE;
 INSERT INTO `rule_tree` (`id`, `tree_id`, `tree_name`, `tree_desc`, `tree_node_rule_key`)
 VALUES (1, 'tree_lock_1', '规则树', '规则树', 'rule_lock'),
        (2, 'tree_luck_award', '规则树-兜底奖励', '规则树-兜底奖励', 'rule_stock'),
-       (3, 'tree_lock_2', '规则树', '规则树', 'rule_lock');
+       (3, 'tree_lock_2', '规则树', '规则树', 'rule_lock'),
+       (4, 'tree_lock_3', '规则树', '规则树', 'rule_lock');
 /*!40000 ALTER TABLE `rule_tree`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -244,7 +245,10 @@ VALUES (1, 'tree_lock_1', 'rule_lock', '限定用户已完成N次抽奖后解锁
        (5, 'tree_luck_award', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
        (6, 'tree_lock_2', 'rule_lock', '限定用户已完成N次抽奖后解锁', '2'),
        (7, 'tree_lock_2', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
-       (8, 'tree_lock_2', 'rule_stock', '库存扣减规则', NULL);
+       (8, 'tree_lock_2', 'rule_stock', '库存扣减规则', NULL),
+       (9, 'tree_lock_3', 'rule_lock', '限定用户已完成N次抽奖后解锁', '3'),
+       (10, 'tree_lock_3', 'rule_luck_award', '兜底奖品随机积分', '101:1,100'),
+       (11, 'tree_lock_3', 'rule_stock', '库存扣减规则', NULL);
 /*!40000 ALTER TABLE `rule_tree_node`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -278,7 +282,10 @@ VALUES (1, 'tree_lock_1', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
        (4, 'tree_luck_award', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW'),
        (5, 'tree_lock_2', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
        (6, 'tree_lock_2', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER'),
-       (7, 'tree_lock_2', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW');
+       (7, 'tree_lock_2', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW'),
+       (8, 'tree_lock_3', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW'),
+       (9, 'tree_lock_3', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER'),
+       (10, 'tree_lock_3', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW');
 /*!40000 ALTER TABLE `rule_tree_node_line`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -340,7 +347,7 @@ LOCK TABLES `raffle_activity_count` WRITE;
     DISABLE KEYS */;
 
 INSERT INTO `raffle_activity_count` (`id`, `activity_count_id`, `total_count`, `day_count`, `month_count`)
-VALUES (1, 11101, 1, 1, 1);
+VALUES (1, 11101, 10000, 1000, 1000);
 
 /*!40000 ALTER TABLE `raffle_activity_count`
     ENABLE KEYS */;
@@ -372,9 +379,40 @@ LOCK TABLES `raffle_activity_sku` WRITE;
 
 INSERT INTO `raffle_activity_sku` (`id`, `sku`, `activity_id`, `activity_count_id`, `stock_count`,
                                    `stock_count_surplus`)
-VALUES (1, 9011, 100301, 11101, 20, 20);
+VALUES (1, 9011, 100301, 11101, 10000, 10000);
 
 /*!40000 ALTER TABLE `raffle_activity_sku`
+    ENABLE KEYS */;
+UNLOCK TABLES;
+
+# 创建 raffle_activity_sku-------------------------------------------------
+
+DROP TABLE IF EXISTS `daily_behavior_rebate`;
+
+CREATE TABLE `daily_behavior_rebate`
+(
+    `id`            int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+    `behavior_type` varchar(16)      NOT NULL COMMENT '行为类型（sign 签到、openai_pay 支付）',
+    `rebate_desc`   varchar(128)     NOT NULL COMMENT '返利描述',
+    `rebate_type`   varchar(16)      NOT NULL COMMENT '返利类型（sku 活动库存充值商品、integral 用户活动积分）',
+    `rebate_config` varchar(32)      NOT NULL COMMENT '返利配置',
+    `state`         varchar(12)      NOT NULL COMMENT '状态（open 开启、close 关闭）',
+    `create_time`   datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`   datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    KEY `idx_behavior_type` (`behavior_type`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='日常行为返利活动配置';
+
+LOCK TABLES `daily_behavior_rebate` WRITE;
+/*!40000 ALTER TABLE `daily_behavior_rebate`
+    DISABLE KEYS */;
+
+INSERT INTO `daily_behavior_rebate` (`id`, `behavior_type`, `rebate_desc`, `rebate_type`, `rebate_config`, `state`)
+VALUES (1, 'sign', '签到返利-sku额度', 'sku', '9011', 'open'),
+       (2, 'sign', '签到返利-积分', 'integral', '10', 'open');
+
+/*!40000 ALTER TABLE `daily_behavior_rebate`
     ENABLE KEYS */;
 UNLOCK TABLES;
 

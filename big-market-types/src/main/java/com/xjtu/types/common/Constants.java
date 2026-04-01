@@ -30,6 +30,9 @@ public class Constants {
         public static String ACTIVITY_SKU_COUNT_QUERY_KEY = "big_market_activity_sku_count_query_key";
         public static String ACTIVITY_SKU_STOCK_COUNT_KEY = "big_market_activity_sku_stock_count_key_";
         public static String ACTIVITY_SKU_COUNT_CLEAR_KEY = "big_market_activity_sku_count_clear_key_";
+
+        public static String REBATE_CONFIG_LIST_KEY = "big_market_rebate_config_list_key_";
+        public static String USER_BEHAVIOR_REBATE_ORDER_KEY = "big_market_user_behavior_rebate_order_key_";
     }
 
 }
