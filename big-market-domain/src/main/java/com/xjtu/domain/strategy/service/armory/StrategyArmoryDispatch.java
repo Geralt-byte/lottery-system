@@ -41,7 +41,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
 
         //2.缓存奖品库存到redis
         for (StrategyAwardEntity strategyAwardEntity : strategyAwardEntities) {
-            strategyAwardCountArmory(strategyId, strategyAwardEntity.getAwardId(), strategyAwardEntity.getAwardCount());
+            strategyAwardCountArmory(strategyId, strategyAwardEntity.getAwardId(), strategyAwardEntity.getAwardCountSurplus());
         }
 
         //3.非权重版本奖品redis初始化
@@ -165,6 +165,6 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
     @Override
     public Boolean subtractionAwardStock(Long strategyId, Integer awardId, Date endDateTime) {
         String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_KEY + strategyId + Constants.UNDERLINE + awardId;
-        return iStrategyRepository.subtractionAwardStock(cacheKey, endDateTime);
+        return iStrategyRepository.subtractionAwardStock(cacheKey, endDateTime, strategyId, awardId);
     }
 }

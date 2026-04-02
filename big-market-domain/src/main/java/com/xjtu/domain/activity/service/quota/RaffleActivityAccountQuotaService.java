@@ -10,6 +10,7 @@ import com.xjtu.domain.activity.service.quota.rule.factory.DefaultActivityChainF
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -79,6 +80,52 @@ public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAcc
 
     @Override
     public Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId) {
-        return iActivityRepository.queryRaffleActivityAccountDayPartakeCount(activityId,userId);
+        return iActivityRepository.queryRaffleActivityAccountDayPartakeCount(activityId, userId);
+    }
+
+    @Override
+    public ActivityAccountEntity queryActivityAccountEntity(Long activityId, String userId) {
+        // 查询总账户额度
+        ActivityAccountEntity activityAccountEntity = iActivityRepository.queryActivityAccountByUserId(userId, activityId);
+        if (activityAccountEntity == null) {
+            return ActivityAccountEntity.builder()
+                    .userId(userId)
+                    .activityId(activityId)
+                    .totalCount(0)
+                    .totalCountSurplus(0)
+                    .dayCount(0)
+                    .dayCountSurplus(0)
+                    .monthCount(0)
+                    .monthCountSurplus(0)
+                    .build();
+        }
+
+        SimpleDateFormat dateFormatMonth = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat dateFormatDay = new SimpleDateFormat("yyyy-MM-dd");
+        String month = dateFormatMonth.format(new Date());
+        String day = dateFormatDay.format(new Date());
+
+        // 查询月账户额度
+        ActivityAccountMonthEntity activityAccountMonthEntity = iActivityRepository.queryActivityAccountMonthByUserId(userId, activityId, month);
+        // 查询日账户额度
+        ActivityAccountDayEntity activityAccountDayEntity = iActivityRepository.queryActivityAccountDayByUserId(userId, activityId, day);
+
+        // 如果没有创建月账户，则从总账户中获取月总额度填充。「当新创建日账户时，会获得总账户额度」
+        if (activityAccountMonthEntity != null) {
+            activityAccountEntity.setMonthCount(activityAccountMonthEntity.getMonthCount());
+            activityAccountEntity.setMonthCountSurplus(activityAccountMonthEntity.getMonthCountSurplus());
+        }
+        // 如果没有创建日账户，则从总账户中获取日总额度填充。「当新创建日账户时，会获得总账户额度」
+        if (activityAccountDayEntity != null) {
+            activityAccountEntity.setDayCount(activityAccountDayEntity.getDayCount());
+            activityAccountEntity.setDayCountSurplus(activityAccountDayEntity.getDayCountSurplus());
+        }
+
+        return activityAccountEntity;
+    }
+
+    @Override
+    public Integer queryRaffleActivityAccountPartakeCount(Long activityId, String userId) {
+        return iActivityRepository.queryRaffleActivityAccountPartakeCount(activityId, userId);
     }
 }

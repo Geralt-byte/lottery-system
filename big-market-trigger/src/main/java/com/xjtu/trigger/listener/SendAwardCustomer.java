@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author mlei@xjtu
- * @description SendAwardCustomer
+ * @description 奖品发放
  * @create 2026/3/30 03:55
  */
 @Slf4j

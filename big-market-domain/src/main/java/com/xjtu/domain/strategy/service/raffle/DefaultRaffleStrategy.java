@@ -2,6 +2,7 @@ package com.xjtu.domain.strategy.service.raffle;
 
 import com.xjtu.domain.strategy.model.entity.StrategyAwardEntity;
 import com.xjtu.domain.strategy.model.valobj.RuleTreeVO;
+import com.xjtu.domain.strategy.model.valobj.RuleWeightVO;
 import com.xjtu.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import com.xjtu.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import com.xjtu.domain.strategy.repository.IStrategyRepository;
@@ -43,7 +44,7 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRa
 
     @Override
     public DefaultTreeFactory.StrategyAwardVO raffleLogicTree(String userId, Long strategyId, Integer awardId) {
-        return raffleLogicTree(userId,strategyId,awardId,null);
+        return raffleLogicTree(userId, strategyId, awardId, null);
     }
 
     @Override
@@ -61,11 +62,11 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRa
                     + strategyAwardRuleModelVO.getRuleModels());
         }
         IDecisionTreeEngine treeEngine = defaultTreeFactory.openLogicTree(ruleTreeVO);
-        return treeEngine.process(userId, strategyId, awardId,endDateTime);
+        return treeEngine.process(userId, strategyId, awardId, endDateTime);
     }
 
     @Override
-    public StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException{
+    public StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException {
         return iStrategyRepository.takeQueueValue();
     }
 
@@ -88,5 +89,16 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRa
     @Override
     public Map<String, Integer> queryAwardRuleLockCount(String[] treeIds) {
         return iStrategyRepository.queryAwardRuleLockCount(treeIds);
+    }
+
+    @Override
+    public List<RuleWeightVO> queryAwardRuleWeightByActivityId(Long activityId) {
+        Long strategyId = iStrategyRepository.queryStrategyIdByActivityId(activityId);
+        return this.queryAwardRuleWeight(strategyId);
+    }
+
+    @Override
+    public List<RuleWeightVO> queryAwardRuleWeight(Long strategyId) {
+        return iStrategyRepository.queryAwardRuleWeight(strategyId);
     }
 }

@@ -1,5 +1,8 @@
 package com.xjtu.domain.strategy.service;
 
+import com.xjtu.domain.strategy.model.valobj.RuleWeightVO;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,4 +18,18 @@ public interface IRaffleRule {
      * @return key 规则树，value rule_lock 加锁值
      */
     Map<String,Integer> queryAwardRuleLockCount(String[] treeIds);
+
+    /*
+    * 根据活动ID查询奖品权重配置
+    * @param activityId 活动ID
+    * @return 奖品权重配置
+    * */
+    List<RuleWeightVO> queryAwardRuleWeightByActivityId(Long activityId);
+
+    /**
+     * 查询奖品权重配置
+     * @param strategyId 策略ID
+     * @return 权重规则
+     */
+    List<RuleWeightVO> queryAwardRuleWeight(Long strategyId);
 }

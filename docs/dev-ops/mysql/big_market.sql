@@ -74,7 +74,7 @@ VALUES (1, 100001, '抽奖策略', 'rule_blacklist,rule_weight'),
        (3, 100002, '抽奖策略-非完整1概率', NULL),
        (4, 100004, '抽奖策略-随机抽奖', NULL),
        (5, 100005, '抽奖策略-测试概率计算', NULL),
-       (6, 100006, '抽奖策略-规则树', NULL);
+       (6, 100006, '抽奖策略-黑名单-权重', 'rule_blacklist,rule_weight');
 /*!40000 ALTER TABLE `strategy`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -156,6 +156,7 @@ CREATE TABLE `strategy_rule`
     `create_time` datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
+    UNIQUE KEY `uq_strategy_id_rule_model` (`strategy_id`,`rule_model`),
     KEY `idx_strategy_id_award_id` (`strategy_id`, `award_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
@@ -164,25 +165,10 @@ LOCK TABLES `strategy_rule` WRITE;
 /*!40000 ALTER TABLE `strategy_rule`
     DISABLE KEYS */;
 INSERT INTO `strategy_rule` (`id`, `strategy_id`, `award_id`, `rule_type`, `rule_model`, `rule_value`, `rule_desc`)
-VALUES (1, 100001, 101, 2, 'rule_random', '1,1000', '随机积分策略'),
-       (2, 100001, 107, 2, 'rule_lock', '1', '抽奖1次后解锁'),
-       (3, 100001, 108, 2, 'rule_lock', '2', '抽奖2次后解锁'),
-       (4, 100001, 109, 2, 'rule_lock', '6', '抽奖6次后解锁'),
-       (5, 100001, 107, 2, 'rule_luck_award', '1,100', '兜底奖品100以内随机积分'),
-       (6, 100001, 108, 2, 'rule_luck_award', '1,100', '兜底奖品100以内随机积分'),
-       (7, 100001, 101, 2, 'rule_luck_award', '1,10', '兜底奖品10以内随机积分'),
-       (8, 100001, 102, 2, 'rule_luck_award', '1,20', '兜底奖品20以内随机积分'),
-       (9, 100001, 103, 2, 'rule_luck_award', '1,30', '兜底奖品30以内随机积分'),
-       (10, 100001, 104, 2, 'rule_luck_award', '1,40', '兜底奖品40以内随机积分'),
-       (11, 100001, 105, 2, 'rule_luck_award', '1,50', '兜底奖品50以内随机积分'),
-       (12, 100001, 106, 2, 'rule_luck_award', '1,60', '兜底奖品60以内随机积分'),
-       (13, 100001, NULL, 1, 'rule_weight',
-        '4000:102,103,104,105 5000:102,103,104,105,106,107 6000:102,103,104,105,106,107,108,109',
-        '消耗6000分，必中奖范围'),
-       (14, 100001, NULL, 1, 'rule_blacklist', '100:user001,user002,user003', '黑名单抽奖，积分兜底'),
-       (15, 100003, 107, 2, 'rule_lock', '1', '抽奖1次后解锁'),
-       (16, 100003, 108, 2, 'rule_lock', '2', '抽奖2次后解锁'),
-       (17, 100003, 109, 2, 'rule_lock', '6', '抽奖6次后解锁');
+VALUES (1, 100001, NULL, 1, 'rule_weight', '60:102 4000:102,103,104,105 5000:102,103,104,105,106,107 6000:102,103,104,105,106,107,108', '消耗6000分，必中奖范围'),
+       (2, 100001, NULL, 1, 'rule_blacklist', '101:user001,user002,user003', '黑名单抽奖，积分兜底'),
+       (3, 100006, NULL, 1, 'rule_weight', '60:102 4000:102,103,104,105 5000:102,103,104,105,106,107 6000:102,103,104,105,106,107,108', '消耗6000分，必中奖范围'),
+       (4, 100006, NULL, 1, 'rule_blacklist', '101:user001,user002,user003', '黑名单抽奖，积分兜底');
 /*!40000 ALTER TABLE `strategy_rule`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -347,7 +333,7 @@ LOCK TABLES `raffle_activity_count` WRITE;
     DISABLE KEYS */;
 
 INSERT INTO `raffle_activity_count` (`id`, `activity_count_id`, `total_count`, `day_count`, `month_count`)
-VALUES (1, 11101, 1, 1, 1);
+VALUES (1, 11101, 10, 10, 10);
 
 /*!40000 ALTER TABLE `raffle_activity_count`
     ENABLE KEYS */;

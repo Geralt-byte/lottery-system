@@ -1,6 +1,7 @@
 package com.xjtu.domain.rebate.repository;
 
 import com.xjtu.domain.rebate.model.aggregate.BehaviorRebateAggregate;
+import com.xjtu.domain.rebate.model.entity.BehaviorRebateOrderEntity;
 import com.xjtu.domain.rebate.model.valobj.BehaviorTypeVO;
 import com.xjtu.domain.rebate.model.valobj.DailyBehaviorRebateVO;
 
@@ -22,4 +23,9 @@ public interface IBehaviorRebateRepository {
      * @description 保存用户行为返利记录
      */
     void saveUserRebateRecord(String userId, List<BehaviorRebateAggregate> behaviorRebateAggregates);
+
+    /**
+     * @description 查询用户返利订单
+     */
+    List<BehaviorRebateOrderEntity> queryOrderByOutBusinessNo(String userId, String onBusinessNo);
 }

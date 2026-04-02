@@ -1,17 +1,20 @@
 package com.xjtu.infrastructure.persistent.repository;
 
+import com.xjtu.domain.strategy.event.SendAwardStockMessageEvent;
 import com.xjtu.domain.strategy.model.entity.StrategyAwardEntity;
 import com.xjtu.domain.strategy.model.entity.StrategyEntity;
 import com.xjtu.domain.strategy.model.entity.StrategyRuleEntity;
 import com.xjtu.domain.strategy.model.valobj.*;
 import com.xjtu.domain.strategy.repository.IStrategyRepository;
+import com.xjtu.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
+import com.xjtu.infrastructure.event.EventPublisher;
 import com.xjtu.infrastructure.persistent.dao.*;
 import com.xjtu.infrastructure.persistent.po.*;
 import com.xjtu.infrastructure.persistent.redis.IRedisService;
 import com.xjtu.types.common.Constants;
 import com.xjtu.types.enums.ResponseCode;
+import com.xjtu.types.event.BaseEvent;
 import com.xjtu.types.exception.AppException;
-import io.micrometer.core.instrument.util.TimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
@@ -49,12 +52,16 @@ public class StrategyRepository implements IStrategyRepository {
     private IRaffleActivityDao iRaffleActivityDao;
     @Resource
     private IRaffleActivityAccountDayDao iRaffleActivityAccountDayDao;
+    @Resource
+    private IRaffleActivityAccountDao iRaffleActivityAccountDao;
 
     /**
      * Redisson层接口注入
      */
     @Resource
     private IRedisService iRedisService;
+    @Resource
+    private EventPublisher eventPublisher;
 
     /**
      * 从redis中查找策略id对应的奖品列表
@@ -303,7 +310,7 @@ public class StrategyRepository implements IStrategyRepository {
     public StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException {
         String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
         RBlockingQueue<StrategyAwardStockKeyVO> destinationQueue = iRedisService.getBlockingQueue(cacheKey);
-        return destinationQueue.take();
+        return destinationQueue.poll();
     }
 
     /**
@@ -323,11 +330,11 @@ public class StrategyRepository implements IStrategyRepository {
      */
     @Override
     public Boolean subtractionAwardStock(String cacheKey) {
-        return subtractionAwardStock(cacheKey, null);
+        return subtractionAwardStock(cacheKey, null,null,null);
     }
 
     @Override
-    public Boolean subtractionAwardStock(String cacheKey, Date endDateTime) {
+    public Boolean subtractionAwardStock(String cacheKey, Date endDateTime,Long strategyId,Integer awardId) {
         long surplus = iRedisService.decr(cacheKey);
         if (surplus < 0) {
             //库存为0，恢复为0
@@ -346,7 +353,24 @@ public class StrategyRepository implements IStrategyRepository {
         }
         if (!lock) {
             log.info("策略奖品库存加锁失败 {}", lockKey);
+            return lock;
         }
+
+        // 发送MQ消息
+        try {
+            SendAwardStockMessageEvent.AwardStockMessage awardStockMessage = SendAwardStockMessageEvent.AwardStockMessage
+                    .builder()
+                    .activityId(strategyId)
+                    .awardId(awardId)
+                    .build();
+            SendAwardStockMessageEvent sendAwardStockMessageEvent=new SendAwardStockMessageEvent();
+            BaseEvent.EventMessage<SendAwardStockMessageEvent.AwardStockMessage> awardStockMessageEventMessage =
+                    sendAwardStockMessageEvent.buildEventMessage(awardStockMessage);
+            eventPublisher.publish("send_award_stock", awardStockMessageEventMessage);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         return lock;
     }
 
@@ -396,5 +420,66 @@ public class StrategyRepository implements IStrategyRepository {
             result.put(treeId, ruleValue);
         }
         return result;
+    }
+
+    @Override
+    public List<RuleWeightVO> queryAwardRuleWeight(Long strategyId) {
+        //先查缓存
+        String cacheKey = Constants.RedisKey.STRATEGY_RULE_WEIGHT_KEY + strategyId;
+        List<RuleWeightVO> ruleWeightVOList = iRedisService.getValue(cacheKey);
+        if (ruleWeightVOList != null) {
+            return ruleWeightVOList;
+        }
+        ruleWeightVOList = new ArrayList<>();
+        // 1. 查询权重规则值配置
+        StrategyRule strategyRule = new StrategyRule();
+        strategyRule.setStrategyId(strategyId);
+        strategyRule.setRuleModel(DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode());
+        String ruleValue = iStrategyRuleDao.queryStrategyRuleValue(strategyRule);
+
+        // 2. 借助实体对象转化规则
+        StrategyRuleEntity strategyRuleEntity = new StrategyRuleEntity();
+        strategyRuleEntity.setRuleModel(DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode());
+        strategyRuleEntity.setRuleValue(ruleValue);
+        Map<String, List<Integer>> ruleWeightValues = strategyRuleEntity.getRuleWeightValues();
+
+        // 3. 遍历规则组装奖品配置
+        Set<String> ruleWeightKeys = ruleWeightValues.keySet();
+        for (String ruleWeightKey : ruleWeightKeys) {
+            List<Integer> awardIds = ruleWeightValues.get(ruleWeightKey);
+            List<RuleWeightVO.Award> awardList = new ArrayList<>();
+            for (Integer awardId : awardIds) {
+                StrategyAward strategyAwardReq = new StrategyAward();
+                strategyAwardReq.setStrategyId(strategyId);
+                strategyAwardReq.setAwardId(awardId);
+                StrategyAward strategyAward = iStrategyAwardDao.queryStrategyAward(strategyAwardReq);
+                awardList.add(RuleWeightVO.Award.builder()
+                        .awardId(strategyAward.getAwardId())
+                        .awardTitle(strategyAward.getAwardTitle())
+                        .build());
+            }
+            ruleWeightVOList.add(RuleWeightVO.builder()
+                    .ruleValue(ruleValue)
+                    .weight(Integer.valueOf(ruleWeightKey.split(Constants.COLON)[0]))
+                    .awardIds(awardIds)
+                    .awardList(awardList)
+                    .build());
+        }
+
+        iRedisService.setValue(cacheKey, ruleWeightVOList);
+
+        return ruleWeightVOList;
+    }
+
+    @Override
+    public Integer queryActivityAccountTotalUseCount(String userId, Long strategyId) {
+        Long activityId = iRaffleActivityDao.queryActivityIdByStrategyId(strategyId);
+        RaffleActivityAccount raffleActivityAccountReq = RaffleActivityAccount.builder()
+                .userId(userId)
+                .activityId(activityId)
+                .build();
+        RaffleActivityAccount raffleActivityAccount = iRaffleActivityAccountDao.queryActivityAccountByUserId(raffleActivityAccountReq);
+        // 返回计算使用量
+        return raffleActivityAccount.getTotalCount()-raffleActivityAccount.getTotalCountSurplus();
     }
 }

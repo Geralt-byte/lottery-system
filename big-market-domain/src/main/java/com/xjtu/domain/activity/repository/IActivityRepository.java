@@ -51,4 +51,6 @@ public interface IActivityRepository {
     List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
     //查询当前用户今天已抽奖次数
     Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId);
+    //查询活动账户总参与次数
+    Integer queryRaffleActivityAccountPartakeCount(Long activityId, String userId);
 }

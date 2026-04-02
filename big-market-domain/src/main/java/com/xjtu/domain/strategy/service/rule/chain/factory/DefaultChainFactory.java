@@ -4,9 +4,11 @@ import com.xjtu.domain.strategy.model.entity.StrategyEntity;
 import com.xjtu.domain.strategy.repository.IStrategyRepository;
 import com.xjtu.domain.strategy.service.rule.chain.ILogicChain;
 import lombok.*;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author mlei@xjtu
@@ -16,17 +18,24 @@ import java.util.Map;
 @Service
 public class DefaultChainFactory {
 
-    private final Map<String, ILogicChain> logicChainGroup;
+    // 原型模式获取对象
+    private final ApplicationContext applicationContext;
+
+    private final Map<Long, ILogicChain> logicChainGroup;
     protected IStrategyRepository iStrategyRepository;
 
     /*构造函数注入*/
-    public DefaultChainFactory(Map<String, ILogicChain> logicChainGroup, IStrategyRepository iStrategyRepository) {
-        this.logicChainGroup = logicChainGroup;
+    public DefaultChainFactory(ApplicationContext applicationContext, Map<String, ILogicChain> logicChainGroup, IStrategyRepository iStrategyRepository) {
+        this.applicationContext = applicationContext;
+        this.logicChainGroup = new ConcurrentHashMap<>();
         this.iStrategyRepository = iStrategyRepository;
     }
 
     /*构建责任链*/
     public ILogicChain openLogicChain(Long strategyId) {
+
+        ILogicChain cacheLogicChain = logicChainGroup.get(strategyId);
+        if(cacheLogicChain!=null) return cacheLogicChain;
 
         //查询策略实体
         StrategyEntity strategyEntity = iStrategyRepository.queryStrategyEntityByStrategyId(strategyId);
@@ -35,17 +44,24 @@ public class DefaultChainFactory {
 
         //为空装填默认链返回
         if (ruleModels == null || ruleModels.length == 0) {
-            return logicChainGroup.get(LogicModel.RULE_DEFAULT.getCode());
+            ILogicChain ruleDefaultLogicChain=applicationContext.getBean(LogicModel.RULE_DEFAULT.getCode(),ILogicChain.class);
+            // 写入缓存
+            logicChainGroup.put(strategyId,ruleDefaultLogicChain);
+            return ruleDefaultLogicChain;
         }
 
-        //装填规则链
-        ILogicChain iLogicChain = logicChainGroup.get(ruleModels[0]);
+        // 按照配置顺序装填用户配置的责任链；rule_blacklist、rule_weight
+        // 「注意此数据从Redis缓存中获取，如果更新库表，记得在测试阶段手动处理缓存」
+        ILogicChain iLogicChain=applicationContext.getBean(ruleModels[0],ILogicChain.class);
         ILogicChain cur=iLogicChain;
         for (int i = 1; i < ruleModels.length; i++) {
-            cur = cur.appendNext(logicChainGroup.get(ruleModels[i]));
+            ILogicChain nextChain = applicationContext.getBean(ruleModels[i], ILogicChain.class);
+            cur = cur.appendNext(nextChain);
         }
         //最后装填默认规则链
-        cur.appendNext(logicChainGroup.get(LogicModel.RULE_DEFAULT.getCode()));
+        cur.appendNext(applicationContext.getBean(LogicModel.RULE_DEFAULT.getCode(),ILogicChain.class));
+        //写入缓存
+        logicChainGroup.put(strategyId,iLogicChain);
 
         return iLogicChain;
     }

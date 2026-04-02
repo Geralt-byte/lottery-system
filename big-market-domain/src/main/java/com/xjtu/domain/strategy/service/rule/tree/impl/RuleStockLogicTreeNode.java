@@ -3,6 +3,7 @@ package com.xjtu.domain.strategy.service.rule.tree.impl;
 import com.xjtu.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import com.xjtu.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import com.xjtu.domain.strategy.repository.IStrategyRepository;
+import com.xjtu.domain.strategy.service.IRaffleStock;
 import com.xjtu.domain.strategy.service.armory.IStrategyDispatch;
 import com.xjtu.domain.strategy.service.rule.tree.ILogicTreeNode;
 import com.xjtu.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
@@ -40,11 +41,11 @@ public class RuleStockLogicTreeNode implements ILogicTreeNode {
                     userId, strategyId, "rule_stock", awardId, ruleValue);
 
             // 写入延迟队列，延迟消费更新数据库记录。【在trigger的job；UpdateAwardStockJob 下消费队列，更新数据库记录】
-            iStrategyRepository.awardStockConsumeSendQueue(StrategyAwardStockKeyVO
-                    .builder()
-                    .strategyId(strategyId)
-                    .awardId(awardId)
-                    .build());
+//            iStrategyRepository.awardStockConsumeSendQueue(StrategyAwardStockKeyVO
+//                    .builder()
+//                    .strategyId(strategyId)
+//                    .awardId(awardId)
+//                    .build());
 
             return DefaultTreeFactory.TreeActionEntity
                     .builder()

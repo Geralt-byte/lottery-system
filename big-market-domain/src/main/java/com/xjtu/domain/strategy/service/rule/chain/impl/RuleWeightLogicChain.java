@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author mlei@xjtu
@@ -28,8 +25,6 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
 
     @Resource
     private IStrategyDispatch iStrategyDispatch;
-
-    public Long userScore = 4500L;
 
 
     /**
@@ -57,8 +52,9 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
 
         //取出key值，即4000，5000，6000，进行排序
         ArrayList<Long> ruleValueSortMaps = new ArrayList<>(ruleValueMaps.keySet());
-        Collections.sort(ruleValueSortMaps);
+        ruleValueSortMaps.sort(Comparator.reverseOrder());
 
+        Integer userScore =iStrategyRepository.queryActivityAccountTotalUseCount(userId, strategyId);
         //找出最小符合的积分值，即对于4000~4999，会选择4000档，对于5000~5999，会选择5000档
         Long nextValue = ruleValueSortMaps
                 .stream()

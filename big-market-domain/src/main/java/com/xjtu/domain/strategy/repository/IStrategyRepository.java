@@ -4,6 +4,7 @@ import com.xjtu.domain.strategy.model.entity.StrategyAwardEntity;
 import com.xjtu.domain.strategy.model.entity.StrategyEntity;
 import com.xjtu.domain.strategy.model.entity.StrategyRuleEntity;
 import com.xjtu.domain.strategy.model.valobj.RuleTreeVO;
+import com.xjtu.domain.strategy.model.valobj.RuleWeightVO;
 import com.xjtu.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import com.xjtu.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
@@ -60,7 +61,7 @@ public interface IStrategyRepository {
     Boolean subtractionAwardStock(String cacheKey);
 
     /**扣减库存操作*/
-    Boolean subtractionAwardStock(String cacheKey, Date endDateTime);
+    Boolean subtractionAwardStock(String cacheKey, Date endDateTime,Long strategyId,Integer awardId);
 
     /**写入奖品库存消费队列*/
     void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
@@ -70,4 +71,8 @@ public interface IStrategyRepository {
     Integer queryTodayUserRaffleCount(String userId, Long strategyId);
     /**根据规则树ID集合查询奖品中加锁数量的配置「部分奖品需要抽奖N次解锁」*/
     Map<String, Integer> queryAwardRuleLockCount(String[] treeIds);
+    /**根据策略id查询奖品规则权重配置*/
+    List<RuleWeightVO> queryAwardRuleWeight(Long strategyId);
+    /**查询用户活动账户总使用量*/
+    Integer queryActivityAccountTotalUseCount(String userId, Long strategyId);
 }

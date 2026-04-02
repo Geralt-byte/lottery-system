@@ -246,7 +246,7 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
-    public ActivitySkuStockKeyVO takeQueueValue() {
+    public ActivitySkuStockKeyVO takeQueueValue(){
         String cacheKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
         RBlockingQueue<ActivitySkuStockKeyVO> destinationQueue = iRedisService.getBlockingQueue(cacheKey);
         return destinationQueue.poll();
@@ -514,5 +514,14 @@ public class ActivityRepository implements IActivityRepository {
         Integer dayPartakeCount = iRaffleActivityAccountDayDao.queryRaffleActivityAccountDayPartakeCount(raffleActivityAccountDay);
 
         return dayPartakeCount == null ? 0 : dayPartakeCount;
+    }
+
+    @Override
+    public Integer queryRaffleActivityAccountPartakeCount(Long activityId, String userId) {
+        RaffleActivityAccount raffleActivityAccount = iRaffleActivityAccountDao.queryActivityAccountByUserId(RaffleActivityAccount.builder()
+                .userId(userId)
+                .activityId(activityId)
+                .build());
+        return raffleActivityAccount.getTotalCount() - raffleActivityAccount.getTotalCountSurplus();
     }
 }
