@@ -144,6 +144,12 @@
                 <artifactId>spring-boot-starter-amqp</artifactId>
                 <version>3.2.0</version>
             </dependency>
+            <!-- 动态线程池依赖 -->
+            <dependency>
+                <groupId>com.xjtu.middleware</groupId>
+                <artifactId>dynamic-thread-pool-spring-boot-starter</artifactId>
+                <version>1.0</version>
+            </dependency>
 
             <!-- 工程模块 -->
             <dependency>

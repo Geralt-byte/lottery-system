@@ -95,6 +95,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+        <!-- 动态线程池依赖 -->
+        <dependency>
+            <groupId>com.xjtu.middleware</groupId>
+            <artifactId>dynamic-thread-pool-spring-boot-starter</artifactId>
+        </dependency>
+
 
         <!-- 工程模块；启动依赖 trigger->domain, infrastructure-->
         <dependency>

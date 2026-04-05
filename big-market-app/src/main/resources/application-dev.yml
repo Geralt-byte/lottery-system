@@ -100,7 +100,7 @@ mini-db-router:
 
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
-  config-location:  classpath:/mybatis/config/mybatis-config.xml
+  config-location: classpath:/mybatis/config/mybatis-config.xml
 
 # Redis
 redis:
@@ -116,6 +116,18 @@ redis:
       retry-interval: 1000
       ping-interval: 60000
       keep-alive: true
+
+# 动态线程池管理配置
+dynamic:
+  thread:
+    pool:
+      config:
+        # 状态；true = 开启、false 关闭
+        enabled: true
+        # redis host
+        host: 101.42.109.191
+        # redis port
+        port: 16379
 
 # 日志
 logging:
