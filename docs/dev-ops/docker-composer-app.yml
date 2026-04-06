@@ -2,7 +2,7 @@ version: '3.9'
 # 命令执行 docker-compose -f docker-compose-app.yml up -d
 services:
   big-market-app:
-    image: big-market-app:2.0
+    image: big-market-app:1.1
     container_name: big-market-app
     restart: always
     ports:
@@ -14,7 +14,7 @@ services:
       - APP_CONFIG_CROSS_ORIGIN=*
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=123456
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/big_market_v1?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/big_market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_HIKARI_POOL_NAME=Retail_HikariCP
       - REDIS_SDK_CONFIG_HOST=redis
@@ -31,7 +31,7 @@ services:
 
   big-market-front-app:
     container_name: big-market-front
-    image: big-market-front:2.0
+    image: big-market-front:1.1
     restart: always
     networks:
       - my-network
