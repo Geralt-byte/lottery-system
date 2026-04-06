@@ -2,7 +2,7 @@ version: '3.9'
 # 命令执行 docker-compose -f docker-compose-app.yml up -d
 services:
   big-market-app:
-    image: big-market-app:1.0
+    image: big-market-app:2.0
     container_name: big-market-app
     restart: always
     ports:
@@ -31,7 +31,7 @@ services:
 
   big-market-front-app:
     container_name: big-market-front
-    image: big-market-front:1.0
+    image: big-market-front:2.0
     restart: always
     networks:
       - my-network
