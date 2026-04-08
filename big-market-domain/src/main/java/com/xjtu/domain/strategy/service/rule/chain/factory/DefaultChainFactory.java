@@ -25,7 +25,7 @@ public class DefaultChainFactory {
     protected IStrategyRepository iStrategyRepository;
 
     /*构造函数注入*/
-    public DefaultChainFactory(ApplicationContext applicationContext, Map<String, ILogicChain> logicChainGroup, IStrategyRepository iStrategyRepository) {
+    public DefaultChainFactory(ApplicationContext applicationContext, IStrategyRepository iStrategyRepository) {
         this.applicationContext = applicationContext;
         this.logicChainGroup = new ConcurrentHashMap<>();
         this.iStrategyRepository = iStrategyRepository;
