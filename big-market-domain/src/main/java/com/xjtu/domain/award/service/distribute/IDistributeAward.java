@@ -12,5 +12,5 @@ public interface IDistributeAward {
     /**
      * @param distributeAwardEntity 分发奖品实体
      */
-    void getOutPrizes(DistributeAwardEntity distributeAwardEntity);
+    void getOutPrizes(DistributeAwardEntity distributeAwardEntity) throws Exception;
 }
