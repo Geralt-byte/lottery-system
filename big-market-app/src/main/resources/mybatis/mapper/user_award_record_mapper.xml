@@ -8,4 +8,13 @@
         values (#{userId}, #{activityId}, #{strategyId}, #{orderId}, #{awardId}, #{awardTitle}, #{awardTime},
                 #{awardState})
     </insert>
+
+    <update id="updateAwardRecordCompletedState" parameterType="com.xjtu.infrastructure.persistent.po.UserAwardRecord">
+        update user_award_record
+        set award_state = 'complete'
+        where user_id = #{userId}
+          and order_id = #{orderId}
+          and award_state = 'create'
+    </update>
+
 </mapper>

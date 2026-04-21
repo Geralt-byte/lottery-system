@@ -12,4 +12,12 @@
         select * from award;
     </select>
 
+    <select id="queryAwardConfigByAwardId" resultType="java.lang.String">
+        select award_config from award where award_id = #{awardId};
+    </select>
+
+    <select id="queryAwardKey" resultType="java.lang.String">
+        select award_key from award where award_id = #{awardId};
+    </select>
+
 </mapper>
