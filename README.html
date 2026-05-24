@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Market 大型抽奖营销系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            border: 2px solid #0366d6;
+            border-radius: 20px;
+            padding: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .language-switch button {
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switch button.active {
+            background: #0366d6;
+            color: white;
+        }
+
+        .language-switch button:hover {
+            background: #0366d6;
+            color: white;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        /* Markdown styling */
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-bottom: 16px;
+            font-size: 2em;
+        }
+
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-size: 1.5em;
+        }
+
+        h3 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-size: 1.25em;
+        }
+
+        code {
+            background-color: rgba(27,31,35,0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 85%;
+        }
+
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 16px;
+            overflow: auto;
+            margin-bottom: 16px;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin-bottom: 16px;
+        }
+
+        ul, ol {
+            padding-left: 2em;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+
+        table th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <button id="btn-zh" class="active" onclick="switchLanguage('zh')">中文</button>
+        <button id="btn-en" onclick="switchLanguage('en')">English</button>
+    </div>
+
+    <div id="content-zh" class="content active">
+        <!-- 中文内容将通过JavaScript从README.md加载 -->
+    </div>
+
+    <div id="content-en" class="content">
+        <!-- 英文内容将通过JavaScript从README_EN.md加载 -->
+    </div>
+
+    <script>
+        async function loadContent(lang) {
+            try {
+                const fileName = lang === 'zh' ? 'README.md' : 'README_EN.md';
+                const response = await fetch(fileName);
+                const text = await response.text();
+
+                // 简单的Markdown解析
+                let html = parseMarkdown(text);
+                document.getElementById(`content-${lang}`).innerHTML = html;
+            } catch (error) {
+                console.error('加载内容失败:', error);
+                document.getElementById(`content-${lang}`).innerHTML = '<p>加载失败，请直接查看对应的README文件</p>';
+            }
+        }
+
+        function parseMarkdown(markdown) {
+            let html = markdown;
+
+            // 处理标题
+            html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+            html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+            html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+            html = html.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+
+            // 处理代码块
+            html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>');
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // 处理链接
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+            // 处理粗体
+            html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+            // 处理列表
+            html = html.replace(/^\* (.*)$/gm, '<li>$1</li>');
+            html = html.replace(/^- (.*)$/gm, '<li>$1</li>');
+
+            // 处理数字列表
+            html = html.replace(/^\d+\. (.*)$/gm, '<li>$1</li>');
+
+            // 处理引用
+            html = html.replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>');
+
+            // 处理换行
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+
+            // 修复一些标签问题
+            html = html.replace(/<p>(<h[1-6]>)/g, '$1');
+            html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<pre>)/g, '$1');
+            html = html.replace(/(<\/pre>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<blockquote>)/g, '$1');
+            html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<ul>)/g, '$1');
+            html = html.replace(/(<\/ul>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<ol>)/g, '$1');
+            html = html.replace(/(<\/ol>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<li>)/g, '$1');
+            html = html.replace(/(<\/li>)<\/p>/g, '$1');
+
+            // 移除空的p标签
+            html = html.replace(/<p><\/p>/g, '');
+
+            return html;
+        }
+
+        function switchLanguage(lang) {
+            // 更新按钮状态
+            document.getElementById('btn-zh').classList.remove('active');
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById(`btn-${lang}`).classList.add('active');
+
+            // 更新内容显示
+            document.getElementById('content-zh').classList.remove('active');
+            document.getElementById('content-en').classList.remove('active');
+            document.getElementById(`content-${lang}`).classList.add('active');
+        }
+
+        // 页面加载时加载内容
+        window.addEventListener('DOMContentLoaded', () => {
+            loadContent('zh');
+            loadContent('en');
+        });
+    </script>
+</body>
+</html>
