@@ -839,34 +839,7 @@ Check RabbitMQ service status, ensure message format is correct.
 6. **Dynamic Thread Pool Management**: Runtime adjustment to adapt to different loads
 7. **Comprehensive Monitoring and Alerting**: Ensure stable system operation
 
-## Development Team
-
-- **Developer**: xiaofuge
-- **Email**: 184172133@qq.com
-- **Organization**: fuzhengwei
-- **GitHub**: https://github.com/fuzhengwei
-
 ## License
 
 Apache License, Version 2.0
 
-## Changelog
-
-### v1.0-SNAPSHOT
-- Initial version release
-- Implemented core raffle functionality
-- Support for multiple raffle strategies
-- Implemented database sharding
-- Integrated message queue and cache
-- Support for rebate mechanism
-
-## Contact
-
-For questions or suggestions, please contact via:
-- Submit an Issue
-- Send email to 184172133@qq.com
-- Follow GitHub project updates
-
----
-
-**Note**: This project is for learning and reference purposes. Please conduct sufficient testing and security assessment before using in production environments.
