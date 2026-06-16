@@ -26,7 +26,8 @@ CREATE TABLE `award`
     `award_desc`   varchar(128)     NOT NULL COMMENT '奖品内容描述',
     `create_time`  datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`  datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uq_award_id` (`award_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 

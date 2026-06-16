@@ -22,6 +22,7 @@ public class EventPublisher {
     public void publish(String topic, BaseEvent.EventMessage<?> eventMessage) {
         try {
             String messageJson = JSON.toJSONString(eventMessage);
+            // 使用明确的交换机和路由键
             rabbitTemplate.convertAndSend(topic, messageJson);
             log.info("发送MQ消息 topic:{} message:{}", topic, messageJson);
         } catch (Exception e) {
@@ -32,6 +33,7 @@ public class EventPublisher {
 
     public void publish(String topic, String eventMessageJSON) {
         try {
+            // 使用明确的交换机和路由键
             rabbitTemplate.convertAndSend(topic, eventMessageJSON);
             log.info("发送MQ消息 topic:{} message:{}", topic, eventMessageJSON);
         } catch (Exception e) {

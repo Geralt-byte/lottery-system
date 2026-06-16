@@ -1,5 +1,6 @@
 package com.xjtu.domain.award.service;
 
+import com.xjtu.domain.award.model.entity.DistributeAwardEntity;
 import com.xjtu.domain.award.model.entity.UserAwardRecordEntity;
 
 /**
@@ -11,4 +12,7 @@ public interface IAwardService {
 
     /**保存中奖记录*/
     void saveUserAwardRecord(UserAwardRecordEntity userAwardRecordEntity);
+
+    /**配送奖品*/
+    void distributeAward(DistributeAwardEntity distributeAward) throws Exception;
 }
